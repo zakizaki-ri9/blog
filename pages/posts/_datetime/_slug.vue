@@ -1,7 +1,7 @@
 <template>
   <article v-if="post">
     <PostDateTime :posted-at="post.postedAt" />
-    <h1 class="text-xl">{{ post.title }}</h1>
+    <h1 class="text-3xl font-bold">{{ post.title }}</h1>
     <div class="pt-6"><NuxtContent :document="post" /></div>
   </article>
 </template>
