@@ -13,16 +13,53 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useAsync,
+  useContext,
+  useMeta,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
-    const { $content } = useContext()
+    const { $content, $config } = useContext()
+
+    useMeta(() => ({
+      title: 'zaki-blog',
+      meta: [
+        {
+          name: 'og:url',
+          content: $config.rootUrl,
+        },
+        {
+          name: 'og:type',
+          content: 'website',
+        },
+        {
+          name: 'og:title',
+          content: 'zaki-blog',
+        },
+        {
+          name: 'og:description',
+          content: 'きままに更新するブログ',
+        },
+        {
+          name: 'twitter:card',
+          content: 'Summary Card',
+        },
+        {
+          name: 'twitter:site',
+          content: '@zucky_zakizaki',
+        },
+      ],
+    }))
+
     return {
       posts: useAsync(() =>
         $content('posts', { deep: true }).sortBy('path', 'desc').fetch()
       ),
     }
   },
+  head: {},
 })
 </script>

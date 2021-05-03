@@ -7,19 +7,59 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useAsync,
+  useContext,
+  useMeta,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
-    const { params, $content } = useContext()
+    const { params, $content, $config } = useContext()
     const { datetime, slug } = params.value
+    const post = useAsync(() =>
+      $content(`posts/${datetime}/${slug}`, { deep: true }).fetch()
+    )
+
+    useMeta(() => ({
+      title: 'zaki-blog',
+      meta: [
+        {
+          name: 'og:url',
+          // @ts-ignore
+          content: `${$config.rootUrl}${post.value.path}`.replace('//', '/'),
+        },
+        {
+          name: 'og:type',
+          content: 'article',
+        },
+        {
+          name: 'og:title',
+          // @ts-ignore
+          content: `zaki-blog - ${post.value.title}`,
+        },
+        {
+          name: 'og:description',
+          // @ts-ignore
+          content: post.value.description,
+        },
+        {
+          name: 'twitter:card',
+          content: 'Summary Card',
+        },
+        {
+          name: 'twitter:site',
+          content: '@zucky_zakizaki',
+        },
+      ],
+    }))
 
     return {
-      post: useAsync(() =>
-        $content(`posts/${datetime}/${slug}`, { deep: true }).fetch()
-      ),
+      post,
     }
   },
+  head: {},
 })
 </script>
 
