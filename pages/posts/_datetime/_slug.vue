@@ -55,4 +55,19 @@ export default defineComponent({
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
+.nuxt-content li {
+  list-style: inside;
+  list-style-type: circle;
+}
+
+.nuxt-content .footnotes {
+  font-weight: 200;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.nuxt-content .footnotes ol {
+  margin-top: 1rem;
+}
 </style>
