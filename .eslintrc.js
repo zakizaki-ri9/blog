@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('@typescript-eslint/experimental-utils').TSESLint.Linter.Config} */
+const config = {
   root: true,
   env: {
     browser: true,
@@ -10,6 +11,7 @@ module.exports = {
     'plugin:nuxt/recommended',
   ],
   plugins: [],
-  // add your custom rules here
   rules: {},
 }
+
+module.exports = config
