@@ -1,17 +1,17 @@
 <template>
-  <header class="flex w-full my-6">
-    <a class="ml-4 mr-auto text-xl font-medium" href="/">zaki blog</a>
-    <div class="flex justify-end">
-      <a
-        v-for="profile in profiles"
-        :key="profile.text"
-        :href="profile.url"
-        class="px-1 font-thin"
-        target="_blank"
-        rel="noopener"
-        >{{ profile.text }}</a
-      >
-    </div>
+  <header class="flex w-full">
+    <h2 class="mr-auto"><a href="/">zaki blog</a></h2>
+    <ul class="flex justify-end">
+      <li v-for="profile in profiles" :key="profile.text">
+        <a
+          :href="profile.url"
+          class="px-1 font-thin"
+          target="_blank"
+          rel="noopener"
+          >{{ profile.text }}</a
+        >
+      </li>
+    </ul>
   </header>
 </template>
 

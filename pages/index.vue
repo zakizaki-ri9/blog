@@ -1,8 +1,9 @@
 <template>
-  <div class="container m-4">
+  <div>
     <section v-for="post in posts" :key="post.path">
       <NuxtLink :to="post.path" target="_blank" rel="noopener">
-        <h2 class="text-lg">{{ post.title }}</h2>
+        <PostDateTime :posted-at="post.postedAt" />
+        <h2 class="text-xl font-medium">{{ post.title }}</h2>
       </NuxtLink>
     </section>
   </div>
@@ -14,12 +15,11 @@ import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
 export default defineComponent({
   setup() {
     const { $content } = useContext()
-
-    const posts = useAsync(() =>
-      $content('posts', { deep: true }).sortBy('path', 'desc').fetch()
-    )
-
-    return { posts }
+    return {
+      posts: useAsync(() =>
+        $content('posts', { deep: true }).sortBy('path', 'desc').fetch()
+      ),
+    }
   },
 })
 </script>

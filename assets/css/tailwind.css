@@ -4,6 +4,14 @@
 
 @layer base {
   html {
-    @apply bg-gray-100 text-gray-800 font-light;
+    @apply bg-gray-100 text-gray-800 text-sm font-light;
+  }
+
+  header h2 {
+    @apply text-xl font-medium;
+  }
+
+  header ul {
+    @apply font-thin;
   }
 }
