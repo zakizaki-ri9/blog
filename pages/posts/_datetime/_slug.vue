@@ -46,7 +46,7 @@ export default defineComponent({
         },
         {
           name: 'twitter:card',
-          content: 'Summary Card',
+          content: 'summary',
         },
         {
           name: 'twitter:site',
