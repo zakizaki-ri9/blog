@@ -4,7 +4,7 @@
       href="https://ja.nuxtjs.org/"
       target="_blank"
       rel="noopener"
-      >NuxtJS</a
+      >NUXTJS</a
     >
   </footer>
 </template>

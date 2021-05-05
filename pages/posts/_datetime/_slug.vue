@@ -110,4 +110,12 @@ export default defineComponent({
 .nuxt-content .footnotes ol {
   margin-top: 1rem;
 }
+
+.nuxt-content a {
+  color: #007fb1;
+}
+
+.nuxt-content a:hover {
+  color: #99cfe5;
+}
 </style>
