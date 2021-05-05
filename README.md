@@ -1,9 +1,13 @@
----
-- site: https://zaki-blog.vercel.app/
-- svg: https://teenyicons.com/
----
+てきとーに更新するブログ
+===
 
-# blog
+# 情報
+
+- 基本
+  - [nuxt/content](https://content.nuxtjs.org/ja/)
+  - [tailwindcss](https://tailwindcss.com/)
+- svg
+  - [teenyicons](https://teenyicons.com/)
 
 ## Build Setup
 
