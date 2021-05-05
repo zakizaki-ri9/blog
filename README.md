@@ -1,6 +1,9 @@
-# blog
+---
+- site: https://zaki-blog.vercel.app/
+- svg: https://teenyicons.com/
+---
 
-site: https://zaki-blog.vercel.app/
+# blog
 
 ## Build Setup
 
