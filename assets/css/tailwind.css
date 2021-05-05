@@ -14,4 +14,15 @@
   header ul {
     @apply font-thin;
   }
+
+  header a {
+    @apply px-2;
+    @apply font-thin;
+  }
+
+  header a:hover {
+    @apply transition;
+    @apply delay-75;
+    @apply text-gray-400;
+  }
 }

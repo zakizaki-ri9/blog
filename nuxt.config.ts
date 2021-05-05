@@ -49,7 +49,6 @@ const config: NuxtConfig = {
       const posts = await $content('posts', { deep: true }).fetch()
       posts.forEach((post: any) => {
         const url = `${rootUrl}${post.path}`
-        console.log({ ...post.body })
         feed.addItem({
           title: post.title,
           id: url,

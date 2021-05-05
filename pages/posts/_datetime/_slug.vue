@@ -96,6 +96,10 @@ export default defineComponent({
   margin-bottom: 0.5rem;
 }
 
+.nuxt-content ul {
+  padding-left: 0.5rem;
+}
+
 .nuxt-content li {
   list-style: inside;
   list-style-type: circle;
