@@ -8,7 +8,7 @@ tags:
 
 [月ノ美兎](https://www.youtube.com/channel/UCD-miitqNY3nyukJ4Fnf4_A)さんの以下配信のこと。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/P7W7Vtti78U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/P7W7Vtti78U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 （自分の）小学生〜高校生時代を彷彿させるような話題が出てくる。たとえば[これ](https://youtu.be/_sGFlcguZDw)。
 
