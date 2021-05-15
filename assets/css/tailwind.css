@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply bg-gray-100 text-gray-800 text-sm font-light;
+  body {
+    @apply bg-gray-100;
+    @apply text-gray-800;
+    @apply text-sm;
+    @apply font-light;
   }
 
   header h2 {
-    @apply text-xl font-medium;
+    @apply text-xl;
+    @apply font-medium;
   }
 
   header ul {
     @apply font-thin;
   }
 
-  header a {
+  header div a {
     @apply px-2;
     @apply font-thin;
   }

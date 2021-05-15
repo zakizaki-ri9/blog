@@ -92,17 +92,19 @@ export default defineComponent({
 }
 
 .nuxt-content p {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.7;
 }
 
 .nuxt-content ul {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .nuxt-content li {
   list-style: inside;
   list-style-type: circle;
+  line-height: 1.7;
 }
 
 .nuxt-content .footnotes {
