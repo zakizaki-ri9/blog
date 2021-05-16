@@ -62,9 +62,7 @@ const config: NuxtConfig = {
     }
 
     const feedFormats = {
-      rss: { type: 'rss2', file: 'rss.xml' },
-      atom: { type: 'atom1', file: 'atom.xml' },
-      json: { type: 'json1', file: 'feed.json' },
+      rss: { type: 'rss2', file: 'feed.xml' },
     }
     return Object.values(feedFormats).map(({ file, type }) => ({
       path: `/${file}`,
