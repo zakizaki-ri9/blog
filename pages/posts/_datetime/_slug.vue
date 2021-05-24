@@ -115,6 +115,18 @@ export default defineComponent({
 
 .nuxt-content .footnotes ol {
   margin-top: 1rem;
+  counter-reset: count;
+}
+
+.nuxt-content .footnotes li {
+  list-style-type: none;
+}
+
+.nuxt-content .footnotes li:before {
+  list-style-type: none;
+  counter-increment: count;
+  content: counter(count);
+  margin-right: 0.5rem;
 }
 
 .nuxt-content a {
