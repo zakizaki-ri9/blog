@@ -31,7 +31,15 @@ const config: NuxtConfig = {
     '@nuxtjs/composition-api/module',
   ],
   modules: ['@nuxt/content', '@nuxtjs/feed'],
-  content: {},
+  content: {
+    markdown: {
+      // @ts-ignore
+      remarkExternalLinks: {
+        target: '_blank',
+        rel: 'noopener',
+      },
+    },
+  },
   build: {},
   publicRuntimeConfig: {
     rootUrl,
@@ -55,7 +63,7 @@ const config: NuxtConfig = {
           title: post.title,
           id: url,
           link: url,
-          date: new Date(post.postedAt),
+          date: new Date(post.updatedAt),
           description: post.description,
           content: post.description,
           author: post.authors,
