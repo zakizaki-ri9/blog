@@ -31,7 +31,15 @@ const config: NuxtConfig = {
     '@nuxtjs/composition-api/module',
   ],
   modules: ['@nuxt/content', '@nuxtjs/feed'],
-  content: {},
+  content: {
+    markdown: {
+      // @ts-ignore
+      remarkExternalLinks: {
+        target: '_blank',
+        rel: 'noopener',
+      },
+    },
+  },
   build: {},
   publicRuntimeConfig: {
     rootUrl,
@@ -46,14 +54,16 @@ const config: NuxtConfig = {
       }
 
       const { $content } = require('@nuxt/content')
-      const posts = await $content('posts', { deep: true }).fetch()
+      const posts = await $content('posts', { deep: true })
+        .sortBy('path', 'desc')
+        .fetch()
       posts.forEach((post: any) => {
         const url = `${rootUrl}${post.path}`
         feed.addItem({
           title: post.title,
           id: url,
           link: url,
-          date: new Date(post.postedAt),
+          date: new Date(post.updatedAt),
           description: post.description,
           content: post.description,
           author: post.authors,
@@ -62,9 +72,7 @@ const config: NuxtConfig = {
     }
 
     const feedFormats = {
-      rss: { type: 'rss2', file: 'rss.xml' },
-      atom: { type: 'atom1', file: 'atom.xml' },
-      json: { type: 'json1', file: 'feed.json' },
+      rss: { type: 'atom1', file: 'feed.xml' },
     }
     return Object.values(feedFormats).map(({ file, type }) => ({
       path: `/${file}`,

@@ -39,22 +39,15 @@
         target="_blank"
         rel="noopener"
       >
-        はてな
+        Hatena
       </a>
-      <a :href="rssUrl" target="_blank" rel="noopener"> RSS </a>
+      <a href="/feed.xml" target="_blank" rel="noopener"> RSS </a>
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 
-export default defineComponent({
-  setup() {
-    const { $config } = useContext()
-    return {
-      rssUrl: `${$config.rootUrl}/rss.xml`,
-    }
-  },
-})
+export default defineComponent({})
 </script>
