@@ -48,9 +48,13 @@ const config: NuxtConfig = {
   feed() {
     const createFeedPosts = async function (feed: any) {
       feed.options = {
+        id: title,
         title,
         description: descriptionContent,
         link: rootUrl,
+        author: {
+          name: 'zaki',
+        },
       }
 
       const { $content } = require('@nuxt/content')
@@ -63,10 +67,9 @@ const config: NuxtConfig = {
           title: post.title,
           id: url,
           link: url,
-          date: new Date(post.updatedAt),
+          date: new Date(post.postedAt),
           description: post.description,
           content: post.description,
-          author: post.authors,
         })
       })
     }
