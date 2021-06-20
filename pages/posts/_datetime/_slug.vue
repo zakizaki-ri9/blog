@@ -23,7 +23,7 @@ export default defineComponent({
     )
 
     useMeta(() => ({
-      title: 'zaki-blog',
+      title: $config.title,
       meta: [
         {
           name: 'og:url',
@@ -37,7 +37,7 @@ export default defineComponent({
         {
           name: 'og:title',
           // @ts-ignore
-          content: `zaki-blog - ${post.value.title}`,
+          content: `${$config.title} - ${post.value.title}`,
         },
         {
           name: 'og:description',
@@ -47,10 +47,6 @@ export default defineComponent({
         {
           name: 'twitter:card',
           content: 'summary',
-        },
-        {
-          name: 'twitter:site',
-          content: '@zucky_zakizaki',
         },
       ],
     }))

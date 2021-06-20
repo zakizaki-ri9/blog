@@ -37,19 +37,11 @@ export default defineComponent({
         },
         {
           name: 'og:title',
-          content: 'zaki-blog',
+          content: $config.title,
         },
         {
           name: 'og:description',
-          content: 'きままに更新するブログ',
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary',
-        },
-        {
-          name: 'twitter:site',
-          content: '@zucky_zakizaki',
+          content: $config.descriptionContent,
         },
       ],
     }))

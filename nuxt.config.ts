@@ -66,7 +66,9 @@ const config: NuxtConfig = {
   },
   build: {},
   publicRuntimeConfig: {
+    title,
     rootUrl,
+    descriptionContent,
   },
   // see. https://content.nuxtjs.org/ja/integrations#nuxtjsfeed
   feed() {
