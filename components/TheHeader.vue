@@ -2,11 +2,7 @@
   <header class="flex w-full">
     <h2 class="mr-auto"><a href="/">zaki blog</a></h2>
     <div class="flex justify-end items-center">
-      <a
-        href="https://twitter.com/zucky_zakizaki"
-        target="_blank"
-        rel="noopener"
-      >
+      <a href="https://twitter.com/zucky_sub" target="_blank" rel="noopener">
         <svg
           viewBox="0 0 15 15"
           fill="none"
