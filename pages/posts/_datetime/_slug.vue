@@ -13,10 +13,11 @@ import {
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
+import { Site } from '@/constants'
 
 export default defineComponent({
   setup() {
-    const { params, $content, $config } = useContext()
+    const { params, $content } = useContext()
     const { datetime, slug } = params.value
     const post = useAsync(() =>
       $content(`posts/${datetime}/${slug}`, { deep: true }).fetch()
@@ -26,31 +27,32 @@ export default defineComponent({
       title: 'zaki-blog',
       meta: [
         {
-          name: 'og:url',
+          name: 'description',
           // @ts-ignore
-          content: `${$config.rootUrl}${post.value.path}`.replace('//', '/'),
+          content: post.value.description,
         },
         {
           name: 'og:type',
           content: 'article',
         },
         {
+          name: 'og:url',
+          // @ts-ignore
+          content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
+        },
+        {
+          name: 'og:type',
+          content: 'website',
+        },
+        {
           name: 'og:title',
           // @ts-ignore
-          content: `zaki-blog - ${post.value.title}`,
+          content: `${Site.title} - ${post.value.title}`,
         },
         {
           name: 'og:description',
           // @ts-ignore
           content: post.value.description,
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary',
-        },
-        {
-          name: 'twitter:site',
-          content: '@zucky_zakizaki',
         },
       ],
     }))

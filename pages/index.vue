@@ -19,37 +19,40 @@ import {
   useContext,
   useMeta,
 } from '@nuxtjs/composition-api'
+import { Site } from '@/constants'
 
 export default defineComponent({
   setup() {
-    const { $content, $config } = useContext()
+    const { $content } = useContext()
 
     useMeta(() => ({
       title: 'zaki-blog',
       meta: [
         {
-          name: 'og:url',
-          content: $config.rootUrl,
+          hid: 'description',
+          name: 'description',
+          content: 'きままに更新するブログ',
         },
         {
           name: 'og:type',
           content: 'website',
         },
         {
+          name: 'og:url',
+          content: Site.rootUrl,
+        },
+        {
           name: 'og:title',
-          content: 'zaki-blog',
+          content: Site.title,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: 'https://i.imgur.com/Y7nlVbM.png',
         },
         {
           name: 'og:description',
           content: 'きままに更新するブログ',
-        },
-        {
-          name: 'twitter:card',
-          content: 'summary',
-        },
-        {
-          name: 'twitter:site',
-          content: '@zucky_zakizaki',
         },
       ],
     }))
