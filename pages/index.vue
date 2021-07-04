@@ -48,7 +48,7 @@ export default defineComponent({
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://i.imgur.com/Y7nlVbM.png',
+          content: Site.defaultImage,
         },
         {
           name: 'og:description',

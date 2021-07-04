@@ -50,6 +50,12 @@ export default defineComponent({
           content: `${Site.title} - ${post.value.title}`,
         },
         {
+          hid: 'og:image',
+          property: 'og:image',
+          // @ts-ignore
+          content: post?.value?.image || Site.defaultImage,
+        },
+        {
           name: 'og:description',
           // @ts-ignore
           content: post.value.description,
