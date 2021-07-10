@@ -1,6 +1,6 @@
 <template>
-  <div class="mx-8 my-4">
-    <TheHeader class="mb-4" />
+  <div class="mx-auto px-8 max-w-screen-md">
+    <TheHeader class="py-4 sticky top-0 bg-gray-100 z-50" />
     <main class="my-8">
       <Nuxt />
     </main>
