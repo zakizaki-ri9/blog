@@ -14,22 +14,37 @@ import {
   useMeta,
 } from '@nuxtjs/composition-api'
 import { Site } from '@/constants'
+import { IContentDocument } from '@nuxt/content/types/content'
+
+export type Post = {
+  postedAt: Date
+  title: string
+  description: string
+  tags?: string[]
+  image?: string
+} & IContentDocument
 
 export default defineComponent({
   setup() {
     const { params, $content } = useContext()
     const { datetime, slug } = params.value
-    const post = useAsync(() =>
-      $content(`posts/${datetime}/${slug}`, { deep: true }).fetch()
+    const fetchedPost = useAsync(() =>
+      $content(`posts/${datetime}/${slug}`, {
+        deep: true,
+      }).fetch<Post>()
     )
 
+    if (!fetchedPost.value || Array.isArray(fetchedPost.value)) {
+      return { post: { postedAt: '', title: '' } }
+    }
+
+    const post = fetchedPost.value
     useMeta(() => ({
       title: 'zaki-blog',
       meta: [
         {
           name: 'description',
-          // @ts-ignore
-          content: post.value.description,
+          content: post.description,
         },
         {
           name: 'og:type',
@@ -37,8 +52,7 @@ export default defineComponent({
         },
         {
           name: 'og:url',
-          // @ts-ignore
-          content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
+          content: `${Site.rootUrl}${post.path}`.replace('//', '/'),
         },
         {
           name: 'og:type',
@@ -46,26 +60,20 @@ export default defineComponent({
         },
         {
           name: 'og:title',
-          // @ts-ignore
-          content: `${Site.title} - ${post.value.title}`,
+          content: `${Site.title} - ${post.title}`,
         },
         {
-          hid: 'og:image',
-          property: 'og:image',
-          // @ts-ignore
-          content: post?.value?.image || Site.defaultImage,
+          name: 'og:image',
+          content: post.image || Site.defaultImage,
         },
         {
           name: 'og:description',
-          // @ts-ignore
-          content: post.value.description,
+          content: post.description,
         },
       ],
     }))
 
-    return {
-      post,
-    }
+    return { post }
   },
   head: {},
 })
