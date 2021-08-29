@@ -20,7 +20,7 @@ tags:
 
 この迷いをなくしたいと思い、1ヶ月ほど、息抜き時に流し続けているのが以下**音声有り**のライブカメラ。
 
-<div style="left: 0; width: 100%; height: 0; position: relative;"><iframe src="https://www.youtube.com/embed/QOjmvL3e7Lc?rel=0&amp;cc_load_policy=1" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;" allowfullscreen scrolling="no" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"></iframe></div>
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;"><iframe src="https://www.youtube.com/embed/QOjmvL3e7Lc?rel=0&amp;cc_load_policy=1" style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;" allowfullscreen scrolling="no" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"></iframe></div>
 
 自分と同じ時間帯の風景が見え、空気（風？）や電車の音が聞こえるため、オフィスで息抜きする際、外に出た時と同じ感覚になれリフレッシュできる。
 
