@@ -73,29 +73,31 @@ export default defineComponent({
 
 <style>
 .nuxt-content h1 {
+  font-weight: 900;
   font-size: 1.5rem;
   line-height: 2rem;
-  margin-top: 1rem;
+  margin-top: 4rem;
   margin-bottom: 1rem;
 }
 
 .nuxt-content h2 {
+  font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.75rem;
-  margin-top: 1rem;
+  margin-top: 4rem;
   margin-bottom: 1rem;
 }
 
 .nuxt-content h3 {
   line-height: 1.75rem;
-  margin-top: 1rem;
+  margin-top: 4rem;
   margin-bottom: 1rem;
 }
 
 .nuxt-content h4 {
   font-size: 1rem;
   line-height: 1.5rem;
-  margin-top: 1rem;
+  margin-top: 4rem;
   margin-bottom: 1rem;
 }
 
