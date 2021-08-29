@@ -2,7 +2,7 @@
 postedAt: 2021-08-29 13:30
 title: 作業・勉強中の息抜きに音有りのライブカメラを流している
 description: 話し声が聞こえず、人が見えない環境音付きライブカメラは癒し
-image: https://imgur.com/3Rjx2h8
+image: https://imgur.com/3Rjx2h8.png
 tags:
   - 雑記
 ---
