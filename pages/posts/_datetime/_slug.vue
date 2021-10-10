@@ -24,7 +24,8 @@ export default defineComponent({
     )
 
     useMeta(() => ({
-      title: 'zaki-blog',
+      // @ts-ignore
+      title: post.value.title,
       meta: [
         {
           name: 'description',
