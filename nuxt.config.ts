@@ -1,7 +1,7 @@
-import { NuxtConfig } from '@nuxt/types'
+import { defineNuxtConfig } from '@nuxt/bridge'
 import { Site } from './constants'
 
-const config: NuxtConfig = {
+export default defineNuxtConfig({
   target: 'static',
   head: {
     title: Site.title,
@@ -22,12 +22,7 @@ const config: NuxtConfig = {
   css: ['@/assets/css/tailwind.css', '@/assets/css/main.css'],
   plugins: [],
   components: true,
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api/module',
-    '@nuxtjs/google-analytics',
-  ],
+  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-analytics'],
   modules: ['@nuxt/content', '@nuxtjs/feed'],
   content: {
     markdown: {
@@ -82,6 +77,4 @@ const config: NuxtConfig = {
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },
-}
-
-export default config
+})
