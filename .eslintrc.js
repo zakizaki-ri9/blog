@@ -7,11 +7,19 @@ const config = {
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
-    'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
+    'plugin:prettier/recommended',
   ],
   plugins: [],
   rules: {},
+  overrides: [
+    {
+      files: ['**/*ts', '**/*js'],
+      rules: {
+        'vue/script-setup-uses-vars': 'off',
+      },
+    },
+  ],
 }
 
 module.exports = config

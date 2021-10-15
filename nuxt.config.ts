@@ -26,6 +26,7 @@ const config: NuxtConfig = {
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/composition-api/module',
+    '@nuxtjs/google-analytics',
   ],
   modules: ['@nuxt/content', '@nuxtjs/feed'],
   content: {
@@ -77,6 +78,9 @@ const config: NuxtConfig = {
       create: createFeedPosts,
       cacheTime: 1000 * 60 * 15,
     }))
+  },
+  googleAnalytics: {
+    id: process.env.GOOGLE_ANALYTICS_ID,
   },
 }
 
