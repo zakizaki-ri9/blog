@@ -80,7 +80,7 @@ const config: NuxtConfig = {
     }))
   },
   googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID,
+    id: 'UA-210222057-1',
   },
 }
 
