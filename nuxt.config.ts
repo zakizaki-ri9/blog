@@ -1,5 +1,6 @@
 import { NuxtConfig } from '@nuxt/types'
 import { Site } from './constants'
+require('dotenv').config()
 
 const config: NuxtConfig = {
   target: 'static',
@@ -80,7 +81,7 @@ const config: NuxtConfig = {
     }))
   },
   googleAnalytics: {
-    id: 'UA-210222057-1',
+    id: process.env.GOOGLE_ANALYTICS_ID,
   },
 }
 
