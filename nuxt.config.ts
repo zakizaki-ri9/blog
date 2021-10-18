@@ -24,8 +24,9 @@ const config: NuxtConfig = {
   plugins: [],
   components: true,
   buildModules: [
-    '@nuxt/typescript-build',
+    ['@nuxt/typescript-build', { typeCheck: false }],
     '@nuxtjs/tailwindcss',
+    'unplugin-vue2-script-setup/nuxt',
     '@nuxtjs/composition-api/module',
     '@nuxtjs/google-analytics',
   ],
