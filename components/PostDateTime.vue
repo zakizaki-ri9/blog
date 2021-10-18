@@ -7,27 +7,19 @@
   >
 </template>
 
-<script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+<script setup lang="ts">
 import dayjs from 'dayjs'
 
-type Props = {
-  postedAt: string
-}
+const { postedAt } = defineProps({
+  postedAt: {
+    type: String,
+    required: true,
+  },
+})
 
 const format = (datetime?: string) => {
   return datetime ? dayjs(datetime).format('YYYY-MM-DD') : undefined
 }
 
-export default defineComponent({
-  props: {
-    postedAt: {
-      type: String,
-      required: true,
-    },
-  },
-  setup({ postedAt }: Props) {
-    return { formatedPostedAt: format(postedAt) }
-  },
-})
+const formatedPostedAt = format(postedAt)
 </script>
