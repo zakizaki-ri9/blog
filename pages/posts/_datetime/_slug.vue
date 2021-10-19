@@ -6,7 +6,7 @@
   </article>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {
   defineComponent,
   useAsync,
@@ -22,65 +22,61 @@ type Post = {
   tags?: string[]
   image?: string
 }
+const { params, $content } = useContext()
+const post = useAsync(async () => {
+  const { datetime, slug } = params.value
+  const fetchedPost = await $content(`posts/${datetime}/${slug}`, {
+    deep: true,
+  }).fetch<Post>()
+  if (!fetchedPost || Array.isArray(fetchedPost)) {
+    return null
+  }
+  return fetchedPost
+})
 
+useMeta(() => {
+  if (!post.value || Array.isArray(post.value)) {
+    return {}
+  }
+  return {
+    title: post.value.title,
+    meta: [
+      {
+        name: 'description',
+        content: post.value.description,
+      },
+      {
+        name: 'og:type',
+        content: 'article',
+      },
+      {
+        name: 'og:url',
+        content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
+      },
+      {
+        name: 'og:type',
+        content: 'website',
+      },
+      {
+        name: 'og:title',
+        content: `${Site.title} - ${post.value.title}`,
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: post.value.image || Site.defaultImage,
+      },
+      {
+        name: 'og:description',
+        content: post.value.description,
+      },
+    ],
+  }
+})
+</script>
+
+<script lang="ts">
 export default defineComponent({
-  setup() {
-    const { params, $content } = useContext()
-    const { datetime, slug } = params.value
-    const post = useAsync(async () => {
-      const fetchedPost = await $content(`posts/${datetime}/${slug}`, {
-        deep: true,
-      }).fetch<Post>()
-      if (!fetchedPost || Array.isArray(fetchedPost)) {
-        return null
-      }
-      return fetchedPost
-    })
-
-    useMeta(() => {
-      if (!post.value || Array.isArray(post.value)) {
-        return {}
-      }
-      return {
-        title: post.value.title,
-        meta: [
-          {
-            name: 'description',
-            content: post.value.description,
-          },
-          {
-            name: 'og:type',
-            content: 'article',
-          },
-          {
-            name: 'og:url',
-            content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
-          },
-          {
-            name: 'og:type',
-            content: 'website',
-          },
-          {
-            name: 'og:title',
-            content: `${Site.title} - ${post.value.title}`,
-          },
-          {
-            hid: 'og:image',
-            property: 'og:image',
-            content: post.value.image || Site.defaultImage,
-          },
-          {
-            name: 'og:description',
-            content: post.value.description,
-          },
-        ],
-      }
-    })
-
-    return {
-      post,
-    }
-  },
   head: {},
 })
 </script>
