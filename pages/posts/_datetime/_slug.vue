@@ -15,54 +15,67 @@ import {
 } from '@nuxtjs/composition-api'
 import { Site } from '@/constants'
 
+type Post = {
+  postedAt: Date
+  title: string
+  description: string
+  tags?: string[]
+  image?: string
+}
+
 export default defineComponent({
   setup() {
     const { params, $content } = useContext()
     const { datetime, slug } = params.value
-    const post = useAsync(() =>
-      $content(`posts/${datetime}/${slug}`, { deep: true }).fetch()
-    )
+    const post = useAsync(async () => {
+      const fetchedPost = await $content(`posts/${datetime}/${slug}`, {
+        deep: true,
+      }).fetch<Post>()
+      if (!fetchedPost || Array.isArray(fetchedPost)) {
+        return null
+      }
+      return fetchedPost
+    })
 
-    useMeta(() => ({
-      // @ts-ignore
-      title: post.value.title,
-      meta: [
-        {
-          name: 'description',
-          // @ts-ignore
-          content: post.value.description,
-        },
-        {
-          name: 'og:type',
-          content: 'article',
-        },
-        {
-          name: 'og:url',
-          // @ts-ignore
-          content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
-        },
-        {
-          name: 'og:type',
-          content: 'website',
-        },
-        {
-          name: 'og:title',
-          // @ts-ignore
-          content: `${Site.title} - ${post.value.title}`,
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          // @ts-ignore
-          content: post?.value?.image || Site.defaultImage,
-        },
-        {
-          name: 'og:description',
-          // @ts-ignore
-          content: post.value.description,
-        },
-      ],
-    }))
+    useMeta(() => {
+      if (!post.value || Array.isArray(post.value)) {
+        return {}
+      }
+      return {
+        title: post.value.title,
+        meta: [
+          {
+            name: 'description',
+            content: post.value.description,
+          },
+          {
+            name: 'og:type',
+            content: 'article',
+          },
+          {
+            name: 'og:url',
+            content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
+          },
+          {
+            name: 'og:type',
+            content: 'website',
+          },
+          {
+            name: 'og:title',
+            content: `${Site.title} - ${post.value.title}`,
+          },
+          {
+            hid: 'og:image',
+            property: 'og:image',
+            content: post.value.image || Site.defaultImage,
+          },
+          {
+            name: 'og:description',
+            content: post.value.description,
+          },
+        ],
+      }
+    })
 
     return {
       post,
