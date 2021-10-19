@@ -14,28 +14,19 @@ import {
   useMeta,
 } from '@nuxtjs/composition-api'
 import { Site } from '@/constants'
+import { fetchPost } from '@/composables/post'
 
-type Post = {
-  postedAt: Date
-  title: string
-  description: string
-  tags?: string[]
-  image?: string
-}
 const { params, $content } = useContext()
-const post = useAsync(async () => {
-  const { datetime, slug } = params.value
-  const fetchedPost = await $content(`posts/${datetime}/${slug}`, {
-    deep: true,
-  }).fetch<Post>()
-  if (!fetchedPost || Array.isArray(fetchedPost)) {
-    return null
-  }
-  return fetchedPost
-})
+const { datetime, slug } = params.value
+const post = useAsync(() =>
+  fetchPost($content, {
+    datetime,
+    slug,
+  })
+)
 
 useMeta(() => {
-  if (!post.value || Array.isArray(post.value)) {
+  if (!post.value) {
     return {}
   }
   return {
