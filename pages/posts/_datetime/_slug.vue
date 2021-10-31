@@ -42,10 +42,7 @@ useMeta(() => {
       },
       {
         name: 'og:url',
-        content: `${process.env.VERCEL_URL}${post.value.path}`.replace(
-          '//',
-          '/'
-        ),
+        content: `${process.env.baseUrl}${post.value.path}`,
       },
       {
         name: 'og:type',
