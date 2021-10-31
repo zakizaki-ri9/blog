@@ -39,7 +39,7 @@ useMeta(() => ({
     },
     {
       name: 'og:url',
-      content: Site.rootUrl,
+      content: process.env.VERCEL_URL,
     },
     {
       name: 'og:title',

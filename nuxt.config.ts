@@ -48,7 +48,7 @@ const config: NuxtConfig = {
         id: Site.title,
         title: Site.title,
         description: 'トップページ',
-        link: Site.rootUrl,
+        link: process.env.VERCEL_URL,
         author: {
           name: 'zaki',
         },
@@ -59,7 +59,7 @@ const config: NuxtConfig = {
         .sortBy('path', 'desc')
         .fetch()
       posts.forEach((post: any) => {
-        const url = `${Site.rootUrl}${post.path}`
+        const url = `${process.env.ROOT_URL}${post.path}`
         feed.addItem({
           title: post.title,
           id: url,
