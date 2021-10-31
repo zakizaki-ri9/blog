@@ -2,6 +2,13 @@ import { NuxtConfig } from '@nuxt/types'
 import { Site } from './constants'
 require('dotenv').config()
 
+const baseUrl = (() => {
+  const vercelUrl = process.env.VERCEL_URL
+  if (!vercelUrl) return 'http://localhost:3000'
+
+  return `https://${vercelUrl}`
+})()
+
 const config: NuxtConfig = {
   target: 'static',
   head: {
@@ -48,7 +55,7 @@ const config: NuxtConfig = {
         id: Site.title,
         title: Site.title,
         description: 'トップページ',
-        link: Site.rootUrl,
+        link: baseUrl,
         author: {
           name: 'zaki',
         },
@@ -59,7 +66,7 @@ const config: NuxtConfig = {
         .sortBy('path', 'desc')
         .fetch()
       posts.forEach((post: any) => {
-        const url = `${Site.rootUrl}${post.path}`
+        const url = `${baseUrl}${post.path}`
         feed.addItem({
           title: post.title,
           id: url,
@@ -83,6 +90,9 @@ const config: NuxtConfig = {
   },
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
+  },
+  env: {
+    baseUrl,
   },
 }
 
