@@ -59,7 +59,7 @@ const config: NuxtConfig = {
         .sortBy('path', 'desc')
         .fetch()
       posts.forEach((post: any) => {
-        const url = `${process.env.ROOT_URL}${post.path}`
+        const url = `${process.env.VERCEL_URL}${post.path}`
         feed.addItem({
           title: post.title,
           id: url,
