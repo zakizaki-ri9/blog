@@ -39,7 +39,7 @@ useMeta(() => ({
     },
     {
       name: 'og:url',
-      content: process.env.baseUrl,
+      content: Site.rootUrl,
     },
     {
       name: 'og:title',
