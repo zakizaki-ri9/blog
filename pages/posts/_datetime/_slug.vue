@@ -42,7 +42,7 @@ useMeta(() => {
       },
       {
         name: 'og:url',
-        content: `${process.env.baseUrl}${post.value.path}`,
+        content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
       },
       {
         name: 'og:type',
