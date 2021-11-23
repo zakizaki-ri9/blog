@@ -2,6 +2,9 @@
   <article v-if="post">
     <PostDateTime :posted-at="post.postedAt" />
     <h1 class="text-3xl font-bold">{{ post.title }}</h1>
+    <div v-if="post.tags" class="flex flex-wrap gap-1 text-sm my-1">
+      <TagLink v-for="tag in post.tags" :key="tag" :label="tag" />
+    </div>
     <div class="pt-6"><NuxtContent :document="post" /></div>
   </article>
 </template>
