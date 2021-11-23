@@ -1,6 +1,10 @@
 import { NuxtConfig } from '@nuxt/types'
 import { Site } from './constants'
+import { fetchPosts } from './composables/post'
+
 require('dotenv').config()
+
+const { $content } = require('@nuxt/content')
 
 const config: NuxtConfig = {
   target: 'static',
@@ -54,10 +58,7 @@ const config: NuxtConfig = {
         },
       }
 
-      const { $content } = require('@nuxt/content')
-      const posts = await $content('posts', { deep: true })
-        .sortBy('path', 'desc')
-        .fetch()
+      const posts = await fetchPosts($content)
       posts.forEach((post: any) => {
         const url = `${Site.rootUrl}${post.path}`
         feed.addItem({
@@ -83,6 +84,16 @@ const config: NuxtConfig = {
   },
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
+  },
+  generate: {
+    async routes() {
+      const tags = [
+        ...new Set(
+          (await fetchPosts($content)).flatMap((post) => post.tags || [])
+        ),
+      ]
+      return tags.map((tag) => `/tags/${tag}`)
+    },
   },
 }
 

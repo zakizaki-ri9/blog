@@ -29,8 +29,8 @@ import {
 import { Site } from '@/constants'
 import { fetchPosts } from '@/composables/post'
 
-const { $content } = useContext()
-const posts = useAsync(() => fetchPosts($content))
+const { params, $content } = useContext()
+const posts = useAsync(() => fetchPosts($content, { tag: params.value.tag }))
 
 useMeta(() => ({
   title: 'zaki-blog',
