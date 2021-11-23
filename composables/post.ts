@@ -13,6 +13,10 @@ type UrlParameter = {
   slug: string
 }
 
+type WhereParameter = {
+  tag: string
+}
+
 export async function fetchPost(
   $content: contentFunc,
   urlParameter: UrlParameter
@@ -27,10 +31,21 @@ export async function fetchPost(
   return fetchedPost
 }
 
-export async function fetchPosts($content: contentFunc) {
+export async function fetchPosts(
+  $content: contentFunc,
+  whereParameter?: WhereParameter
+) {
   const contents = await $content('posts', { deep: true })
     .sortBy('path', 'desc')
+    .where(generateWhereParameter(whereParameter))
     .fetch<Post>()
   if (contents && Array.isArray(contents)) return contents
   return []
+}
+
+const generateWhereParameter = (whereParameter?: WhereParameter) => {
+  if (!whereParameter) return {}
+  return {
+    tags: { $contains: [whereParameter.tag] },
+  }
 }
