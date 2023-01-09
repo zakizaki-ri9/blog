@@ -1,8 +1,8 @@
 <template>
   <ul v-if="posts" class="grid gap-y-4">
-    <li v-for="post in posts" :key="post.path">
+    <li v-for="post in posts" :key="post._path">
       <div class="transition hover:bg-gray-300">
-        <NuxtLink :to="post.path" target="_blank" rel="noopener">
+        <NuxtLink :to="post._path" target="_blank" rel="noopener">
           <PostDateTime :posted-at="post.postedAt" />
           <h2 class="text-xl font-medium">{{ post.title }}</h2>
           <span
@@ -20,19 +20,16 @@
 </template>
 
 <script setup lang="ts">
-import {
-  defineComponent,
-  useAsync,
-  useContext,
-  useMeta,
-} from '@nuxtjs/composition-api'
 import { Site } from '@/constants'
 import { fetchPosts } from '@/composables/post'
 
-const { $content } = useContext()
-const posts = useAsync(() => fetchPosts($content))
+const posts = await fetchPosts()
 
-useMeta(() => ({
+console.log({
+  posts
+})
+
+useHead(() => ({
   title: 'zaki-blog',
   meta: [
     {

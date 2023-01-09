@@ -1,12 +1,11 @@
-import { contentFunc } from '@nuxt/content/types/content'
+import { QueryBuilderWhere, ParsedContentInternalMeta } from '@nuxt/content/dist/runtime/types'
 
 export type Post = {
-  postedAt: Date
-  title: string
-  description: string
-  tags?: string[]
+  postedAt: string
   image?: string
-}
+  description: string
+  tags: string[]
+} & ParsedContentInternalMeta
 
 type UrlParameter = {
   datetime: string
@@ -18,34 +17,26 @@ type WhereParameter = {
 }
 
 export async function fetchPost(
-  $content: contentFunc,
   urlParameter: UrlParameter
 ) {
   const { datetime, slug } = urlParameter
-  const fetchedPost = await $content(`posts/${datetime}/${slug}`, {
-    deep: true,
-  }).fetch<Post>()
-  if (!fetchedPost || Array.isArray(fetchedPost)) {
-    return null
-  }
-  return fetchedPost
+  return queryContent<Post>(`posts/${datetime}/${slug}`).findOne()
 }
 
 export async function fetchPosts(
-  $content: contentFunc,
   whereParameter?: WhereParameter
 ) {
-  const contents = await $content('posts', { deep: true })
-    .sortBy('path', 'desc')
+  return await queryContent<Post>('posts')
+    .sort({
+      path: -1
+    })
     .where(generateWhereParameter(whereParameter))
-    .fetch<Post>()
-  if (contents && Array.isArray(contents)) return contents
-  return []
+    .find()
 }
 
-const generateWhereParameter = (whereParameter?: WhereParameter) => {
+const generateWhereParameter = (whereParameter?: WhereParameter): QueryBuilderWhere => {
   if (!whereParameter) return {}
   return {
-    tags: { $contains: [whereParameter.tag] },
+    tags: { $in: [whereParameter.tag] },
   }
 }
