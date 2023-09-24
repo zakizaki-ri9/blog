@@ -1,25 +1,19 @@
-/** @type {import('@typescript-eslint/experimental-utils').TSESLint.Linter.Config} */
-const config = {
+module.exports = {
   root: true,
-  env: {
-    browser: true,
-    node: true,
+  extends: ['@nuxtjs/eslint-config', '@nuxt/eslint-config'],
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module'
   },
-  extends: [
-    '@nuxtjs/eslint-config-typescript',
-    'plugin:nuxt/recommended',
-    'plugin:prettier/recommended',
-  ],
-  plugins: [],
-  rules: {},
-  overrides: [
-    {
-      files: ['**/*ts', '**/*js'],
-      rules: {
-        'vue/script-setup-uses-vars': 'off',
-      },
-    },
-  ],
+  rules: {
+    'vue/multiline-html-element-content-newline': [
+      'error',
+      {
+        ignoreWhenEmpty: true,
+        ignores: ['NuxtLink'],
+        allowEmptyLines: false
+      }
+    ]
+  }
 }
-
-module.exports = config
