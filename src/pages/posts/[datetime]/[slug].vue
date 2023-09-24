@@ -1,10 +1,19 @@
 <template>
   <article :class="$style.article">
-    <ContentDoc v-slot="{doc}" >
+    <ContentDoc v-slot="{doc}">
       <PostDateTime :posted-at="doc.postedAt" />
-      <h1 class="text-3xl font-bold">{{ doc.title }}</h1>
-      <div v-if="doc.tags" class="flex flex-wrap gap-1 text-sm my-1">
-        <TagLink v-for="tag in doc.tags" :key="tag" :label="tag" />
+      <h1 class="text-3xl font-bold">
+        {{ doc.title }}
+      </h1>
+      <div
+        v-if="doc.tags"
+        class="flex flex-wrap gap-1 text-sm my-1"
+      >
+        <TagLink
+          v-for="tag in doc.tags"
+          :key="tag"
+          :label="tag"
+        />
       </div>
       <ContentRenderer :value="doc" />
     </ContentDoc>
@@ -28,39 +37,41 @@ useHead(() => {
     meta: [
       {
         name: 'description',
-        content: data.value.description,
+        content: data.value.description
       },
       {
         name: 'og:type',
-        content: 'article',
+        content: 'article'
       },
       {
         name: 'og:url',
-        content: `${Site.rootUrl}${data.value.path}`.replace('//', '/'),
+        content: `${Site.rootUrl}${data.value.path}`.replace('//', '/')
       },
       {
         name: 'og:type',
-        content: 'website',
+        content: 'website'
       },
       {
         name: 'og:title',
-        content: `${Site.title} - ${data.value.title}`,
+        content: `${Site.title} - ${data.value.title}`
       },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: data.value.image || Site.defaultImage,
+        content: data.value.image || Site.defaultImage
       },
       {
         name: 'og:description',
-        content: data.value.description,
-      },
+        content: data.value.description
+      }
     ],
     script: [
-      data.value?.iframely ? {
-        async: true,
-        src: "//iframely.net/embed.js"
-      } : {}
+      data.value?.iframely
+        ? {
+            async: true,
+            src: '//iframely.net/embed.js'
+          }
+        : {}
     ]
   }
 })

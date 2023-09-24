@@ -4,12 +4,13 @@
       <div class="transition hover:bg-gray-300">
         <NuxtLink :to="post._path" target="_blank" rel="noopener">
           <PostDateTime :posted-at="post.postedAt" />
-          <h2 class="text-xl font-medium">{{ post.title }}</h2>
+          <h2 class="text-xl font-medium">
+            {{ post.title }}
+          </h2>
           <span
             v-if="post.description"
             class="font-thin text-sm text-gray-600"
-            >{{ post.description }}</span
-          >
+          >{{ post.description }}</span>
         </NuxtLink>
       </div>
       <div v-if="post.tags" class="flex flex-wrap gap-1 text-sm my-1">
@@ -23,7 +24,7 @@
 import { Site } from '@/constants'
 
 const route = useRoute()
-const { data } = useAsyncData(() => queryContent("posts").where({ tags: { $contains: route.params.tag } }).find())
+const { data } = useAsyncData(() => queryContent('posts').where({ tags: { $contains: route.params.tag } }).find())
 
 useHead(() => ({
   title: 'zaki-blog',
@@ -31,29 +32,29 @@ useHead(() => ({
     {
       hid: 'description',
       name: 'description',
-      content: 'きままに更新するブログ',
+      content: 'きままに更新するブログ'
     },
     {
       name: 'og:type',
-      content: 'website',
+      content: 'website'
     },
     {
       name: 'og:url',
-      content: Site.rootUrl,
+      content: Site.rootUrl
     },
     {
       name: 'og:title',
-      content: Site.title,
+      content: Site.title
     },
     {
       hid: 'og:image',
       property: 'og:image',
-      content: Site.defaultImage,
+      content: Site.defaultImage
     },
     {
       name: 'og:description',
-      content: 'きままに更新するブログ',
-    },
-  ],
+      content: 'きままに更新するブログ'
+    }
+  ]
 }))
 </script>
