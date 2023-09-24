@@ -2,6 +2,7 @@
 postedAt: 2021-05-02
 title: 雑記ブログはじめました
 description: Twitterやブログより、長くて書きなぐれる場所が欲しかった
+iframely: true
 tags:
   - 雑記
 ---
@@ -12,7 +13,7 @@ tags:
 
 2021/03頃に行われた、Front-End Study #5「2020年代のフロントエンド」にて、何かを試せる砂場（気になっている技術）を持っている人ほど、伸びやすいと聞いた。
 
-<div class="iframely-embed"><div class="iframely-responsive" style="padding-bottom: 40.8994%; padding-top: 120px;"><a href="https://forkwell.connpass.com/event/205227/" data-iframely-url="//cdn.iframe.ly/iI0Oxci"></a></div></div><script async src="//cdn.iframe.ly/embed.js" charset="utf-8"></script>
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://forkwell.connpass.com/event/205227/" data-iframely-url="//iframely.net/KF5vDN7"></a></div></div>
 
 「砂場」というのは、極力多くの人の目につき、フィードバックを得られやすい or 試しやすい場所と解釈した。パッと思いついたのは以下。
 

@@ -1,8 +1,8 @@
 <template>
   <ul v-if="data" class="grid gap-y-4">
-    <li v-for="post in data" :key="post.path">
+    <li v-for="post in data" :key="post._path">
       <div class="transition hover:bg-gray-300">
-        <NuxtLink :to="post.path" target="_blank" rel="noopener">
+        <NuxtLink :to="post._path" target="_blank" rel="noopener">
           <PostDateTime :posted-at="post.postedAt" />
           <h2 class="text-xl font-medium">{{ post.title }}</h2>
           <span

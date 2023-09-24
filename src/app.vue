@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import "modern-css-reset/dist/reset.min.css"
+// import "modern-css-reset/dist/reset.min.css"
+import '@unocss/reset/tailwind.css'
 </script>
 
 <template>
