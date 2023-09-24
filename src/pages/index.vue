@@ -1,6 +1,6 @@
 <template>
-  <ul v-if="posts" class="grid gap-y-4">
-    <li v-for="post in posts" :key="post.path">
+  <ul v-if="data" class="grid gap-y-4">
+    <li v-for="post in data" :key="post.path">
       <div class="transition hover:bg-gray-300">
         <NuxtLink :to="post.path" target="_blank" rel="noopener">
           <PostDateTime :posted-at="post.postedAt" />
@@ -20,19 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-  defineComponent,
-  useAsync,
-  useContext,
-  useMeta,
-} from '@nuxtjs/composition-api'
 import { Site } from '@/constants'
-import { fetchPosts } from '@/composables/post'
 
-const { params, $content } = useContext()
-const posts = useAsync(() => fetchPosts($content, { tag: params.value.tag }))
+const { data } = useAsyncData(() => queryContent("posts").find())
 
-useMeta(() => ({
+useHead(() => ({
   title: 'zaki-blog',
   meta: [
     {
@@ -63,10 +55,4 @@ useMeta(() => ({
     },
   ],
 }))
-</script>
-
-<script lang="ts">
-export default defineComponent({
-  head: {},
-})
 </script>

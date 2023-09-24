@@ -1,43 +1,34 @@
 <template>
-  <article v-if="post">
-    <PostDateTime :posted-at="post.postedAt" />
-    <h1 class="text-3xl font-bold">{{ post.title }}</h1>
-    <div v-if="post.tags" class="flex flex-wrap gap-1 text-sm my-1">
-      <TagLink v-for="tag in post.tags" :key="tag" :label="tag" />
-    </div>
-    <div class="pt-6"><NuxtContent :document="post" /></div>
+  <article>
+    <ContentDoc v-slot="{doc}" >
+      <PostDateTime :posted-at="doc.postedAt" />
+      <h1 class="text-3xl font-bold">{{ doc.title }}</h1>
+      <div v-if="doc.tags" class="flex flex-wrap gap-1 text-sm my-1">
+        <TagLink v-for="tag in doc.tags" :key="tag" :label="tag" />
+      </div>
+      <ContentRenderer :value="doc" />
+    </ContentDoc>
   </article>
 </template>
 
 <script setup lang="ts">
-import {
-  defineComponent,
-  useAsync,
-  useContext,
-  useMeta,
-} from '@nuxtjs/composition-api'
 import { Site } from '@/constants'
-import { fetchPost } from '@/composables/post'
 
-const { params, $content } = useContext()
-const { datetime, slug } = params.value
-const post = useAsync(() =>
-  fetchPost($content, {
-    datetime,
-    slug,
-  })
-)
+const { path } = useRoute()
+const { data } = await useAsyncData(path, () => {
+  return queryContent().where({ _path: path }).findOne()
+})
 
-useMeta(() => {
-  if (!post.value) {
+useHead(() => {
+  if (!data.value) {
     return {}
   }
   return {
-    title: post.value.title,
+    title: data.value.title,
     meta: [
       {
         name: 'description',
-        content: post.value.description,
+        content: data.value.description,
       },
       {
         name: 'og:type',
@@ -45,7 +36,7 @@ useMeta(() => {
       },
       {
         name: 'og:url',
-        content: `${Site.rootUrl}${post.value.path}`.replace('//', '/'),
+        content: `${Site.rootUrl}${data.value.path}`.replace('//', '/'),
       },
       {
         name: 'og:type',
@@ -53,30 +44,24 @@ useMeta(() => {
       },
       {
         name: 'og:title',
-        content: `${Site.title} - ${post.value.title}`,
+        content: `${Site.title} - ${data.value.title}`,
       },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: post.value.image || Site.defaultImage,
+        content: data.value.image || Site.defaultImage,
       },
       {
         name: 'og:description',
-        content: post.value.description,
+        content: data.value.description,
       },
     ],
   }
 })
 </script>
 
-<script lang="ts">
-export default defineComponent({
-  head: {},
-})
-</script>
-
 <style>
-.nuxt-content h1 {
+/* .nuxt-content h1 {
   font-weight: 900;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -149,5 +134,5 @@ export default defineComponent({
 
 .nuxt-content a:hover {
   color: #99cfe5;
-}
+} */
 </style>

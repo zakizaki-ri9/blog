@@ -1,5 +1,5 @@
 <template>
-  <header class="flex w-full">
+  <header class="flex w-full" :class="$style.header">
     <h2 class="mr-auto"><NuxtLink href="/">zaki blog</NuxtLink></h2>
     <div class="flex justify-end items-center">
       <a href="https://twitter.com/zucky_sub" target="_blank">
@@ -41,3 +41,26 @@
     </div>
   </header>
 </template>
+
+<style lang="scss" module>
+.header {
+  h2 {
+    @apply text-xl;
+    @apply font-medium;
+  }
+  ul {
+    @apply font-thin;
+  }
+
+  div a {
+    @apply px-2;
+    @apply font-thin;
+  }
+
+  a:hover {
+    @apply transition;
+    @apply delay-75;
+    @apply text-gray-400;
+  }
+}
+</style>

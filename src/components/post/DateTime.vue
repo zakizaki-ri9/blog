@@ -3,9 +3,7 @@ const props = defineProps<{
   postedAt: string | null
 }>()
 
-// const { dateFormat } = useDateFormat()
-// const formattedPostedAt = props.postedAt ? dateFormat(props.postedAt) : ""
-const formattedPostedAt = props.postedAt
+const formattedPostedAt = props.postedAt ? new Date(props.postedAt).toISOString().substring(0, 10) : ""
 </script>
 
 
