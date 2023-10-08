@@ -10,7 +10,8 @@
           <span
             v-if="post.description"
             class="font-thin text-sm text-gray-600"
-          >{{ post.description }}</span>
+            >{{ post.description }}</span
+          >
         </NuxtLink>
       </div>
       <div v-if="post.tags" class="flex flex-wrap gap-1 text-sm my-1">
@@ -21,40 +22,44 @@
 </template>
 
 <script setup lang="ts">
-import { Site } from '@/constants'
+import { Site } from "@/constants";
 
-const route = useRoute()
-const { data } = useAsyncData(() => queryContent('posts').where({ tags: { $contains: route.params.tag } }).find())
+const route = useRoute();
+const { data } = useAsyncData(() =>
+  queryContent("posts")
+    .where({ tags: { $contains: route.params.tag } })
+    .find(),
+);
 
 useHead(() => ({
-  title: 'zaki-blog',
+  title: "zaki-blog",
   meta: [
     {
-      hid: 'description',
-      name: 'description',
-      content: 'きままに更新するブログ'
+      hid: "description",
+      name: "description",
+      content: "きままに更新するブログ",
     },
     {
-      name: 'og:type',
-      content: 'website'
+      name: "og:type",
+      content: "website",
     },
     {
-      name: 'og:url',
-      content: Site.rootUrl
+      name: "og:url",
+      content: Site.rootUrl,
     },
     {
-      name: 'og:title',
-      content: Site.title
+      name: "og:title",
+      content: Site.title,
     },
     {
-      hid: 'og:image',
-      property: 'og:image',
-      content: Site.defaultImage
+      hid: "og:image",
+      property: "og:image",
+      content: Site.defaultImage,
     },
     {
-      name: 'og:description',
-      content: 'きままに更新するブログ'
-    }
-  ]
-}))
+      name: "og:description",
+      content: "きままに更新するブログ",
+    },
+  ],
+}));
 </script>

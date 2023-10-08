@@ -1,19 +1,12 @@
 <template>
   <article :class="$style.article">
-    <ContentDoc v-slot="{doc}">
+    <ContentDoc v-slot="{ doc }">
       <PostDateTime :posted-at="doc.postedAt" />
       <h1 class="text-3xl font-bold">
         {{ doc.title }}
       </h1>
-      <div
-        v-if="doc.tags"
-        class="flex flex-wrap gap-1 text-sm my-1"
-      >
-        <TagLink
-          v-for="tag in doc.tags"
-          :key="tag"
-          :label="tag"
-        />
+      <div v-if="doc.tags" class="flex flex-wrap gap-1 text-sm my-1">
+        <TagLink v-for="tag in doc.tags" :key="tag" :label="tag" />
       </div>
       <ContentRenderer :value="doc" />
     </ContentDoc>
@@ -21,60 +14,60 @@
 </template>
 
 <script setup lang="ts">
-import { Site } from '@/constants'
+import { Site } from "@/constants";
 
-const { path } = useRoute()
+const { path } = useRoute();
 const { data } = await useAsyncData(path, () => {
-  return queryContent().where({ _path: path }).findOne()
-})
+  return queryContent().where({ _path: path }).findOne();
+});
 
 useHead(() => {
   if (!data.value) {
-    return {}
+    return {};
   }
   return {
     title: data.value.title,
     meta: [
       {
-        name: 'description',
-        content: data.value.description
+        name: "description",
+        content: data.value.description,
       },
       {
-        name: 'og:type',
-        content: 'article'
+        name: "og:type",
+        content: "article",
       },
       {
-        name: 'og:url',
-        content: `${Site.rootUrl}${data.value.path}`.replace('//', '/')
+        name: "og:url",
+        content: `${Site.rootUrl}${data.value.path}`.replace("//", "/"),
       },
       {
-        name: 'og:type',
-        content: 'website'
+        name: "og:type",
+        content: "website",
       },
       {
-        name: 'og:title',
-        content: `${Site.title} - ${data.value.title}`
+        name: "og:title",
+        content: `${Site.title} - ${data.value.title}`,
       },
       {
-        hid: 'og:image',
-        property: 'og:image',
-        content: data.value.image || Site.defaultImage
+        hid: "og:image",
+        property: "og:image",
+        content: data.value.image || Site.defaultImage,
       },
       {
-        name: 'og:description',
-        content: data.value.description
-      }
+        name: "og:description",
+        content: data.value.description,
+      },
     ],
     script: [
       data.value?.iframely
         ? {
             async: true,
-            src: '//iframely.net/embed.js'
+            src: "//iframely.net/embed.js",
           }
-        : {}
-    ]
-  }
-})
+        : {},
+    ],
+  };
+});
 </script>
 
 <style lang="scss" module>

@@ -1,18 +1,10 @@
 <template>
-  <header
-    class="flex w-full"
-    :class="$style.header"
-  >
+  <header class="flex w-full" :class="$style.header">
     <h2 class="mr-auto">
-      <NuxtLink href="/">
-        zaki blog
-      </NuxtLink>
+      <NuxtLink href="/"> zaki blog </NuxtLink>
     </h2>
     <div class="flex justify-end items-center">
-      <a
-        href="https://twitter.com/zucky_sub"
-        target="_blank"
-      >
+      <a href="https://twitter.com/zucky_sub" target="_blank">
         <svg
           viewBox="0 0 15 15"
           fill="none"
@@ -26,10 +18,7 @@
           />
         </svg>
       </a>
-      <NuxtLink
-        href="https://github.com/zakizaki-ri9"
-        target="_blank"
-      >
+      <NuxtLink href="https://github.com/zakizaki-ri9" target="_blank">
         <svg
           viewBox="0 0 15 15"
           fill="none"
@@ -50,12 +39,7 @@
       >
         Hatena
       </NuxtLink>
-      <NuxtLink
-        href="/feed.xml"
-        target="_blank"
-      >
-        RSS
-      </NuxtLink>
+      <NuxtLink href="/feed.xml" target="_blank"> RSS </NuxtLink>
     </div>
   </header>
 </template>
