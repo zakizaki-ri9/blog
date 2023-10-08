@@ -4,7 +4,7 @@
     <main class="my-8">
       <slot />
     </main>
-    <hr>
+    <hr />
     <TheFooter class="mt-4" />
   </div>
 </template>

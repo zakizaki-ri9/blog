@@ -1,19 +1,23 @@
 module.exports = {
   root: true,
-  extends: ['@nuxtjs/eslint-config', '@nuxt/eslint-config'],
-  parser: 'vue-eslint-parser',
+  extends: [
+    "@nuxtjs/eslint-config",
+    "@nuxt/eslint-config",
+    "plugin:prettier/recommended",
+  ],
+  parser: "vue-eslint-parser",
   parserOptions: {
-    parser: '@typescript-eslint/parser',
-    sourceType: 'module'
+    parser: "@typescript-eslint/parser",
+    sourceType: "module",
   },
   rules: {
-    'vue/multiline-html-element-content-newline': [
-      'error',
+    "vue/multiline-html-element-content-newline": [
+      "error",
       {
         ignoreWhenEmpty: true,
-        ignores: ['NuxtLink'],
-        allowEmptyLines: false
-      }
-    ]
-  }
-}
+        ignores: ["NuxtLink"],
+        allowEmptyLines: false,
+      },
+    ],
+  },
+};
