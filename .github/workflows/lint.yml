@@ -1,5 +1,5 @@
-name: learn-github-actions
-on: [push, pull_request]
+name: lint all check
+on: pull_request
 jobs:
   lint-all-check:
     runs-on: ubuntu-latest
