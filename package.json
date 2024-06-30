@@ -7,33 +7,24 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint:js:check": "eslint src",
-    "lint:js:fix": "eslint src --fix",
-    "lint:format:check": "prettier --check .",
-    "lint:format:fix": "prettier --write .",
-    "lint:all:check": "npm run lint:js:check && npm run lint:format:check",
-    "lint:all:fix": "npm run lint:js:fix && npm run lint:format:fix"
+    "lint:check": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "devDependencies": {
-    "@iconify-json/tabler": "^1.1.94",
-    "@nuxt/content": "^2.8.2",
+    "@iconify-json/tabler": "^1.1.115",
+    "@nuxt/content": "^2.13.0",
     "@nuxt/devtools": "latest",
-    "@nuxt/eslint-config": "^0.2.0",
-    "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@typescript-eslint/eslint-plugin": "^6.7.2",
-    "@typescript-eslint/parser": "^6.7.2",
-    "@unocss/nuxt": "^0.55.7",
-    "@unocss/reset": "^0.56.1",
-    "eslint": "^8.50.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
+    "@nuxt/eslint": "^0.3.13",
+    "@unocss/nuxt": "^0.61.0",
+    "@unocss/reset": "^0.61.0",
+    "eslint": "^9.6.0",
     "feed": "^4.2.2",
-    "nuxt": "^3.7.1",
-    "nuxt-gtag": "^1.1.1",
-    "sass": "^1.66.1"
+    "nuxt": "^3.12.2",
+    "nuxt-gtag": "^1.1.2",
+    "sass": "^1.77.6"
   },
   "volta": {
-    "node": "18.18.0",
+    "node": "20.15.0",
     "npm": "10.2.0"
   }
 }
