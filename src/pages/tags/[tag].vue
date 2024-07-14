@@ -41,7 +41,6 @@
 import { Site } from "@/constants"
 
 const route = useRoute("tags-tag")
-
 const { data } = useAsyncData(() =>
   queryContent("posts")
     .where({ tags: { $contains: route.params.tag } })
