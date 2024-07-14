@@ -10,7 +10,7 @@ export default defineNuxtConfig({
    * 互換性を意味する
    * ref. https://github.com/nuxt/nuxt/issues/27992
    */
-  compatibilityDate: "2024-07-06",
+  // compatibilityDate: "2024-07-06",d
 
   devtools: { enabled: true },
 
