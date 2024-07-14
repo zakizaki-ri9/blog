@@ -19,7 +19,6 @@ export default defineNuxtConfig({
     "@unocss/nuxt",
     "nuxt-gtag",
     "@nuxt/eslint",
-    "@nuxt/image",
   ],
   content: {},
   srcDir: "src/",
