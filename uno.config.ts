@@ -3,7 +3,7 @@ import {
   presetUno,
   transformerDirectives,
   presetIcons,
-} from "unocss";
+} from "unocss"
 
 export default defineConfig({
   presets: [
@@ -11,9 +11,9 @@ export default defineConfig({
     presetIcons({
       collections: {
         tabler: () =>
-          import("@iconify-json/tabler/icons.json").then((i) => i.default),
+          import("@iconify-json/tabler/icons.json").then(i => i.default),
       },
     }),
   ],
   transformers: [transformerDirectives()],
-});
+})

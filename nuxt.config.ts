@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   // future: {
   //   // Nuxt4 の機能で問題ないか確認する
   //   compatibilityVersion: 4,
