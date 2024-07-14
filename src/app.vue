@@ -10,9 +10,6 @@ import "@unocss/reset/tailwind.css"
 
 <style lang="scss">
 body {
-  @apply bg-gray-100;
-  @apply text-gray-800;
-  @apply text-sm;
-  @apply font-light;
+  @apply bg-gray-50 text-gray-800 text-sm font-light;
 }
 </style>
