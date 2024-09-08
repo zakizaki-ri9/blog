@@ -67,4 +67,3 @@ GPT に相談一部抜粋
   - [Amazon ECS のタスクにメモリを割り当てるにはどうすればよいですか?](https://repost.aws/ja/knowledge-center/allocate-ecs-memory-tasks)
   - [詳解: Amazon ECS による CPU とメモリのリソース管理](https://aws.amazon.com/jp/blogs/news/how-amazon-ecs-manages-cpu-and-memory-resources/)
   - [ECSタスクのCPUとメモリをチューニングする](https://akng-engineer.hatenablog.com/entry/2020/03/03/231142)
-- 
