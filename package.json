@@ -20,6 +20,7 @@
     "@unocss/reset": "^0.61.0",
     "eslint": "^8.57.0",
     "feed": "^4.2.2",
+    "git-cz": "^4.9.0",
     "nuxt": "^3.12.3",
     "nuxt-gtag": "^1.1.2",
     "sass": "^1.77.6"
@@ -27,5 +28,10 @@
   "volta": {
     "node": "20.15.0",
     "npm": "10.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
   }
 }
