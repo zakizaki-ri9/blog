@@ -7,7 +7,7 @@ on:
 
 jobs:
   pr_agent:
-    if: ${{ github.event.sender.type != 'Bot' }}
+    if: ${{ github.event.sender.type != 'Bot' && github.event.sender.login == 'zakizaki-ri9' }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
