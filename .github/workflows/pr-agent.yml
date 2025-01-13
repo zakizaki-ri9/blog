@@ -1,0 +1,28 @@
+name: PR-Agent
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  pr_agent:
+    if: ${{ github.event.sender.type != 'Bot' && github.event.sender.login == 'zakizaki-ri9' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    name: Run PR Agent
+    steps:
+      - id: pr-agent
+        uses: Codium-ai/pr-agent@main
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # 次の中からモデルを指定
+          # https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/algo/__init__.py
+          CONFIG.MODEL: "o1-mini"
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。タイトルは commitlint パターンの接頭辞を含む必要があります。"
+          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
