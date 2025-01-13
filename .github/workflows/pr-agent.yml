@@ -22,7 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 次の中からモデルを指定
           # https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/algo/__init__.py
-          CONFIG.MODEL: "o1-preview"
-          PR_REVIEWER.EXTRA_INSTRUCTIONS: "日本語で回答してください。"
-          PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "日本語で回答してください。タイトルは commitlint パターンの接頭辞を含む必要があります。"
-          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "日本語で回答してください。"
+          CONFIG.MODEL: "o1-mini"
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。タイトルは commitlint パターンの接頭辞を含む必要があります。"
+          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
