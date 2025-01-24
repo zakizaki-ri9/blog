@@ -8,7 +8,7 @@ on:
 
 jobs:
   pr_agent:
-    # if: ${{ github.event.sender.type != 'Bot' && github.event.sender.login == 'zakizaki-ri9' }}
+    if: ${{ github.event.sender.type != 'Bot' && github.event.sender.login == 'zakizaki-ri9' && github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
