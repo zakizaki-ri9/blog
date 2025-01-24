@@ -19,7 +19,7 @@ jobs:
       - id: pr-agent
         uses: Codium-ai/pr-agent@main
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY_TEST }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 次の中からモデルを指定
           # https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/algo/__init__.py
