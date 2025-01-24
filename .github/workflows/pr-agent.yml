@@ -3,7 +3,8 @@ name: PR-Agent
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-  workflow_dispatch:
+  issue_comment:
+    types: [created]
 
 jobs:
   pr_agent:
@@ -18,7 +19,7 @@ jobs:
       - id: pr-agent
         uses: Codium-ai/pr-agent@main
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY_TEST }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 次の中からモデルを指定
           # https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/algo/__init__.py
@@ -26,3 +27,12 @@ jobs:
           PR_REVIEWER.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
           PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。タイトルは commitlint パターンの接頭辞を含む必要があります。"
           PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_ADD_DOCS.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_UPDATE_CHANGELOG.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_TEST.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_IMPROVE_COMPONENT.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          PR_REVIEWER.ENABLE_REVIEW_LABELS_SECURITY: false
+          PR_REVIEWER.ENABLE_REVIEW_LABELS_EFFORT: false
+          PR_DESCRIPTION.PUBLISH_LABELS: false
+          CONFIG.IGNORE_PR_TITLE: ["^WIP"]
+          CONFIG.IGNORE_PR_SOURCE_BRANCH: [develop, main]
