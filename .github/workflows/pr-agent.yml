@@ -34,5 +34,5 @@ jobs:
           PR_REVIEWER.ENABLE_REVIEW_LABELS_SECURITY: false
           PR_REVIEWER.ENABLE_REVIEW_LABELS_EFFORT: false
           PR_DESCRIPTION.PUBLISH_LABELS: false
-          CONFIG.IGNORE_PR_TITLE: ["^WIP"]
-          CONFIG.IGNORE_PR_SOURCE_BRANCH: [develop, main]
+          # CONFIG.IGNORE_PR_TITLE: "['WIP']"
+          # CONFIG.IGNORE_PR_SOURCE_BRANCH: [develop, main]
