@@ -20,6 +20,9 @@ jobs:
       - id: pr-agent
         uses: Codium-ai/pr-agent@main
         env:
+          GITHUB_ACTION.AUTO_REVIEW: true
+          GITHUB_ACTION.AUTO_DESCRIBE: true
+          GITHUB_ACTION.AUTO_IMPROVE: true
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 次の中からモデルを指定
