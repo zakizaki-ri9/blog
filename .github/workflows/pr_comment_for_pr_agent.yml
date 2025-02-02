@@ -12,19 +12,12 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get PR Number
-        id: pr_number
-        uses: actions/github-script@v6
-        with:
-          script: |
-            return context.issue.number;
-
       - name: Find and Delete Comments
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue_number = ${{ steps.pr_number.outputs.return }};
+            const issue_number = ${{ github.event.pull_request.number }};
             const comments = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -48,7 +41,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue_number = ${{ steps.pr_number.outputs.return }};
+            const issue_number = ${{ github.event.pull_request.number }};
             const commentsToPost = ['/review', '/describe', '/improve'];
 
             for (const comment of commentsToPost) {
