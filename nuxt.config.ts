@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
   modules: [
     "@nuxt/content",
     "@unocss/nuxt",
@@ -8,16 +7,24 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/image",
   ],
+  devtools: { enabled: true },
   content: {},
-  srcDir: "src/",
 
-  gtag: {
-    id: "G-SX3SFV4BQL",
+  runtimeConfig: {
+    public: {
+      baseURL:
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000"
+          : process.env.VERCEL_URL,
+    },
   },
+  srcDir: "src/",
 
   experimental: {
     typedPages: true,
   },
+
+  compatibilityDate: "2024-07-28",
 
   eslint: {
     config: {
@@ -28,5 +35,7 @@ export default defineNuxtConfig({
     },
   },
 
-  compatibilityDate: "2024-07-28",
+  gtag: {
+    id: "G-SX3SFV4BQL",
+  },
 })

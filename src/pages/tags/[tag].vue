@@ -27,7 +27,7 @@
         v-if="post.tags"
         class="flex flex-wrap gap-1 text-sm my-1"
       >
-        <TagLink
+        <PostTagLink
           v-for="tag in post.tags"
           :key="tag"
           :label="tag"

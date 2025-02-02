@@ -9,7 +9,7 @@
         v-if="doc.tags"
         class="flex flex-wrap gap-1 text-sm my-1"
       >
-        <TagLink
+        <PostTagLink
           v-for="tag in doc.tags"
           :key="tag"
           :label="tag"
