@@ -17,12 +17,13 @@ jobs:
 
       - name: Generate Installation Token
         id: generate_token
+        env:
+          APP_ID: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_PRIVATE_KEY }}
+          INSTALLATION_ID: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_INSTALLATION_ID }}
         run: |
-          chmod +x .github/generate-jwt.sh
-          token=$(APP_ID=${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_ID }} \
-                 APP_PRIVATE_KEY=${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_PRIVATE_KEY }} \
-                 INSTALLATION_ID=${{ secrets.PR_COMMENT_FOR_PR_AGENT_INSTALLATION_ID }} \
-                 .github/generate-jwt.sh)
+          chmod +x .github/generate-github-app-token.sh
+          token=$(.github/generate-github-app-token.sh)
           echo "token=$token" >> $GITHUB_OUTPUT
 
       - name: Find and Delete Comments
