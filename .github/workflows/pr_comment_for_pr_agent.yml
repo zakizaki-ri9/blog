@@ -77,6 +77,7 @@ jobs:
             try {
               const jwt = process.env.JWT;
               console.log('Using JWT token for authentication');
+              console.log('JWT token length:', jwt.length);
               
               const response = await github.request('GET /app/installations', {
                 headers: {
