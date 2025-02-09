@@ -39,21 +39,26 @@ jobs:
 
             try {
               const privateKey = Buffer.from(process.env.APP_PRIVATE_KEY_BASE64, 'base64').toString('utf8');
-              // デバッグ用のログを追加
-              console.log('Payload:', JSON.stringify(payload));
+              
+              // デコードされた秘密鍵の内容を確認（セキュリティ上重要な部分は表示しない）
+              console.log('Decoded private key starts with:', privateKey.startsWith('-----BEGIN RSA PRIVATE KEY-----'));
+              console.log('Decoded private key ends with:', privateKey.endsWith('-----END RSA PRIVATE KEY-----'));
               console.log('Private key length:', privateKey.length);
-
+              
+              // 秘密鍵の内容を確認
+              console.log('Private key starts with:', privateKey.slice(0, 27));
+              console.log('Private key ends with:', privateKey.slice(-25));
+              
+              // JWTの生成
               const token = jwt.sign(payload, privateKey, { 
-                algorithm: 'RS256',
-                header: {
-                  alg: 'RS256',
-                  typ: 'JWT'
-                }
+                algorithm: 'RS256'
               });
-              console.log('JWT token length:', token.length);
-              console.log('JWT generated successfully');
+              
+              // 生成されたトークンの確認
+              console.log('JWT starts with:', token.slice(0, 10));
               core.setOutput('token', token);
             } catch (error) {
+              console.log('Error details:', error);
               core.setFailed(`JWT generation failed: ${error.message}`);
               throw error;
             }
