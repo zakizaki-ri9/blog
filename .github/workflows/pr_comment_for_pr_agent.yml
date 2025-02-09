@@ -39,11 +39,23 @@ jobs:
 
             try {
               const privateKey = Buffer.from(process.env.APP_PRIVATE_KEY_BASE64, 'base64').toString('utf8');
-              const token = jwt.sign(payload, privateKey, { algorithm: 'RS256' });
+              // デバッグ用のログを追加
+              console.log('Payload:', JSON.stringify(payload));
+              console.log('Private key length:', privateKey.length);
+
+              const token = jwt.sign(payload, privateKey, { 
+                algorithm: 'RS256',
+                header: {
+                  alg: 'RS256',
+                  typ: 'JWT'
+                }
+              });
+              console.log('JWT token length:', token.length);
               console.log('JWT generated successfully');
               core.setOutput('token', token);
             } catch (error) {
               core.setFailed(`JWT generation failed: ${error.message}`);
+              throw error;
             }
         env:
           APP_ID: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_ID }}
@@ -56,16 +68,22 @@ jobs:
           script: |
             const jwt = process.env.JWT;
             try {
+              // デバッグ用のログを追加
+              console.log('Using JWT token length:', jwt.length);
+
               const result = await github.request('POST /app/installations/${{ secrets.PR_COMMENT_FOR_PR_AGENT_INSTALLATION_ID }}/access_tokens', {
                 headers: {
-                  authorization: `Bearer ${jwt}`,
-                  accept: 'application/vnd.github.v3+json'
+                  'authorization': `Bearer ${jwt}`,
+                  'accept': 'application/vnd.github.v3+json'
                 }
               });
               console.log('Installation token obtained successfully');
               core.setOutput('token', result.data.token);
             } catch (error) {
               core.setFailed(`Failed to get installation token: ${error.message}`);
+              // エラーの詳細をログ出力
+              console.log('Error details:', error);
+              throw error;
             }
         env:
           JWT: ${{ steps.generate_jwt.outputs.token }}
