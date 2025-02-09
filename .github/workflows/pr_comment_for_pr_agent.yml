@@ -67,22 +67,64 @@ jobs:
           APP_ID: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_ID }}
           APP_PRIVATE_KEY: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_PRIVATE_KEY }}
 
+      - name: Get Installation ID
+        id: get_installation_id
+        uses: actions/github-script@v6
+        with:
+          script: |
+            try {
+              const jwt = process.env.JWT;
+              console.log('Fetching installations with JWT token');
+              
+              const installations = await github.request('GET /app/installations', {
+                headers: {
+                  'authorization': `Bearer ${jwt}`,
+                  'accept': 'application/vnd.github.v3+json'
+                }
+              });
+              
+              // リポジトリの情報を取得
+              const repo = {
+                owner: context.repo.owner,
+                name: context.repo.repo
+              };
+              
+              // このリポジトリに対応するインストールを検索
+              const installation = installations.data.find(inst => 
+                inst.account.login.toLowerCase() === repo.owner.toLowerCase()
+              );
+              
+              if (!installation) {
+                throw new Error('No installation found for this repository');
+              }
+              
+              console.log('Found installation ID:', installation.id);
+              core.setOutput('installation_id', installation.id);
+            } catch (error) {
+              console.log('Error getting installation:', error);
+              core.setFailed(`Failed to get installation ID: ${error.message}`);
+              throw error;
+            }
+        env:
+          JWT: ${{ steps.generate_jwt.outputs.token }}
+
       - name: Get Installation Token
         id: get_installation_token
         uses: actions/github-script@v6
         with:
           script: |
             const jwt = process.env.JWT;
+            const installation_id = process.env.INSTALLATION_ID;
             try {
-              console.log('Using JWT token length:', jwt.length);
-              console.log('Authorization header:', `Bearer ${jwt.substring(0, 10)}...`);
-
-              const result = await github.request('POST /app/installations/${{ secrets.PR_COMMENT_FOR_PR_AGENT_INSTALLATION_ID }}/access_tokens', {
+              console.log('Getting token for installation:', installation_id);
+              
+              const result = await github.request(`POST /app/installations/${installation_id}/access_tokens`, {
                 headers: {
                   'authorization': `Bearer ${jwt}`,
                   'accept': 'application/vnd.github.v3+json'
                 }
               });
+              
               console.log('Installation token obtained successfully');
               core.setOutput('token', result.data.token);
             } catch (error) {
@@ -92,6 +134,7 @@ jobs:
             }
         env:
           JWT: ${{ steps.generate_jwt.outputs.token }}
+          INSTALLATION_ID: ${{ steps.get_installation_id.outputs.installation_id }}
 
       - name: Find and Delete Comments
         uses: actions/github-script@v6
