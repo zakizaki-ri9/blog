@@ -12,10 +12,48 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Generate JWT
+        id: generate_jwt
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const crypto = require('crypto');
+            const jwt = require('jsonwebtoken');
+
+            const now = Math.floor(Date.now() / 1000);
+            const payload = {
+              iat: now,
+              exp: now + (10 * 60),
+              iss: process.env.APP_ID
+            };
+
+            const privateKey = Buffer.from(process.env.APP_PRIVATE_KEY_BASE64, 'base64').toString('utf8');
+            const token = jwt.sign(payload, privateKey, { algorithm: 'RS256' });
+            core.setOutput('token', token);
+        env:
+          APP_ID: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_ID }}
+          APP_PRIVATE_KEY_BASE64: ${{ secrets.PR_COMMENT_FOR_PR_AGENT_APP_PRIVATE_KEY_BASE64 }}
+
+      - name: Get Installation Token
+        id: get_installation_token
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const jwt = process.env.JWT;
+            const result = await github.request('POST /app/installations/${{ secrets.PR_COMMENT_FOR_PR_AGENT_INSTALLATION_ID }}/access_tokens', {
+              headers: {
+                authorization: `Bearer ${jwt}`,
+                accept: 'application/vnd.github.v3+json'
+              }
+            });
+            core.setOutput('token', result.data.token);
+        env:
+          JWT: ${{ steps.generate_jwt.outputs.token }}
+
       - name: Find and Delete Comments
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.get_installation_token.outputs.token }}
           script: |
             const issue_number = ${{ github.event.pull_request.number }};
             const comments = await github.rest.issues.listComments({
@@ -39,7 +77,7 @@ jobs:
       - name: Post Comments
         uses: actions/github-script@v6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.get_installation_token.outputs.token }}
           script: |
             const issue_number = ${{ github.event.pull_request.number }};
             const commentsToPost = ['/review', '/describe', '/improve'];
