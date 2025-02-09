@@ -12,13 +12,20 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install jsonwebtoken
+
       - name: Generate JWT
         id: generate_jwt
         uses: actions/github-script@v6
         with:
           script: |
-            const crypto = require('crypto');
-            const jwt = require('jsonwebtoken');
+            const jwt = require('./node_modules/jsonwebtoken');
 
             const now = Math.floor(Date.now() / 1000);
             const payload = {
