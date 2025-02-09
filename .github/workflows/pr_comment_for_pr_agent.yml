@@ -40,16 +40,23 @@ jobs:
             try {
               const privateKey = process.env.APP_PRIVATE_KEY;
               
-              // 秘密鍵の内容を確認（セキュリティ上重要な部分は表示しない）
-              console.log('Private key format validation:');
+              // デバッグログの追加
+              console.log('JWT Payload:', JSON.stringify(payload));
+              console.log('Private key validation:');
               console.log('- Starts with correct header:', privateKey.startsWith('-----BEGIN RSA PRIVATE KEY-----'));
               console.log('- Ends with correct footer:', privateKey.endsWith('-----END RSA PRIVATE KEY-----'));
+              console.log('- Contains newlines:', privateKey.includes('\n'));
               console.log('- Total length:', privateKey.length);
               
               const token = jwt.sign(payload, privateKey, { 
-                algorithm: 'RS256'
+                algorithm: 'RS256',
+                header: {
+                  alg: 'RS256',
+                  typ: 'JWT'
+                }
               });
               
+              console.log('Generated JWT token length:', token.length);
               core.setOutput('token', token);
             } catch (error) {
               console.log('Error details:', error);
@@ -67,8 +74,8 @@ jobs:
           script: |
             const jwt = process.env.JWT;
             try {
-              // デバッグ用のログを追加
               console.log('Using JWT token length:', jwt.length);
+              console.log('Authorization header:', `Bearer ${jwt.substring(0, 10)}...`);
 
               const result = await github.request('POST /app/installations/${{ secrets.PR_COMMENT_FOR_PR_AGENT_INSTALLATION_ID }}/access_tokens', {
                 headers: {
@@ -79,9 +86,8 @@ jobs:
               console.log('Installation token obtained successfully');
               core.setOutput('token', result.data.token);
             } catch (error) {
+              console.log('Full error:', error);
               core.setFailed(`Failed to get installation token: ${error.message}`);
-              // エラーの詳細をログ出力
-              console.log('Error details:', error);
               throw error;
             }
         env:
