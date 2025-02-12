@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# デバッグ用
-set -x
+# # デバッグ用
+# set -x
 
 # JWTヘッダーの生成
 header=$(echo -n "{\"alg\":\"RS256\",\"typ\":\"JWT\"}" | base64 -w0)
