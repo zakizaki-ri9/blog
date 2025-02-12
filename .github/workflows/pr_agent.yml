@@ -8,8 +8,7 @@ on:
 jobs:
   pr_agent:
     # PR or PRのコメントの場合に実行する
-    # if: ${{ (github.event.sender.type == 'Bot' || github.event.sender.login == 'zakizaki-ri9') && (github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.issue.pull_request)) }}
-    if: ${{ (github.event_name == 'issue_comment' && github.event.issue.pull_request) }}
+    if: ${{ (github.event.sender.type == 'Bot' || github.event.sender.login == 'zakizaki-ri9') && (github.event_name == 'pull_request' || (github.event_name == 'issue_comment' && github.event.issue.pull_request)) }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -27,14 +26,27 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # 次の中からモデルを指定
           # https://github.com/Codium-ai/pr-agent/blob/main/pr_agent/algo/__init__.py
-          CONFIG.MODEL: "o1-mini"
-          PR_REVIEWER.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
-          PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。タイトルは commitlint パターンの接頭辞を含む必要があります。"
-          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
-          PR_ADD_DOCS.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
-          PR_UPDATE_CHANGELOG.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
-          PR_TEST.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
-          PR_IMPROVE_COMPONENT.EXTRA_INSTRUCTIONS: "Please be sure to answer in Japanese. 必ず日本語で回答してください。"
+          CONFIG.MODEL: "o3-mini"
+          # 共通の指示内容
+          COMMON_INSTRUCTIONS: |-
+            Please be sure to answer in Japanese.
+            必ず日本語で回答してください。
+
+            次言語やフレームワークの標準的な実装やベストプラクティスに従ってください。
+            - Vue3, Nuxt3, Vite, TypeScript
+
+            次ルールを遵守してください。
+            - Vue, Nuxt や外部ライブラリ提供コンポーネント以外は、Prefix に Atoms, Molecules, Organisms, Templates, Pages を含む必要があります。
+            - 汎用的な変数や関数は、JSDocで処理概要を記述してください。
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: ${{ env.COMMON_INSTRUCTIONS }}
+          PR_DESCRIPTION.EXTRA_INSTRUCTIONS: |-
+            ${{ env.COMMON_INSTRUCTIONS }}
+            タイトルは commitlint パターンの接頭辞を含む必要があります。
+          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: ${{ env.COMMON_INSTRUCTIONS }}
+          PR_ADD_DOCS.EXTRA_INSTRUCTIONS: ${{ env.COMMON_INSTRUCTIONS }}
+          PR_UPDATE_CHANGELOG.EXTRA_INSTRUCTIONS: ${{ env.COMMON_INSTRUCTIONS }}
+          PR_TEST.EXTRA_INSTRUCTIONS: ${{ env.COMMON_INSTRUCTIONS }}
+          PR_IMPROVE_COMPONENT.EXTRA_INSTRUCTIONS: ${{ env.COMMON_INSTRUCTIONS }}
           PR_REVIEWER.ENABLE_REVIEW_LABELS_SECURITY: false
           PR_REVIEWER.ENABLE_REVIEW_LABELS_EFFORT: false
           PR_DESCRIPTION.PUBLISH_LABELS: false

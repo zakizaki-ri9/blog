@@ -31,6 +31,7 @@ jobs:
         with:
           github-token: ${{ steps.generate_token.outputs.token }}
           script: |
+            // プルリクエストのコメントを取得
             const issue_number = context.issue.number;
             const comments = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -38,10 +39,17 @@ jobs:
               issue_number: issue_number,
             });
 
+            // GitHub App のユーザー情報を取得
+            const appUser = await github.rest.apps.getAuthenticated();
+
+            // 削除対象のコメントをフィルタリング
             const commentsToDelete = comments.data.filter(comment =>
-              ['/review', '/describe', '/improve'].includes(comment.body)
+              ['/review', '/describe', '/improve'].includes(comment.body) &&
+              comment.user.type === 'Bot' &&
+              comment.user.login === appUser.data.slug
             );
 
+            // コメントを削除
             for (const comment of commentsToDelete) {
               await github.rest.issues.deleteComment({
                 owner: context.repo.owner,
@@ -55,6 +63,7 @@ jobs:
         with:
           github-token: ${{ steps.generate_token.outputs.token }}
           script: |
+            // プルリクエストにコメントを投稿
             const issue_number = context.issue.number;
             const commentsToPost = ['/review', '/describe', '/improve'];
 
