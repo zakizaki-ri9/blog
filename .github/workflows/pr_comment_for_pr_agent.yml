@@ -39,14 +39,10 @@ jobs:
               issue_number: issue_number,
             });
 
-            // GitHub App のユーザー情報を取得
-            const appUser = await github.rest.apps.getAuthenticated();
-
             // 削除対象のコメントをフィルタリング
             const commentsToDelete = comments.data.filter(comment =>
               ['/review', '/describe', '/improve'].includes(comment.body) &&
-              comment.user.type === 'Bot' &&
-              comment.user.login === appUser.data.slug
+              comment.user.type === 'Bot'
             );
 
             // コメントを削除
