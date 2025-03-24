@@ -1,0 +1,70 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
+const tagCounts = tags.reduce((acc, tag) => {
+    const count = posts.filter((post) => post.data.tags?.includes(tag)).length;
+    acc[tag] = count;
+    return acc;
+}, {} as Record<string, number>);
+
+// タグの数が多い順にソート
+const sortedTags = tags.sort((a, b) => tagCounts[b] - tagCounts[a]);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`タグ一覧 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: 0 auto;
+				padding: 2em 0;
+			}
+			h1 {
+				margin-bottom: 1em;
+			}
+			.tags-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				margin: 2em 0;
+			}
+			.tag-link {
+				display: flex;
+				align-items: center;
+				padding: 0.5em 1em;
+				background-color: rgba(var(--accent), 0.1);
+				color: rgb(var(--accent));
+				border-radius: 1em;
+				font-size: 1em;
+				text-decoration: none;
+				transition: background-color 0.2s ease;
+			}
+			.tag-link:hover {
+				background-color: rgba(var(--accent), 0.2);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>タグ一覧</h1>
+			<div class="tags-container">
+				{
+					sortedTags.map((tag) => (
+						<a href={`/tags/${tag}`} class="tag-link">
+							{tag}({tagCounts[tag]})
+						</a>
+					))
+				}
+			</div>
+		</main>
+	</body>
+</html> 
