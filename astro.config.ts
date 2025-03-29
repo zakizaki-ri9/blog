@@ -2,10 +2,13 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import vercelStatic from "@astrojs/vercel/static"
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	output: "static",
+	adapter: vercelStatic({}),
+	site: import.meta.env.VERCEL_URL || "http://localhost:3000",
 	integrations: [mdx(), sitemap()],
 	vite: {
 		resolve: {
