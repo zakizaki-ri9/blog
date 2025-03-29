@@ -1,0 +1,72 @@
+---
+interface Props {
+  url: string;
+  title?: string;
+}
+
+const { url, title } = Astro.props;
+const displayTitle = title || url;
+const hostname = new URL(url).hostname;
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="simple-link">
+  <div class="link-container">
+    <span class="link-icon">🔗</span>
+    <div class="link-content">
+      <span class="link-title">{displayTitle}</span>
+      <span class="link-domain">{hostname}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .simple-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    margin: 1rem 0;
+    transition: background-color 0.2s ease;
+    background-color: #f8fafc;
+  }
+
+  .simple-link:hover {
+    background-color: #f0f4f8;
+  }
+
+  .link-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .link-icon {
+    font-size: 1.25rem;
+    color: #4a5568;
+    flex-shrink: 0;
+  }
+
+  .link-content {
+    overflow: hidden;
+  }
+
+  .link-title {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link-domain {
+    display: block;
+    font-size: 0.75rem;
+    color: #718096;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
