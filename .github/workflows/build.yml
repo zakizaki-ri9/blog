@@ -44,7 +44,7 @@ jobs:
         id: build
 
       - name: Build failure
-        if: failure()
+        if: ${{ failure() }}
         run: |
           echo "::error::ビルドが失敗しました。依存関係の更新がプロジェクトと互換性がない可能性があります。"
           exit 1 
