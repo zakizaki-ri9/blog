@@ -1,0 +1,36 @@
+version: 2
+updates:
+  # npm用の設定
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    versioning-strategy: auto
+    labels:
+      - "dependencies"
+      - "npm"
+    # 自動マージの設定
+    auto-merge: true
+    groups:
+      # 開発依存関係の更新をグループ化
+      dev-dependencies:
+        patterns:
+          - "*eslint*"
+          - "@typescript-eslint/*"
+          - "typescript"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actionsのワークフロー用の設定
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "github-actions"
+    # 自動マージの設定
+    auto-merge: true 
