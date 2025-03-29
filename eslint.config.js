@@ -1,10 +1,12 @@
-// @ts-check
 import js from '@eslint/js';
 import astroPlugin from 'eslint-plugin-astro';
 import tsParser from '@typescript-eslint/parser';
 import astroEslintParser from 'astro-eslint-parser';
 import globals from 'globals';
 
+/**
+ * @type {import('eslint').Linter.Config[]}
+ */
 export default [
   // グローバル設定
   js.configs.recommended,
