@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VERCEL_ENV: "production" | "preview" | "development";
 }
 
+// eslint-disable-next-line no-unused-vars
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }

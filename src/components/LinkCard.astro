@@ -3,11 +3,9 @@ import { getOgpData, type OgpData } from '../utils/ogp';
 
 interface Props {
   url: string;
-  // キャッシュ制御（開発中に便利）
-  noCache?: boolean;
 }
 
-const { url, noCache = false } = Astro.props;
+const { url } = Astro.props;
 
 // OGP情報を取得
 let ogpData: OgpData | null = null;
