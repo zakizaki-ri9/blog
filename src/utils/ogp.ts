@@ -39,19 +39,19 @@ export async function getOgpData(url: string): Promise<OgpData | null> {
     // OGP情報を抽出
     const ogpData: OgpData = {
       url,
-      title: $("meta[property=\"og:title\"]").attr("content") || 
+      title: $("meta[property='og:title']").attr("content") || 
              $("title").text() || 
              url,
-      description: $("meta[property=\"og:description\"]").attr("content") || 
-                  $("meta[name=\"description\"]").attr("content") || 
+      description: $("meta[property='og:description']").attr("content") || 
+                  $("meta[name='description']").attr("content") || 
                   "",
-      image: $("meta[property=\"og:image\"]").attr("content") || 
+      image: $("meta[property='og:image']").attr("content") || 
              "",
-      siteName: $("meta[property=\"og:site_name\"]").attr("content") || 
+      siteName: $("meta[property='og:site_name']").attr("content") || 
                 parsedUrl.hostname || 
                 "",
-      favicon: $("link[rel=\"icon\"]").attr("href") || 
-               $("link[rel=\"shortcut icon\"]").attr("href") || 
+      favicon: $("link[rel='icon']").attr("href") || 
+               $("link[rel='shortcut icon']").attr("href") || 
                "/favicon.ico",
     };
     
