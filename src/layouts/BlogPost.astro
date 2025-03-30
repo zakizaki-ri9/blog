@@ -4,14 +4,18 @@ import BaseHead from '@/components/BaseHead.astro';
 import Header from '@/components/Header.astro';
 import FormattedDate from '@/components/FormattedDate.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Props {
+	data: CollectionEntry<'blog'>['data'];
+	slug: string;
+}
 
-const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.props;
+const { data, slug } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } = data;
 ---
 
 <html lang="ja">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} slug={slug} />
 		<style>
 			main {
 				width: calc(100% - 2em);
