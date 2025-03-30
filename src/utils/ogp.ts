@@ -1,6 +1,6 @@
-import * as cheerio from 'cheerio';
-import { parse as parseUrl } from 'node:url';
-import { useConfig } from '@/config/site'; 
+import * as cheerio from "cheerio";
+import { parse as parseUrl } from "node:url";
+import { useConfig } from "@/config/site"; 
 
 export interface OgpData {
   url: string;
@@ -39,28 +39,28 @@ export async function getOgpData(url: string): Promise<OgpData | null> {
     // OGP情報を抽出
     const ogpData: OgpData = {
       url,
-      title: $('meta[property="og:title"]').attr('content') || 
-             $('title').text() || 
+      title: $("meta[property='og:title']").attr("content") || 
+             $("title").text() || 
              url,
-      description: $('meta[property="og:description"]').attr('content') || 
-                  $('meta[name="description"]').attr('content') || 
-                  '',
-      image: $('meta[property="og:image"]').attr('content') || 
-             '',
-      siteName: $('meta[property="og:site_name"]').attr('content') || 
+      description: $("meta[property='og:description']").attr("content") || 
+                  $("meta[name='description']").attr("content") || 
+                  "",
+      image: $("meta[property='og:image']").attr("content") || 
+             "",
+      siteName: $("meta[property='og:site_name']").attr("content") || 
                 parsedUrl.hostname || 
-                '',
-      favicon: $('link[rel="icon"]').attr('href') || 
-               $('link[rel="shortcut icon"]').attr('href') || 
-               '/favicon.ico',
+                "",
+      favicon: $("link[rel='icon']").attr("href") || 
+               $("link[rel='shortcut icon']").attr("href") || 
+               "/favicon.ico",
     };
     
     // 相対URLを絶対URLに変換
-    if (ogpData.image && !ogpData.image.startsWith('http')) {
+    if (ogpData.image && !ogpData.image.startsWith("http")) {
       ogpData.image = new URL(ogpData.image, baseUrl).toString();
     }
     
-    if (ogpData.favicon && !ogpData.favicon.startsWith('http')) {
+    if (ogpData.favicon && !ogpData.favicon.startsWith("http")) {
       ogpData.favicon = new URL(ogpData.favicon, baseUrl).toString();
     }
     

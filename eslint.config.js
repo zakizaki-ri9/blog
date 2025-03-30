@@ -3,6 +3,7 @@ import astroPlugin from 'eslint-plugin-astro';
 import tsParser from '@typescript-eslint/parser';
 import astroEslintParser from 'astro-eslint-parser';
 import globals from 'globals';
+import stylisticTs from '@stylistic/eslint-plugin-ts';
 
 /**
  * @type {import('eslint').Linter.Config[]}
@@ -51,8 +52,23 @@ export default [
         ...globals.node,
       },
     },
+    plugins: {
+      '@stylistic/ts': stylisticTs,
+    },
     rules: {
       'no-unused-vars': 'warn', // 未使用変数を警告に変更
+      // Stylistic設定
+      '@stylistic/ts/indent': ['error', 2],
+      '@stylistic/ts/quotes': ['error', "double"],
+      '@stylistic/ts/semi': ['error', 'always'],
+      '@stylistic/ts/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/ts/brace-style': ['error', '1tbs'],
+      '@stylistic/ts/object-curly-spacing': ['error', 'always'],
+      '@stylistic/ts/space-infix-ops': 'error',
+      '@stylistic/ts/comma-spacing': ['error', { 'before': false, 'after': true }],
+      '@stylistic/ts/no-extra-semi': 'error',
+      '@stylistic/ts/keyword-spacing': ['error', { 'before': true, 'after': true }],
+      '@stylistic/ts/type-annotation-spacing': 'error',
     },
   },
 ]; 
