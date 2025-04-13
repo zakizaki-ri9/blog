@@ -1,15 +1,19 @@
 ---
 import HeaderLink from '@/components/HeaderLink.astro';
 import { SITE_TITLE } from '@/consts';
+import { getTagCount } from '@/utils/tags';
+
+const tagCount = await getTagCount();
 ---
 
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/">Blog</HeaderLink>
-			<HeaderLink href="/tils">TILs</HeaderLink>
-			<HeaderLink href="/tags">Tags</HeaderLink>
+			<HeaderLink href="/">ホーム</HeaderLink>
+			<HeaderLink href="/tils">TIL</HeaderLink>
+			<HeaderLink href="/tags">タグ({tagCount})</HeaderLink>
+			<HeaderLink href="/search">検索</HeaderLink>
 		</div>
 		<div class="social-links">
 			<a href="https://twitter.com/zucky_sub" target="_blank">

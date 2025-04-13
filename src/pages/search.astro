@@ -1,0 +1,82 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`検索 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: 0 auto;
+				padding: 2em 0;
+			}
+			h1 {
+				margin-bottom: 1em;
+			}
+		</style>
+		<script is:inline define:vars={{siteTitle: SITE_TITLE}}>
+			// クライアントサイドでのみ実行
+			document.addEventListener('DOMContentLoaded', () => {
+				// PageFindスクリプトの読み込み
+				const script = document.createElement('script');
+				script.src = '/pagefind/pagefind-ui.js';
+				document.head.appendChild(script);
+
+				// PageFindスタイルの読み込み
+				const link = document.createElement('link');
+				link.rel = 'stylesheet';
+				link.href = '/pagefind/pagefind-ui.css';
+				document.head.appendChild(link);
+
+				// スクリプト読み込み後の初期化
+				script.onload = () => {
+					// @ts-ignore
+					if (typeof window.PagefindUI !== 'undefined') {
+						// @ts-ignore
+						new window.PagefindUI({ 
+							element: '#search',
+							showImages: false,
+							translations: {
+								placeholder: `${siteTitle}内を検索...`,
+								clear_search: 'クリア',
+								load_more: 'もっと見る',
+								search_label: '検索',
+								filters_label: 'フィルター',
+								zero_results: '「[SEARCH_TERM]」の検索結果はありません',
+								many_results: '「[SEARCH_TERM]」の検索結果（[COUNT]件）',
+								one_result: '「[SEARCH_TERM]」の検索結果（1件）',
+								searching: '「[SEARCH_TERM]」を検索中...'
+							}
+						});
+					}
+				};
+			});
+		</script>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>検索</h1>
+			<div id="search"></div>
+		</main>
+
+		<style is:global>
+			.pagefind-ui {
+				--pagefind-ui-scale: 0.9;
+				--pagefind-ui-primary: #4a69bd;
+				--pagefind-ui-text: #333;
+				--pagefind-ui-background: #fff;
+				--pagefind-ui-border: #eee;
+				--pagefind-ui-border-width: 1px;
+				--pagefind-ui-border-radius: 0.3rem;
+				--pagefind-ui-font: inherit;
+				margin: 2rem 0;
+			}
+		</style>
+	</body>
+</html> 

@@ -1,0 +1,53 @@
+<div class="search-container">
+  <div id="search" class="search"></div>
+  <div id="results" class="results"></div>
+</div>
+
+<style>
+  .search-container {
+    margin: 2rem 0;
+  }
+
+  .search {
+    margin-bottom: 1rem;
+  }
+
+  .results {
+    margin-top: 1rem;
+  }
+
+  :global(.pagefind-ui) {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: rgb(var(--accent));
+    --pagefind-ui-text: rgb(var(--black));
+    --pagefind-ui-background: rgb(var(--white));
+    --pagefind-ui-border: rgb(var(--gray));
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 0.3rem;
+    --pagefind-ui-font: inherit;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // PageFindスクリプトの読み込み
+    const script = document.createElement('script');
+    script.src = '/pagefind/pagefind-ui.js';
+    document.head.appendChild(script);
+
+    // PageFindスタイルの読み込み
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/pagefind/pagefind-ui.css';
+    document.head.appendChild(link);
+
+    // スクリプト読み込み後の初期化
+    script.onload = () => {
+      // @ts-ignore
+      if (typeof window.PagefindUI !== 'undefined') {
+        // @ts-ignore
+        new window.PagefindUI({ element: '#search' });
+      }
+    };
+  });
+</script> 

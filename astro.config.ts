@@ -22,4 +22,8 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    // PageFindのインデックス作成のために設定
+    format: "directory",
+  },
 });
