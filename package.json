@@ -4,18 +4,18 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev --port 3000",
-    "build": "astro build && npx pagefind --site dist --glob \"**/*.html\" --output-subdir pagefind --force-language ja",
+    "build": "astro build && npx pagefind --site dist --glob \"**/blog/**/*.html\" --exclude-selectors \"nav, footer\" --output-subdir pagefind --force-language ja",
     "preview": "astro preview --port 3000",
     "astro": "astro",
     "lint": "eslint --ext .js,.ts,.astro src",
     "lint:fix": "eslint --ext .js,.ts,.astro src --fix"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.1.0",
+    "@astrojs/mdx": "^4.2.4",
     "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/sitemap": "^3.3.0",
     "@resvg/resvg-js": "^2.6.2",
-    "astro": "^5.4.2",
+    "astro": "^5.7.4",
     "cheerio": "^1.0.0",
     "satori": "^0.12.2",
     "sharp": "^0.33.5"
