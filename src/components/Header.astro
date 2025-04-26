@@ -1,16 +1,31 @@
 ---
-import HeaderLink from '@/components/HeaderLink.astro';
-import { SITE_TITLE } from '@/consts';
+import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
 <header>
+	<h2>
+		<a href="/">{SITE_TITLE}</a>
+	</h2>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Blog</HeaderLink>
 			<HeaderLink href="/tils">TILs</HeaderLink>
-			<HeaderLink href="/tags">Tags</HeaderLink>
 		</div>
+
+		<!-- PageFind Search -->
+		<div id="search" class="pagefind-ui"></div>
+		<script is:inline>
+			window.addEventListener('DOMContentLoaded', () => {
+				new PagefindUI({ 
+					element: "#search", 
+					showSubResults: true, // サブ結果を表示
+					// 必要に応じて他のオプションを追加
+				});
+			});
+		</script>
+		<!-- / PageFind Search -->
+
 		<div class="social-links">
 			<a href="https://twitter.com/zucky_sub" target="_blank">
 				<span class="sr-only">X (旧 Twitter)</span>
@@ -44,7 +59,7 @@ import { SITE_TITLE } from '@/consts';
 </header>
 <style>
 	header {
-		margin: 0;
+		margin: 0em 0 2em;
 		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
@@ -55,7 +70,7 @@ import { SITE_TITLE } from '@/consts';
 		z-index: 1000;
 	}
 	h2 {
-		margin: 0;
+		margin: 0.5em 0;
 		font-size: 1em;
 	}
 
@@ -82,9 +97,24 @@ import { SITE_TITLE } from '@/consts';
 	.social-links a {
 		display: flex;
 	}
+	.internal-links {
+		display: flex;
+		gap: 1em; /* リンク間のスペース */
+	}
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
 		}
+	}
+
+	/* PageFind UI スタイル調整 */
+	.pagefind-ui {
+		margin-top: 1em; /* ヘッダーの他の要素との間隔を調整 */
+	}
+	.pagefind-ui__search-input {
+		/* 必要に応じて入力欄のスタイルを調整 */
+	}
+	.pagefind-ui__results {
+		/* 必要に応じて検索結果のスタイルを調整 */
 	}
 </style>

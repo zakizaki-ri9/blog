@@ -31,6 +31,8 @@ export default [
         // Astro特有のグローバル
         Astro: 'readonly',
         Fragment: 'readonly',
+        // PageFind UI
+        PagefindUI: 'readonly',
       },
     },
     rules: {
