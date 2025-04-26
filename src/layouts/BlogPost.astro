@@ -13,7 +13,7 @@ const { data, slug } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, tags } = data;
 ---
 
-<html lang="ja">
+<html lang="ja" transition:animate="morph">
 	<head>
 		<BaseHead title={title} description={description} slug={slug} />
 		<style>
@@ -75,6 +75,20 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = data;
 				background-color: rgb(var(--accent));
 				color: white;
 			}
+			.prose ul[data-pagefind-meta="tags"] {
+				list-style: none;
+				padding: 0;
+				display: flex;
+				gap: 0.5em;
+			}
+			.prose ul[data-pagefind-meta="tags"] li a {
+				text-decoration: none;
+				background-color: var(--accent);
+				color: white;
+				padding: 0.2em 0.5em;
+				border-radius: 4px;
+				font-size: 0.8em;
+			}
 		</style>
 	</head>
 
@@ -99,14 +113,18 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = data;
 								)
 							}
 						</div>
-						<h1>{title}</h1>
+						<h1 data-pagefind-meta="title">{title}</h1>
+						<hr />
+						<p data-pagefind-meta="description">{description}</p>
 						<div class="tags">
 							{tags && tags.map((tag) => (
 								<a href={`/tags/${tag}`} class="tag">#{tag}</a>
 							))}
 						</div>
 					</div>
-					<slot />
+					<div data-pagefind-body>
+						<slot />
+					</div>
 				</div>
 			</article>
 		</main>
