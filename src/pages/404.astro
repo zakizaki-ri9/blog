@@ -1,0 +1,50 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import { SITE_TITLE } from '@/consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`404 - ページが見つかりません | ${SITE_TITLE}`} description="お探しのページが見つかりませんでした。" />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: 0 auto;
+				padding: 2em 0;
+				text-align: center;
+			}
+			h1 {
+				font-size: 6rem;
+				margin: 0;
+				color: rgb(var(--accent));
+			}
+			p {
+				font-size: 1.5rem;
+				margin: 1em 0;
+				color: rgb(var(--gray));
+			}
+			.home-link {
+				display: inline-block;
+				padding: 0.5em 1em;
+				background-color: rgb(var(--accent));
+				color: white;
+				text-decoration: none;
+				border-radius: 0.5em;
+				transition: background-color 0.2s ease;
+			}
+			.home-link:hover {
+				background-color: rgba(var(--accent), 0.8);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>404</h1>
+			<p>お探しのページが見つかりませんでした。</p>
+		</main>
+	</body>
+</html> 
