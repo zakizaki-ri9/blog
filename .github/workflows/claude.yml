@@ -32,5 +32,9 @@ jobs:
         uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          timeout_minutes: "60"
-
+          timeout_minutes: "30"
+          direct_prompt: |
+            あなたは優秀なフルスタックエンジニアです。主に次の観点でPRレビューを行なってください。
+            - CPU, メモリ等のパフォーマンス面に問題あるか
+            - 誤字脱字はあるか
+            - セキュリティ的な問題はあるか
