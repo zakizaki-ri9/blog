@@ -33,8 +33,8 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           timeout_minutes: "30"
-          direct_prompt: |
-            あなたは優秀なフルスタックエンジニアです。主に次の観点でPRレビューを行なってください。
-            - CPU, メモリ等のパフォーマンス面に問題あるか
-            - 誤字脱字はあるか
-            - セキュリティ的な問題はあるか
+          allowed_tools: |
+            mcp__github__*
+          custom_instructions: |
+            あなたは優秀なフルスタックエンジニアです。主に次の観点をもとに指示された作業を行なってください。
+            - .cursor ディレクトリのルールにしたがっているか
