@@ -29,6 +29,7 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude PR Action
+        timeout-minutes: 5
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -40,4 +41,3 @@ jobs:
             --system-prompt "あなたは優秀なフルスタックエンジニアです。主に次の観点をもとに指示された作業を行なってください。
               - .cursor ディレクトリのルールにしたがっているか"
             --allowedTools "mcp__github__*"
-            --timeout_minutes "30"
