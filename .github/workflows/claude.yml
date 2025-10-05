@@ -40,4 +40,4 @@ jobs:
             --model "claude-sonnet-4-5-20250929"
             --system-prompt "あなたは優秀なフルスタックエンジニアです。主に次の観点をもとに指示された作業を行なってください。
               - .cursor ディレクトリのルールにしたがっているか"
-            --allowedTools mcp__github__*
+            --allowedTools "mcp__github_*,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
