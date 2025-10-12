@@ -68,8 +68,8 @@
 ### 5. 効率的なレビューの流れ
 1. `mcp__github_list_files_in_pull_request`で変更されたファイルを特定
 2. `mcp__github_get_pull_request_diff`で差分を確認し、重要な変更のみを特定
-3. 重要度の高い変更のみ`mcp__github_get_file_contents`でファイル内容を確認
-4. 指摘事項を重要度順に整理（最大5件まで）
+3. 重要度の高い変更のみ`mcp__github_get_file_contents`でファイル内容を確認（※ Haiku 3.5最適化モードではこの手順をスキップ）
+4. 指摘事項を重要度順に整理（最大5件まで。※ Haiku 3.5最適化モードでは最大3件）
 5. 重要な指摘のみ`mcp__github_add_comment_to_pending_review`でインラインコメントを提示
 6. `mcp__github_add_issue_comment`で簡潔なレビューサマリを投稿
 
