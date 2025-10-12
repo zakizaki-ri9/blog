@@ -55,4 +55,4 @@ jobs:
             ${{ steps.read-prompt.outputs.prompt }}
           claude_args: |
             --model "claude-sonnet-4-5-20250929"
-            --allowedTools "mcp__github_*,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
+            --allowedTools "mcp__github_*,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh api --method POST /repos/*/pulls/*/comments*)"
