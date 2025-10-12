@@ -16,10 +16,14 @@
 - 関連するファイルやコンテキストも調査
 
 ### 2. 指摘の仕方
-- **インラインコメント**で具体的な改善点をサジェスト
-  - `mcp__github_add_comment_to_pending_review`でインラインコメント、コードサジェストを追加
+- **インラインコメントは必須**：すべての指摘事項は必ずインラインコメントで行う
+  - **MCP使用時**：`mcp__github_add_comment_to_pending_review` や `mcp__github_inline_comment__create_inline_comment` でインラインコメント、コードサジェストを追加
+  - **MCP使用不可時**：GitHub CLI（`gh`）を使用してインラインコメントを投稿
+    - `gh api` を使用してREST API経由でインラインコメントを投稿（`gh pr review --comment`ではインラインコメント不可）
+    - コマンド例：`gh api --method POST /repos/OWNER/REPO/pulls/PR_NUMBER/comments -f body='コメント内容' -f commit_id='コミットSHA' -f path='ファイルパス' -f line=行番号`
   - コードの行番号を指定して、具体的な修正案を提示
   - 変更推奨の場合は、なぜその変更が必要かを理由とともに説明
+  - **重要**：指摘事項がある場合は、必ずインラインコメントを投稿すること
 
 ### 3. レビュー承認について
 - **承認は行わない**（approve しない）
@@ -66,16 +70,23 @@
 - カバレッジの向上
 
 ### 5. 効率的なレビューの流れ
-1. `mcp__github_list_files_in_pull_request`で変更されたファイルを特定
-2. `mcp__github_get_pull_request_diff`で差分を確認し、重要な変更のみを特定
-3. 重要度の高い変更のみ`mcp__github_get_file_contents`でファイル内容を確認（※ Haiku 3.5最適化モードではこの手順をスキップ）
+1. **MCP使用時**：`mcp__github_list_files_in_pull_request`で変更されたファイルを特定
+   **MCP使用不可時**：`gh pr diff`で差分を確認し、変更されたファイルを特定
+2. **MCP使用時**：`mcp__github_get_pull_request_diff`で差分を確認し、重要な変更のみを特定
+   **MCP使用不可時**：`gh pr diff`で差分を詳細に確認
+3. 重要度の高い変更のみファイル内容を確認（※ Haiku 3.5最適化モードではこの手順をスキップ）
 4. 指摘事項を重要度順に整理（最大5件まで。※ Haiku 3.5最適化モードでは最大3件）
-5. 重要な指摘のみ`mcp__github_add_comment_to_pending_review`でインラインコメントを提示
-6. `mcp__github_add_issue_comment`で簡潔なレビューサマリを投稿
+5. **必須**：指摘事項がある場合は必ずインラインコメントを提示
+   - **MCP使用時**：`mcp__github_add_comment_to_pending_review`を使用
+   - **MCP使用不可時**：`gh api`を使用してREST API経由でインラインコメントを投稿
+6. レビューサマリを投稿
+   - **MCP使用時**：`mcp__github_add_issue_comment`を使用
+   - **MCP使用不可時**：`gh pr comment`を使用
 
 ### 6. レビューサマリの投稿
 - インラインコメントでの詳細な指摘の後、必ずレビューのサマリをPRにコメント投稿する
-- `mcp__github_add_issue_comment`を使用してPRにコメントを投稿
+- **MCP使用時**：`mcp__github_add_issue_comment`を使用してPRにコメントを投稿
+- **MCP使用不可時**：`gh pr comment`を使用してPRにコメントを投稿
 - サマリには以下の内容を含める：
   - 指摘したジャンル別の件数（例：🔧 リファクタリング 3件、🐛 バグの可能性 1件）
   - 全体的な評価と改善提案
@@ -84,6 +95,7 @@
 
 ### 7. 効率化のための指示（Haiku 3.5最適化）
 - **指摘件数を制限**：1つのPRで最大3件まで（重要度の高いものから選択）
+- **インラインコメントは必須**：指摘事項がある場合は必ずインラインコメントを投稿
 - **極めて簡潔なコメント**：インラインコメントは1件あたり1行以内にまとめる
 - **MCPコールの最小化**：差分のみで判断し、ファイル内容は読み込まない
 - **重要度の判定基準**：
@@ -92,6 +104,9 @@
   - 🟢 低：指摘しない
 
 ### 8. 注意事項
+- **インラインコメントの必須性**：指摘事項がある場合は必ずインラインコメントを投稿し、レビューサマリのみでは不十分
+- **MCPとGitHub CLIの使い分け**：MCPが使用できない環境では、GitHub CLI（`gh api`）を使用してREST API経由でインラインコメントを投稿
+- **GitHub CLIの制限**：`gh pr review --comment`ではインラインコメントは不可。`gh api`を使用する必要がある
 - 建設的で具体的なフィードバックを提供
 - コードの意図を理解してから指摘
 - 重要な改善点を見逃さない
