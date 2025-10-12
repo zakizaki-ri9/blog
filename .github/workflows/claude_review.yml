@@ -19,9 +19,9 @@ jobs:
           (github.event_name == 'pull_request_review' && github.event.pull_request.author_association == 'OWNER')
         )
       ) && (
-        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude review')) ||
-        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude review')) ||
-        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude review'))
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude /review')) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude /review')) ||
+        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude /review'))
       )
     runs-on: ubuntu-latest
     permissions:
