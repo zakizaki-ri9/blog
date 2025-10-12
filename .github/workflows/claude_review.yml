@@ -55,6 +55,4 @@ jobs:
             ${{ steps.read-prompt.outputs.prompt }}
           claude_args: |
             --model "claude-3-5-haiku-20241022"
-            --max-tokens 2000
-            --temperature 0.1
             --allowedTools "mcp__github_*,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
