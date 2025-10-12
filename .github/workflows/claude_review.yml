@@ -35,6 +35,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Read review prompt
+        id: read-prompt
+        run: |
+          echo "prompt<<EOF" >> $GITHUB_OUTPUT
+          cat .github/claude/review_prompt.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Run Claude PR Action
         timeout-minutes: 5
         uses: anthropics/claude-code-action@v1
@@ -43,8 +50,8 @@ jobs:
           prompt: |
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event_name == 'issue_comment' && github.event.issue.number || github.event.pull_request.number }}
+            
+            ${{ steps.read-prompt.outputs.prompt }}
           claude_args: |
             --model "claude-sonnet-4-5-20250929"
-            --system-prompt "あなたは優秀なフルスタックエンジニアです。主に次の観点をもとに指示された作業を行なってください。
-              - .cursor ディレクトリのルールにしたがっているか"
             --allowedTools "mcp__github_*,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
