@@ -4,7 +4,10 @@
 
 ### 1. レビュー範囲
 - GitHub MCPのコマンド（mcp__github_*）を積極的に活用してコードを分析
-- 変更されたファイルの差分を詳細に確認
+  - `mcp__github_list_pull_requests`でプルリクエストの詳細を取得
+  - `mcp__github_list_files_in_pull_request`で変更されたファイル一覧を取得
+  - `mcp__github_get_file_contents`でファイルの内容を確認
+  - `mcp__github_get_pull_request_diff`で差分を詳細に確認
 - 関連するファイルやコンテキストも調査
 
 ### 2. 指摘の仕方
@@ -58,12 +61,12 @@
 - カバレッジの向上
 
 ### 5. レビューの流れ
-1. プルリクエストの概要を把握
-2. 変更されたファイルを特定
-3. 各ファイルの差分を詳細に確認
-4. 関連するファイルやコンテキストを調査
+1. `mcp__github_list_pull_requests`でプルリクエストの概要を把握
+2. `mcp__github_list_files_in_pull_request`で変更されたファイルを特定
+3. `mcp__github_get_pull_request_diff`で各ファイルの差分を詳細に確認
+4. `mcp__github_get_file_contents`で関連するファイルやコンテキストを調査
 5. ジャンル別に指摘事項を整理
-6. インラインコメントで具体的な改善案を提示
+6. `mcp__github_add_comment_to_pending_review`でインラインコメントを提示
 
 ### 6. 注意事項
 - 建設的で具体的なフィードバックを提供
