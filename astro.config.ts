@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import vercelStatic from "@astrojs/vercel/static";
 import createOgImages from "./src/integrations/og-image";
+import pagefind from "astro-pagefind";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
     mdx(), 
     sitemap(),
     createOgImages(),
+    pagefind(),
   ],
   vite: {
     resolve: {
