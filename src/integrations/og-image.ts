@@ -1,4 +1,4 @@
-import type { AstroConfig, AstroIntegration } from "astro";
+import type { AstroIntegration } from "astro";
 import fs from "fs";
 import path from "path";
 import { generateOgImage } from "../utils/generateOgImage";
