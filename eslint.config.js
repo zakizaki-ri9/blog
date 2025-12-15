@@ -3,7 +3,7 @@ import astroPlugin from 'eslint-plugin-astro';
 import tsParser from '@typescript-eslint/parser';
 import astroEslintParser from 'astro-eslint-parser';
 import globals from 'globals';
-import stylisticTs from '@stylistic/eslint-plugin-ts';
+import stylistic from '@stylistic/eslint-plugin';
 
 /**
  * @type {import('eslint').Linter.Config[]}
@@ -53,22 +53,22 @@ export default [
       },
     },
     plugins: {
-      '@stylistic/ts': stylisticTs,
+      '@stylistic': stylistic,
     },
     rules: {
       'no-unused-vars': 'warn', // 未使用変数を警告に変更
       // Stylistic設定
-      '@stylistic/ts/indent': ['error', 2],
-      '@stylistic/ts/quotes': ['error', "double"],
-      '@stylistic/ts/semi': ['error', 'always'],
-      '@stylistic/ts/comma-dangle': ['error', 'always-multiline'],
-      '@stylistic/ts/brace-style': ['error', '1tbs'],
-      '@stylistic/ts/object-curly-spacing': ['error', 'always'],
-      '@stylistic/ts/space-infix-ops': 'error',
-      '@stylistic/ts/comma-spacing': ['error', { 'before': false, 'after': true }],
-      '@stylistic/ts/no-extra-semi': 'error',
-      '@stylistic/ts/keyword-spacing': ['error', { 'before': true, 'after': true }],
-      '@stylistic/ts/type-annotation-spacing': 'error',
+      '@stylistic/indent': ['error', 2],
+      '@stylistic/quotes': ['error', "double"],
+      '@stylistic/semi': ['error', 'always'],
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/brace-style': ['error', '1tbs'],
+      '@stylistic/object-curly-spacing': ['error', 'always'],
+      '@stylistic/space-infix-ops': 'error',
+      '@stylistic/comma-spacing': ['error', { 'before': false, 'after': true }],
+      '@stylistic/no-extra-semi': 'error',
+      '@stylistic/keyword-spacing': ['error', { 'before': true, 'after': true }],
+      '@stylistic/type-annotation-spacing': 'error',
     },
   },
 ]; 
