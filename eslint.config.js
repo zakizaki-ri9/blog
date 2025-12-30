@@ -35,6 +35,7 @@ export default [
     },
     rules: {
       // astroプラグインの推奨ルール
+      ...astroPlugin.configs.recommended.rules,
       'astro/no-conflict-set-directives': 'error',
       'astro/no-unused-define-vars-in-style': 'error',
       // エラーを緩和するルール
@@ -57,6 +58,7 @@ export default [
     },
     rules: {
       'no-unused-vars': 'warn', // 未使用変数を警告に変更
+      // 型安全性はTypeScriptの型チェック（tsc --noEmit）で検証
       // Stylistic設定
       '@stylistic/indent': ['error', 2],
       '@stylistic/quotes': ['error', "double"],

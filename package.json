@@ -8,7 +8,10 @@
     "preview": "astro preview --port 3000",
     "astro": "astro",
     "lint": "eslint --ext .js,.ts,.astro src",
-    "lint:fix": "eslint --ext .js,.ts,.astro src --fix"
+    "lint:fix": "eslint --ext .js,.ts,.astro src --fix",
+    "type-check": "tsc --noEmit",
+    "security-check": "pnpm audit --audit-level=moderate",
+    "review": "pnpm lint && pnpm type-check && pnpm security-check"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",
