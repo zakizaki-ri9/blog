@@ -2,13 +2,13 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import vercelStatic from "@astrojs/vercel/static";
+import vercel from "@astrojs/vercel";
 import createOgImages from "./src/integrations/og-image";
 
 // https://astro.build/config
 export default defineConfig({
   output: "static",
-  adapter: vercelStatic({}),
+  adapter: vercel({}),
   site: "https://zaki-blog.vercel.app/",
   integrations: [
     mdx(), 
