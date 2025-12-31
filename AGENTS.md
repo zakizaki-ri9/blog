@@ -1,5 +1,37 @@
 # エージェント開発ガイド
 
+## 全エージェント共通ルール
+
+このセクションは、すべてのエージェントが参照すべき共通のルールとガイドラインをまとめています。
+
+### 実装・レビュー時に気を付けること
+
+- CPU, メモリ等のパフォーマンス面に問題あるか
+- 誤字脱字はあるか
+- セキュリティ的な問題はあるか
+- コメントやドキュメントは必ず日本語で記述する
+
+### Serena MCP使用ガイドライン
+
+- **複雑なコード解析**や**アーキテクチャ理解**が必要な場面では積極的にSerenaを使用する
+- **Serena推奨場面**：
+  - コードベース全体の構造理解
+  - シンボル間の参照関係調査
+  - クラス・関数・変数の使用箇所特定
+  - ファイル間の依存関係分析
+  - 大規模リファクタリングの影響範囲調査
+  - 設計パターンの実装箇所探索
+  - バグの原因となる関連コード特定
+- **通常ツール推奨場面**：
+  - 単純なファイル読み込み・編集
+  - 既知のファイル・関数への直接的な変更
+  - シンプルな文字列検索・置換
+- Serena MCPの機能を活用して効率的で正確なコード分析を心がける
+
+### 実装完了後の動作
+
+Cursor コマンド `/all-commit` を利用してブランチ作成 -> コミット -> PR作成を行うかをユーザーに確認する。
+
 ## 目的と前提
 - このプロジェクトは Astro（TypeScript）によるブログサイトであり、エージェントはタスクごとにテスト駆動で安全に改善します。
 - パッケージマネージャーは `pnpm`、フォーマット・静的検査は既存の ESLint 設定を尊重してください。
@@ -34,83 +66,17 @@
 - 回帰防止としてバグ修正時は必ず再現テストを追加してから修正します。
 
 ## コーディングと設計の指針
-- TypeScript の厳格モードを維持しつつ、テストからインターフェースを導出して依存の向きを明確化します。
-- テストを最小の仕様書とみなし、振る舞いの期待（例・反例）をテスト名とアサーションに埋め込みます。
-- ファイル構造・命名規則・ESLint ルールは既存メモ（`code_style_conventions`）に従い、ドメイン単位で関心を分離します。
-- 仕様が曖昧な場合は「誤りに対して合否が判断できるテスト」を先に追加し、意図をコード化してから実装を変えます。
-- リファクタリング時はテスト網で守られている範囲だけを対象にし、不要な最適化や広範囲の変更を避けてください。
 
-## テスト容易性を確保するアーキテクチャ
-- 依存逆転（DIP）
-  - ドメイン/アプリ層が上位。外部世界（FS/HTTP/画像生成/検索）はポート（インターフェース）で抽象化し、具体はアダプタで注入します。
-- Functional Core, Imperative Shell
-  - コアは副作用ゼロの純粋関数と不変データで構成。I/O とフレームワーク依存は薄いシェルへ隔離します。
-- 境界の明示と契約
-  - 入出力 DTO を定義し、例外・エラーは Result 型（成功/失敗）や明示的エラーに収束。アダプタには契約（contract）テストを用意します。
-- 時刻/乱数/設定/環境変数の注入
-  - `Clock`・`IdGenerator`・`Env` をポート化し、テスト時に固定化して決定的にします。
-- コンポジションルートの一元化
-  - 実行環境でのみ依存を束ねる初期化コード（factory/compose）を用意し、テストではインメモリ実装を配線します。
+コーディングと設計に関する詳細なガイドラインは、[`docs/coding-guidelines/`](../docs/coding-guidelines/) ディレクトリにまとめられています。
 
-### 推奨ディレクトリ構成（例）
-- `src/domain/`：エンティティ、値オブジェクト、ドメインサービス（純粋関数）
-- `src/app/`：ユースケース、ポート定義（インターフェース）、DTO
-- `src/adapters/`：
-  - `content/`（Astro Content Collections 実装）
-  - `ogp/`（Satori/Sharp 実装）
-  - `rss/`・`sitemap/`（出力生成）
-  - `search/`（Pagefind 連携）
-  - `http/`・`fs/`・`clock/`・`id/`
-- `src/web/`：Astro ページ/コンポーネント（表示専用、ビジネスロジックは `app` 内）
-- `src/config/compose.ts`：コンポジションルート（本番配線）
-- `tests/`：
-  - `unit/`（domain/app の純粋テスト）
-  - `contract/`（各アダプタがポート契約を満たすか）
-  - `integration/`（ユースケース越境）
-  - `e2e/`（Playwright 等で最重要経路）
+### 主要なドキュメント
 
-### 代表ポート例（TypeScript）
-```ts
-// src/app/ports/content-repo.ts
-export interface ContentRepo {
-  listPosts(params: { tag?: string }): Promise<PostSummary[]>;
-  getPostBySlug(slug: string): Promise<Post | null>;
-}
+- **[アーキテクチャ設計](../docs/coding-guidelines/architecture.md)**: テスト容易性を確保するアーキテクチャ設計原則、推奨ディレクトリ構成、ポート例、テストダブル運用など
+- **[Astro/TypeScript](../docs/coding-guidelines/astro-typescript.md)**: Astro/TypeScript に特化したコーディングガイドライン
+- **[セキュリティ](../docs/coding-guidelines/security.md)**: セキュリティチェック項目とベストプラクティス
+- **[コード品質](../docs/coding-guidelines/code-quality.md)**: コード品質チェック項目とレビュー時の注意事項
 
-// src/app/ports/ogp.ts
-export interface OgpGenerator {
-  render(input: OgpInput): Promise<Uint8Array>; // 画像バイト列
-}
-
-// src/app/ports/search.ts
-export interface SearchIndexer {
-  index(docs: SearchDoc[]): Promise<void>;
-}
-
-// 共通ポート（決定性確保）
-export interface Clock { now(): Date }
-export interface IdGenerator { next(): string }
-```
-
-### テストダブル運用
-- InMemory/Fake 実装を `tests/doubles/` に配置し、ユースケースの速度と決定性を確保します。
-- 例：`InMemoryContentRepo`、`FakeOgpGenerator`（一定サイズのダミーバイト列を返す）、`FixedClock`、`FixedIdGenerator`。
-
-### 契約テストの型
-- ポートごとに共通テストスイートを用意し、任意のアダプタ実装に対して同一の振る舞いを検証します。
-- 例：`content-repo.contract.spec.ts` で「同一タグでのフィルタ」「存在しない slug で null を返す」などを定義。
-
-### Astro との境界ポリシー
-- Astro コンポーネントは「表示関心」に限定し、データ整形・絞り込みは `app` ユースケースに委譲します。
-- 可能な限り `getStaticPaths`/`get` 相当のデータ取得処理はポート経由で注入し、コンポーネントを関数としてテスト可能にします。
-
-### 副作用の隔離ポイント
-- ファイル書込（RSS/サイトマップ/OGP 出力）、ネットワーク、プロセス実行（Pagefind）はアダプタに集約。
-- テストではファイルシステムを使わずメモリ/一時ディレクトリを使用し、観察可能な戻り値・イベントで検証します。
-
-### 回帰を防ぐテクニック
-- バグ再現テスト → 修正 → 追加の失敗テストで三角測量 → リファクタの順で固定化。
-- 表示はスナップショットを最小単位で使用し、過度なドキュメント一括スナップショットは避けます。
+詳細は各ドキュメントを参照してください。
 
 ## 仕上げと品質ゲート
 - `pnpm lint` と全テストを完走させ、失敗テストがないことを確認します。
