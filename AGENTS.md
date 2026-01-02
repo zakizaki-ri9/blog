@@ -1,5 +1,7 @@
 # エージェント開発ガイド
 
+- 必ず日本語で回答する、ドキュメントやコメント文なども同様
+
 ## 全エージェント共通ルール
 
 このセクションは、すべてのエージェントが参照すべき共通のルールとガイドラインをまとめています。
@@ -71,10 +73,10 @@ Cursor コマンド `/all-commit` を利用してブランチ作成 -> コミッ
 
 ### 主要なドキュメント
 
-- **[アーキテクチャ設計](../docs/coding-guidelines/architecture.md)**: テスト容易性を確保するアーキテクチャ設計原則、推奨ディレクトリ構成、ポート例、テストダブル運用など
-- **[Astro/TypeScript](../docs/coding-guidelines/astro-typescript.md)**: Astro/TypeScript に特化したコーディングガイドライン
-- **[セキュリティ](../docs/coding-guidelines/security.md)**: セキュリティチェック項目とベストプラクティス
-- **[コード品質](../docs/coding-guidelines/code-quality.md)**: コード品質チェック項目とレビュー時の注意事項
+- **[アーキテクチャ設計](./docs/coding-guidelines/architecture.md)**: テスト容易性を確保するアーキテクチャ設計原則、推奨ディレクトリ構成、ポート例、テストダブル運用など
+- **[Astro/TypeScript](./docs/coding-guidelines/astro-typescript.md)**: Astro/TypeScript に特化したコーディングガイドライン
+- **[セキュリティ](./docs/coding-guidelines/security.md)**: セキュリティチェック項目とベストプラクティス
+- **[コード品質](./docs/coding-guidelines/code-quality.md)**: コード品質チェック項目とレビュー時の注意事項
 
 詳細は各ドキュメントを参照してください。
 
