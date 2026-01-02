@@ -6,7 +6,7 @@
 
 実装時およびコードレビュー時に参照すべき、技術的な詳細ガイドラインを提供します。
 
-> **重要**: エージェントが常に参照すべき要点は [`.cursor/rules/coding.mdc`](../../.cursor/rules/coding.mdc) に記載されています。このディレクトリは詳細な説明、実装例、チェックリストを提供します。
+> **重要**: エージェントが常に参照すべき要点は、Cursor の場合は [`.cursor/rules/coding.mdc`](../../.cursor/rules/coding.mdc)、Antigravity の場合は [`.agent/rules.md`](../../.agent/rules.md) に記載されています。このディレクトリは詳細な説明、実装例、チェックリストを提供します。
 
 エージェント開発の全体的なガイドラインやTDDの原則については、[`AGENTS.md`](../../AGENTS.md) を参照してください。
 
