@@ -55,6 +55,6 @@ PRを新規作成します。
 
 1. **MCPでPR更新** (任意)
    - GitHub MCPサーバーの `update_pull_request` ツールを使用
-   - パラメータ: `owner`, `repo`, `pull_number`, `title`, `body`
+   - パラメータ: `owner`, `repo`, `pull_number` (手順2で取得), `title`, `body`
    - 内容を適宜修正・追記してください（**日本語**）
 
