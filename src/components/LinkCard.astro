@@ -1,68 +1,33 @@
 ---
-import { getOgpData, type OgpData } from '../utils/ogp';
-
 interface Props {
   url: string;
+  title?: string;
+  description?: string;
 }
 
-const { url } = Astro.props;
+const { url, title, description } = Astro.props;
 
-// OGP情報を取得
-let ogpData: OgpData | null = null;
-
-// ビルド時にOGP情報を取得する
+// ドメイン名を抽出
+let domain = '';
 try {
-  // キャッシュは削除し、毎回OGP情報を取得するシンプルな実装に変更
-  ogpData = await getOgpData(url);
-} catch (error) {
-  console.error(`Error fetching OGP data for ${url}:`, error);
+  domain = new URL(url).hostname;
+} catch {
+  domain = url;
 }
 
-// OGP情報が取得できない場合のフォールバック
-if (!ogpData) {
-  ogpData = {
-    url,
-    title: url,
-    description: 'リンク先の情報を取得できませんでした',
-    image: '',
-    siteName: new URL(url).hostname,
-    favicon: '',
-  };
-}
+// 表示用タイトル（指定がない場合はドメインまたはURLを表示）
+const displayTitle = title || domain || url;
 ---
 
 <a href={url} target="_blank" rel="noopener noreferrer" class="link-card">
   <div class="card-container">
     <div class="content">
-      <h3 class="title">{ogpData.title}</h3>
-      <p class="description">{ogpData.description}</p>
+      <h3 class="title">{displayTitle}</h3>
+      {description && <p class="description">{description}</p>}
       <div class="site">
-        {ogpData.favicon && (
-          <img 
-            src={ogpData.favicon} 
-            alt="" 
-            class="favicon" 
-            width="16" 
-            height="16" 
-            onerror="this.style.display='none'"
-          />
-        )}
-        <span class="site-name">{ogpData.siteName}</span>
+        <span class="site-name">{domain}</span>
       </div>
     </div>
-    {ogpData.image && (
-      <div class="image">
-        <img 
-          src={ogpData.image} 
-          alt="" 
-          width="120" 
-          height="120" 
-          loading="lazy" 
-          decoding="async"
-          onerror="this.style.display='none'"
-        />
-      </div>
-    )}
   </div>
 </a>
 
@@ -91,7 +56,6 @@ if (!ogpData) {
   .content {
     flex: 1;
     min-width: 0;
-    padding-right: 1rem;
   }
 
   .title {
@@ -123,38 +87,13 @@ if (!ogpData) {
     color: #718096;
   }
 
-  .favicon {
-    margin-right: 0.25rem;
-    flex-shrink: 0;
-  }
-
   .site-name {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .image {
-    width: 120px;
-    height: 120px;
-    flex-shrink: 0;
-    background-color: #e2e8f0;
-    border-radius: 0.25rem;
-    overflow: hidden;
-  }
-
-  .image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   @media (max-width: 640px) {
-    .image {
-      width: 80px;
-      height: 80px;
-    }
-    
     .description {
       -webkit-line-clamp: 1;
     }
