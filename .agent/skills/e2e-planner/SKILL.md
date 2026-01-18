@@ -75,6 +75,7 @@ docs/e2e-plan.md
 
 - 壊れにくいテストを設計するため、以下のセレクターを優先：
   - `getByRole()`（ARIAロール）
-  - `getByTestId()`（data-testid属性）
   - `getByText()`（テキストコンテンツ）
+  - `getByLabel()`（ラベルテキスト）
+  - `getByTestId()`（data-testid属性、他が使えない場合のみ）
 - レイアウトやスタイルに依存するテストは避ける

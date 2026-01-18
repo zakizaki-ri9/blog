@@ -49,9 +49,9 @@ test.describe('[テストグループ名]', () => {
 | 優先度 | セレクター | 例 |
 |-------|-----------|-----|
 | 1 | `getByRole()` | `getByRole('button', { name: '送信' })` |
-| 2 | `getByTestId()` | `getByTestId('nav-menu')` |
-| 3 | `getByText()` | `getByText('ログイン')` |
-| 4 | `getByLabel()` | `getByLabel('メールアドレス')` |
+| 2 | `getByText()` | `getByText('ようこそ')` |
+| 3 | `getByLabel()` | `getByLabel('メールアドレス')` |
+| 4 | `getByTestId()` | `getByTestId('nav-menu')`（乱用注意） |
 
 **避けるべき**:
 - CSSクラスセレクター（`.btn-primary`）
