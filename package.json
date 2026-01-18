@@ -7,8 +7,8 @@
     "build": "astro build",
     "preview": "astro preview --port 3000",
     "astro": "astro",
-    "lint": "eslint --ext .js,.ts,.astro src",
-    "lint:fix": "eslint --ext .js,.ts,.astro src --fix",
+    "lint": "eslint src tests",
+    "lint:fix": "eslint src tests --fix",
     "type-check": "tsc --noEmit",
     "security-check": "pnpm audit --audit-level=moderate",
     "review": "pnpm lint && pnpm type-check && pnpm security-check",
@@ -34,6 +34,7 @@
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
+    "eslint-plugin-playwright": "^2.5.0",
     "globals": "^16.5.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1"
