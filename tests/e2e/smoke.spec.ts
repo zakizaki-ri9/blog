@@ -11,7 +11,7 @@ test.describe('スモークテスト', () => {
     await expect(page.getByRole('navigation')).toBeVisible();
 
     // 記事が1件以上表示されているか
-    const articles = page.locator('article').or(page.getByRole('listitem'));
+    const articles = page.getByRole('listitem');
     await expect(articles.first()).toBeVisible();
   });
 });
