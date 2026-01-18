@@ -26,3 +26,8 @@ pnpm-debug.log*
 .old-blog/
 .vercel/
 
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
