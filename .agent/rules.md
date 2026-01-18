@@ -58,3 +58,15 @@ GitHub に関連する操作（PR作成、PR更新、PRリスト取得など）�
 
 - `AGENTS.md` に記載された "t-wada流TDD" のサイクル (Red -> Green -> Refactor) を尊重すること。
 - テストは「仕様の例示」として扱い、可読性を高く保つこと。
+
+## 7. Git操作とPR作成の制限
+
+**自律的に行ってよい操作**:
+- コードの修正
+- ローカルブランチの作成・切り替え
+- コミットの作成 (`git commit`)
+
+**ユーザー承認が必要な操作**:
+- **明示的な指示がない限り**、以下の操作は禁止します。実行前に必ず `notify_user` で許可を得てください。
+  - リモートリポジトリへの反映 (`git push`)
+  - Pull Request の作成・更新 (`create_pull_request`, `update_pull_request` 等)
