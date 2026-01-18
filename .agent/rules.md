@@ -20,6 +20,7 @@ description: Antigravity エージェントの行動指針と基本ルール
 - **[アーキテクチャ](../docs/coding-guidelines/architecture.md)**: DIP, レイヤー構造, 副作用の分離
 - **[Astro/TypeScript](../docs/coding-guidelines/astro-typescript.md)**: 型安全性, コンポーネント設計
 - **[セキュリティ](../docs/coding-guidelines/security.md)**: XSS対策, 機密情報管理
+- **[E2Eテスト](../docs/coding-guidelines/e2e-testing.md)**: スモークテスト, セレクター戦略
 - **[コード品質](../docs/coding-guidelines/code-quality.md)**: レビュー基準
 
 ## 3. コンテキスト取得 (Context & Serena)
