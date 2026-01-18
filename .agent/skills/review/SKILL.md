@@ -42,8 +42,15 @@ pnpm security-check
 - [Astro/TypeScript](../../../docs/coding-guidelines/astro-typescript.md)
 - [セキュリティ](../../../docs/coding-guidelines/security.md)
 - [コード品質](../../../docs/coding-guidelines/code-quality.md)
+- [E2Eテスト](../../../docs/coding-guidelines/e2e-testing.md)
 
 ### チェックリスト
+
+**E2Eテスト / Playwright**
+- [ ] **セレクター**: `getByRole` 等の優先順位はガイドラインに従っているか？
+- [ ] **安定性**: 構造変更に弱いセレクター（XPath, CSS Class）を使っていないか？
+- [ ] **可読性**: `.or()` などの複雑なロジックを避け、シンプルか？
+- [ ] **ハードコード**: URLやパス、待機時間（`waitForTimeout`）が直接記述されていないか？
 
 **アーキテクチャ**
 - [ ] 依存逆転（DIP）は守られているか？

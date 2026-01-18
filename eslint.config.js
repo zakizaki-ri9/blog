@@ -5,10 +5,17 @@ import astroEslintParser from 'astro-eslint-parser';
 import globals from 'globals';
 import stylistic from '@stylistic/eslint-plugin';
 
+import playwright from 'eslint-plugin-playwright';
+
 /**
  * @type {import('eslint').Linter.Config[]}
  */
 export default [
+  // Playwrightテストの設定 (推奨設定を適用)
+  {
+    ...playwright.configs['flat/recommended'],
+    files: ['tests/**'],
+  },
   // グローバル設定
   js.configs.recommended,
   // .astroファイル用の設定
