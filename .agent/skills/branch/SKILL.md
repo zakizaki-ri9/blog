@@ -21,12 +21,11 @@ git branch --show-current
 
 実装内容に基づいてブランチ名を決定してください。
 
-**命名規則**: `cursor/{type}/{description}`
+**命名規則**: `{type}/{description}`
 - `type`: `feat`, `fix`, `refactor`, `docs`, `test`, `chore` など
 - `description`: 英数字とハイフン（日本語は不可）
-- **必須**: prefixとして `cursor/` を付けること
 
-例: `cursor/feat/add-login-ui`
+例: `feat/add-login-ui`
 
 ## 3. ブランチの作成・切り替え
 

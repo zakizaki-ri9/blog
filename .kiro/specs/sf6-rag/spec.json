@@ -1,0 +1,14 @@
+{
+  "language": "ja",
+  "feature": "sf6-rag",
+  "description": "SF6パッチノートRAG機能 - Astroブログ内にAIチャットツールを統合し、ストリートファイター6のパッチノートに関する質問に回答する機能",
+  "status": "tasks",
+  "created": "2026-01-24",
+  "updated": "2026-01-24",
+  "phases": {
+    "requirements": "complete",
+    "design": "complete",
+    "tasks": "complete",
+    "implementation": "pending"
+  }
+}
