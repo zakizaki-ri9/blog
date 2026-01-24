@@ -4,6 +4,10 @@
 必ず日本語を利用してください。
 英語の場合は日本語に訳してください。
 
+## パッケージマネージャー
+必ず pnpm を使用してください。
+npx ではなく `pnpm dlx` を使用してください。
+
 # AI-DLC と仕様駆動開発 (Spec-Driven Development)
 
 AI-DLC (AI Development Life Cycle) 上での Kiro スタイル仕様駆動開発の実装
@@ -49,4 +53,3 @@ AI-DLC (AI Development Life Cycle) 上での Kiro スタイル仕様駆動開発
 - `.kiro/steering/` 全体をプロジェクトメモリとしてロード
 - デフォルトファイル: `product.md`, `tech.md`, `structure.md`
 - カスタムファイルもサポート (`/kiro:steering-custom` で管理)
-
