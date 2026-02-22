@@ -1,5 +1,6 @@
 ---
 import HeaderLink from '@/components/HeaderLink.astro';
+import SiteSearch from '@/components/SiteSearch.astro';
 import { SITE_TITLE } from '@/consts';
 ---
 
@@ -39,6 +40,7 @@ import { SITE_TITLE } from '@/consts';
 					></path>
 				</svg>
 			</a>
+			<SiteSearch />
 		</div>
 	</nav>
 </header>
@@ -81,6 +83,7 @@ import { SITE_TITLE } from '@/consts';
 	.social-links,
 	.social-links a {
 		display: flex;
+		align-items: center;
 	}
 	@media (max-width: 720px) {
 		.social-links {
