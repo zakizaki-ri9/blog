@@ -18,18 +18,18 @@
 
 **参考**: `AGENTS.md` を和訳しつつ、GitHub Copilot ネイティブの表現に調整
 
-### 2. `.github/agents/` ディレクトリ構築
+### 2. `.claude/skills/` ディレクトリ構築
 
 ```
-.github/agents/
-├── sdd.md              # Spec-Driven Development
-├── branch.md           # ブランチ管理
-├── commit.md           # コミット作成
-├── pr.md               # PR 作成
-└── review.md           # PR レビュー
+.claude/skills/
+├── sdd/SKILL.md        # Spec-Driven Development
+├── branch/SKILL.md     # ブランチ管理
+├── commit/SKILL.md     # コミット作成
+├── pr/SKILL.md         # PR 作成
+└── review/SKILL.md     # PR レビュー
 ```
 
-- [ ] `.agent/skills/sdd/SKILL.md` → `.github/agents/sdd.md` に移植
+- [ ] `.agent/skills/sdd/SKILL.md` → `.claude/skills/sdd/SKILL.md` に移植
   - [ ] Markdown フォーマットに調整
   - [ ] GitHub Copilot Agent Skill フォーマット の frontmatter 確認
   - [ ] コマンド形式を `/kiro` → 対応する Copilot 形式に調整
@@ -38,7 +38,7 @@
   - [ ] 各ファイルのヘッダーを確認
   - [ ] GitHub Copilot での発火条件（trigger）を定義
 
-### 3. ルール定義（`.github/agents/` に統合、または専用ファイル）
+### 3. ルール定義（`.claude/skills/` に統合、または専用ファイル）
 
 **Option A**: 既存ルール継承
 - [ ] `.agent/rules/rules.md` を `.github/` にコピー
@@ -111,7 +111,7 @@ jobs:
 
 - [ ] `docs/guides/copilot-setup.md` 作成
   - Copilot 設定方法
-  - `.github/agents/` の利用方法
+  - `.claude/skills/` の利用方法
   - 推奨された典型的なワークフロー
   
 - [ ] `docs/guides/multi-agent-comparison.md` 作成
@@ -137,7 +137,7 @@ jobs:
 - 現在: フル稼働中
 
 ### GitHub Copilot
-- ✓ 対応: AGENTS.md, copilot-instructions.md, .github/agents/
+- ✓ 対応: AGENTS.md, copilot-instructions.md, .claude/skills/
 - ツール: Agent Skills (2025.12 パブリックプレビュー)
 - 特徴: UI 統合、確認駆動
 - 現在: 実装中（Phase 1）
@@ -157,7 +157,7 @@ jobs:
 
 参考: GitHub Copilot Agent Skills ドキュメント
 
-**Frontmatter テンプレート** (`.github/agents/*.md`):
+**Frontmatter テンプレート** (`.claude/skills/*/SKILL.md`):
 
 ```markdown
 ---
@@ -174,7 +174,7 @@ type: agent-skill  # または skill
 [内容]
 ```
 
-- [ ] が使用するすべての `.github/agents/` ファイルで確認
+- [ ] が使用するすべての `.claude/skills/` ファイルで確認
 
 ### 10. MCP 設定（`.github/` 向け、または GitHub Copilot 側の設定）
 
@@ -193,7 +193,7 @@ Copilot で Serena MCP を使用したい場合:
 
 **テスト項目**:
 
-- [ ] Copilot で `.github/agents/sdd.md` がドロップダウンに表示されるか
+- [ ] Copilot で `.claude/skills/sdd/SKILL.md` がドロップダウンに表示されるか
 - [ ] `/sdd` で称号が発動するか（または UI で選択可能か）
 - [ ] `src/**/*.ts` を編集したとき `.github/instructions/typescript.instructions.md` が自動提案されるか
 - [ ] AGENTS.md 更新後、同期スクリプト実行で `copilot-instructions.md` が更新されるか
@@ -202,7 +202,7 @@ Copilot で Serena MCP を使用したい場合:
 ### 12. クロスツール整合性チェック
 
 - [ ] AGENTS.md の内容が正確に Claude Code でも Copilot でも適用されているか
-- [ ] `.agent/skills/` と `.github/agents/` で同等の動作が実現されているか
+- [ ] `.agent/skills/` と `.claude/skills/` で同等の動作が実現されているか
 - [ ] エラーを超過したときの出力フォーマットが統一されているか
 
 ---
@@ -214,7 +214,7 @@ Copilot で Serena MCP を使用したい場合:
 ```
 Phase 1: 基盤整備
   [ ] copilot-instructions.md 作成
-  [ ] .github/agents/ ディレクトリ構築
+  [ ] .claude/skills/ ディレクトリ構築
   [ ] ルール定義
 
 Phase 2: 検証と最適化
@@ -265,7 +265,7 @@ Phase 5: テストと検証
 [AGENTS.md より引用…]
 ```
 
-### `.github/agents/sdd.md` の移植テンプレート
+### `.claude/skills/sdd/SKILL.md` の移植テンプレート
 
 ```markdown
 ---

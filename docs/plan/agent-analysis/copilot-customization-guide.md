@@ -24,7 +24,7 @@
 **Copilot の得意分野を活かす**:
 1. **段階的なタスク分解**が得意
    - 仕様駆動開発（SDD）の各フェーズを「コマンド選択」で実行
-   - `.github/agents/` に SDD スキルを配置
+   - `.claude/skills/` に SDD スキルを配置
 
 2. **ファイル単位の条件付き自動提案**が得意
    - `*.instructions.md` で TypeScript, Astro など拡張子別のルール適用
@@ -48,12 +48,12 @@
 ```
 blog/
 ├── copilot-instructions.md          ← AGENTS.md を簡潔にまとめたもの
-└── .github/agents/
-    ├── sdd.md                       ← Spec-Driven Development
-    ├── branch.md                    ← ブランチ操作
-    ├── commit.md                    ← コミット作成
-    ├── pr.md                        ← PR 作成・管理
-    └── review.md                    ← PR レビュー
+└── .claude/skills/
+   ├── sdd/SKILL.md                 ← Spec-Driven Development
+   ├── branch/SKILL.md              ← ブランチ操作
+   ├── commit/SKILL.md              ← コミット作成
+   ├── pr/SKILL.md                  ← PR 作成・管理
+   └── review/SKILL.md              ← PR レビュー
 ```
 
 **実装内容**:
@@ -71,13 +71,13 @@ blog/
    - GitHub MCP: PR/Issue 操作時に活用
    
    ## エージェント Agent
-   - `.github/agents/` に Spec-Driven Development など配置
+   - `.claude/skills/` に Spec-Driven Development など配置
    - ドロップダウンから選択して利用
    
    詳細は [AGENTS.md](./AGENTS.md) 参照。
    ```
 
-2. **`.github/agents/*.md`** (各 100-200行)
+2. **`.claude/skills/*/SKILL.md`** (各 100-200行)
    - `.agent/skills/` の Markdown 版を配置
    - GitHub Copilot Agent Skills の Frontmatter 追加
    - コマンド形式を調整（`/kiro:spec-init` → `Spec-Driven Development Agent から実行`）
@@ -113,7 +113,7 @@ blog/
 1. **同期スクリプト** (`scripts/sync-instructions.js`)
    ```javascript
    // AGENTS.md → claude.md, Gemini.md, copilot-instructions.md
-   // .agent/skills/ → .github/agents/
+   // .agent/skills/ → .claude/skills/
    ```
 
 2. **CI/CD Workflow** (`.github/workflows/validate-agent-files.yml`)
@@ -131,7 +131,7 @@ blog/
 3. **セットアップガイド** (`docs/guides/copilot-setup.md`)
    - Copilot インストール
    - 設定方法
-   - `.github/agents/` の利用方法
+   - `.claude/skills/` の利用方法
 
 **メリット**:
 - 更新負荷軽減（自動同期）
@@ -160,7 +160,7 @@ blog/
     ├── Gemini.md
     ├── copilot-instructions.md
     ├── .agent/skills/
-    ├── .github/agents/
+    ├── .claude/skills/
     └── ...
 ```
 
@@ -203,10 +203,10 @@ blog/
 
 - Day 1:
   - `copilot-instructions.md` 作成
-  - `.github/agents/sdd.md` 作成（`.agent/skills/sdd/SKILL.md` から移植）
+  - `.claude/skills/sdd/SKILL.md` 作成（`.agent/skills/sdd/SKILL.md` から移植）
 
 - Day 2:
-  - `.github/agents/branch.md`, `commit.md`, `pr.md`, `review.md` 作成
+   - `.claude/skills/branch/SKILL.md`, `commit/SKILL.md`, `pr/SKILL.md`, `review/SKILL.md` 作成
   - Copilot で試し利用・フィードバック
 
 **チェックポイント**:
@@ -243,7 +243,7 @@ Copilot へカスタマイズする際の確認表：
 | 設定項目 | Claude Code | Copilot | 対応方法 |
 |---|---|---|---|
 | **全体指示** | `claude.md` | `copilot-instructions.md` | 内容を共通化、差分を別ファイルで管理 |
-| **スキル/Agent** | `.claude/skills/*.md` | `.github/agents/*.md` | 内容をコピー、Frontmatter 形式調整 |
+| **スキル/Agent** | `.claude/skills/*/SKILL.md` | `.claude/skills/*/SKILL.md` | 共通の Skill 定義を利用 |
 | **ファイル別ルール** | ディレクトリ単位 | glob pattern (`*.instructions.md`) | 必要に応じて `.github/instructions/` を追加 |
 | **自動実行** | `claude.md` で常時 | `applyTo` glob で条件付き | 発火条件を明示的に定義 |
 | **コマンド発動** | `/skill-name` | ドロップダウン選択 or `/` コマンド | UI 統合を活用 |
@@ -268,7 +268,7 @@ Copilot へカスタマイズする際の確認表：
 ### Gemini CLI
 - ...
 ### GitHub Copilot
-- `.github/agents/` を使用
+- `.claude/skills/` を使用
 - `copilot-instructions.md` を参照
 ```
 
@@ -309,7 +309,7 @@ Copilot へカスタマイズする際の確認表：
 
 ### Week 1（案 A 実装）
 - [x] `copilot-instructions.md` 作成着手
-- [ ] `.github/agents/` ディレクトリ構築
+- [ ] `.claude/skills/` ディレクトリ構築
 
 ### Week 2 以降
 - [ ] CI/CD Workflow 追加（案 B）

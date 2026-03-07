@@ -39,7 +39,7 @@ docs/
 ├── coding-guidelines/   # コーディング基準
 └── guides/              # 操作ガイド
 
-.github/agents/         # Copilot Agent Skills
+.claude/skills/         # Copilot Agent Skills
 .agent/                 # Claude Code スキル（Copilot から参考可）
 ```
 
@@ -88,7 +88,7 @@ PR・Issue 操作時：
 
 ## エージェント（Agent Skills）
 
-`.github/agents/` にスキルを配置。ドロップダウンから選択して利用：
+`.claude/skills/` にスキルを配置。ドロップダウンから選択して利用：
 
 - **sdd**: 仕様駆動開発（要件 → 設計 → タスク → 実装）
 - **branch**: ブランチ作成・管理
@@ -154,9 +154,9 @@ pnpm build
 
 ---
 
-## Template 2: `.github/agents/sdd.md`
+## Template 2: `.claude/skills/sdd/SKILL.md`
 
-**配置**: `.github/agents/sdd.md`
+**配置**: `.claude/skills/sdd/SKILL.md`
 
 **用途**: 仕様駆動開発（Spec-Driven Development）Agent
 
@@ -348,9 +348,9 @@ pnpm test   # 検証
 
 ---
 
-## Template 3: `.github/agents/branch.md`
+## Template 3: `.claude/skills/branch/SKILL.md`
 
-**配置**: `.github/agents/branch.md`
+**配置**: `.claude/skills/branch/SKILL.md`
 
 **用途**: ブランチ管理
 
@@ -418,9 +418,9 @@ git branch -a
 
 ---
 
-## Template 4: `.github/agents/commit.md`
+## Template 4: `.claude/skills/commit/SKILL.md`
 
-**配置**: `.github/agents/commit.md`
+**配置**: `.claude/skills/commit/SKILL.md`
 
 **用途**: コミット作成（Conventional Commits）
 
@@ -517,9 +517,9 @@ pnpm typecheck
 
 ---
 
-## Template 5: `.github/agents/pr.md`
+## Template 5: `.claude/skills/pr/SKILL.md`
 
-**配置**: `.github/agents/pr.md`
+**配置**: `.claude/skills/pr/SKILL.md`
 
 **用途**: Pull Request 作成・管理
 
@@ -610,9 +610,9 @@ gh pr create --title "[Feature] ダークモード対応を追加" \
 
 ---
 
-## Template 6: `.github/agents/review.md`
+## Template 6: `.claude/skills/review/SKILL.md`
 
-**配置**: `.github/agents/review.md`
+**配置**: `.claude/skills/review/SKILL.md`
 
 **用途**: PR レビュー・品質チェック
 
@@ -813,13 +813,13 @@ if (process.argv.includes('--validate')) {
 # copilot-instructions.md をプロジェクトルートに作成
 cp -i template1-copilot-instructions.md copilot-instructions.md
 
-# .github/agents/ を作成
-mkdir -p .github/agents/
-cp -i template2-sdd.md .github/agents/sdd.md
-cp -i template3-branch.md .github/agents/branch.md
-cp -i template4-commit.md .github/agents/commit.md
-cp -i template5-pr.md .github/agents/pr.md
-cp -i template6-review.md .github/agents/review.md
+# .claude/skills/ を作成
+mkdir -p .claude/skills/
+cp -i template2-sdd.md .claude/skills/sdd/SKILL.md
+cp -i template3-branch.md .claude/skills/branch/SKILL.md
+cp -i template4-commit.md .claude/skills/commit/SKILL.md
+cp -i template5-pr.md .claude/skills/pr/SKILL.md
+cp -i template6-review.md .claude/skills/review/SKILL.md
 
 # スクリプトを配置
 mkdir -p scripts/
@@ -832,7 +832,7 @@ chmod +x scripts/sync-instructions.js
 各ファイルをプロジェクトに合わせて修正：
 
 - `copilot-instructions.md`: プロジェクト概要、テック スタック
-- `.github/agents/*.md`: 命名規則、ワークフロー詳細
+- `.claude/skills/*/SKILL.md`: 命名規則、ワークフロー詳細
 - `scripts/sync-instructions.js`: 同期ロジック
 
 ### 3. テスト
@@ -848,7 +848,7 @@ pnpm sync:instructions --validate
 ### 4. GitHub へ提出
 
 ```bash
-git add copilot-instructions.md .github/agents/ scripts/sync-instructions.js
+git add copilot-instructions.md .claude/skills/ scripts/sync-instructions.js
 git commit -m "feat: GitHub Copilot 対応を実装"
 git push origin feature/copilot-support
 ```

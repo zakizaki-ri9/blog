@@ -43,7 +43,7 @@
 
 **内容**: Copilot 対応の段階的な実装タスク
 
-- Phase 1: 基盤整備（`copilot-instructions.md`, `.github/agents/`）
+- Phase 1: 基盤整備（`copilot-instructions.md`, `.claude/skills/`）
 - Phase 2: 検証と最適化（`.github/instructions/`, CI/CD Workflow）
 - Phase 3: ドキュメント整備
 - Phase 4: 実装詳細確認
@@ -64,11 +64,11 @@
 **含まれるテンプレート**:
 
 1. **Template 1**: `copilot-instructions.md` - GitHub Copilot 用全体指示
-2. **Template 2**: `.github/agents/sdd.md` - 仕様駆動開発 Agent
-3. **Template 3**: `.github/agents/branch.md` - ブランチ管理 Agent
-4. **Template 4**: `.github/agents/commit.md` - Conventional Commit Agent
-5. **Template 5**: `.github/agents/pr.md` - PR 管理 Agent
-6. **Template 6**: `.github/agents/review.md` - PR レビュー Agent
+2. **Template 2**: `.claude/skills/sdd/SKILL.md` - 仕様駆動開発 Agent
+3. **Template 3**: `.claude/skills/branch/SKILL.md` - ブランチ管理 Agent
+4. **Template 4**: `.claude/skills/commit/SKILL.md` - Conventional Commit Agent
+5. **Template 5**: `.claude/skills/pr/SKILL.md` - PR 管理 Agent
+6. **Template 6**: `.claude/skills/review/SKILL.md` - PR レビュー Agent
 7. **Script**: `scripts/sync-instructions.js` - 指示ファイル同期スクリプト
 
 各テンプレートは実装ガイド付き。
@@ -186,24 +186,24 @@
 
 | 層 | Antigravity | Gemini | Cursor | Copilot |
 |---|---|---|---|---|
-| 全体指示 | `claude.md` + `AGENTS.md` | `Gemini.md` | – | 未実装 |
-| スキル | `.agent/skills/` | `.gemini/commands/` | `.cursor/commands/` | 未実装 |
-| ルール | `.agent/rules/` | – | `.cursor/rules/` | 未実装 |
+| 全体指示 | `claude.md` + `AGENTS.md` | `Gemini.md` | – | `copilot-instructions.md`（実装済み） |
+| スキル | `.agent/skills/` | `.gemini/commands/` | `.cursor/commands/` | `.claude/skills/`（実装済み） |
+| ルール | `.agent/rules/` | – | `.cursor/rules/` | `AGENTS.md` / `copilot-instructions.md` で適用 |
 
-### Copilot 対応で新規作成すべきファイル
+### Copilot 対応で整備したファイル
 
 ```
 copilot-instructions.md        ← 全体指示
-.github/agents/sdd.md          ← SDD Agent
-.github/agents/branch.md       ← ブランチ Agent
-.github/agents/commit.md       ← Commit Agent
-.github/agents/pr.md           ← PR Agent
-.github/agents/review.md       ← Review Agent
+.claude/skills/sdd/SKILL.md          ← SDD Agent
+.claude/skills/branch/SKILL.md       ← ブランチ Agent
+.claude/skills/commit/SKILL.md       ← Commit Agent
+.claude/skills/pr/SKILL.md           ← PR Agent
+.claude/skills/review/SKILL.md       ← Review Agent
 ```
 
 ### 実装案の選択肢（推奨順）
 
-1. **案 A（最小限）**: `copilot-instructions.md` + `.github/agents/` のみ
+1. **案 A（最小限）**: `copilot-instructions.md` + `.claude/skills/` のみ
    - コスト: **低**（1-2日）
    - 効果: **中**（Copilot で基本的なワークフロー可能）
 
@@ -229,7 +229,7 @@ copilot-instructions.md        ← 全体指示
 
 - [x] テンプレートをコピー・カスタマイズ
 - [x] `copilot-instructions.md` 作成
-- [ ] `.github/agents/` を構築
+- [ ] `.claude/skills/` を構築
 - [ ] Copilot で試用開始
 
 ### 長期（以降）
