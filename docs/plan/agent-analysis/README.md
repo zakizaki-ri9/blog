@@ -44,7 +44,7 @@
 **内容**: Copilot 対応の段階的な実装タスク
 
 - Phase 1: 基盤整備（`copilot-instructions.md`, `.claude/skills/`）
-- Phase 2: 検証と最適化（`.github/instructions/`, CI/CD Workflow）
+- Phase 2: 検証と最適化（`copilot-instructions.md` ルール拡張, CI/CD Workflow）
 - Phase 3: ドキュメント整備
 - Phase 4: 実装詳細確認
 - Phase 5: テストと検証

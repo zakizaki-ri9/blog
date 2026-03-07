@@ -41,28 +41,28 @@
 ### 3. ルール定義（`.claude/skills/` に統合、または専用ファイル）
 
 **Option A**: 既存ルール継承
-- [ ] `.agent/rules/rules.md` を `.github/` にコピー
+- [ ] `.agent/rules/rules.md` を `copilot-instructions.md` に要約して反映
 - [ ] Copilot フォーマット（`.mdc` or Markdown）に変換
 - [ ] `applyTo` glob pattern を設定（全TS/JS ファイル、全Markdown等）
 
 **Option B**: 専用ファイル作成
-- [ ] `.github/copilot-rules.md` または `.github/instructions/copilot-rules.instructions.md`
+- [ ] `copilot-instructions.md` に「Copilot 追加ルール」セクションを作成
 
 ---
 
 ## Phase 2: 動期検証と最適化
 
-### 4. `.github/instructions/` 条件付き自動適用（Optional）
+### 4. `copilot-instructions.md` 条件付きルール（Optional）
 
 特定ファイル編集時に自動キック
 
-- [ ] `.github/instructions/astro.instructions.md`
-  - `applyTo: "src/**/*.astro"`
-  - Astro コンポーネント編集時に自動適用
+- [ ] `copilot-instructions.md` に Astro 向けルールを追加
+  - 例: `src/**/*.astro` 編集時に参照する指針を明記
+  - Astro コンポーネント編集時の推奨パターンを記載
 
-- [ ] `.github/instructions/typescript.instructions.md`
-  - `applyTo: "src/**/*.ts"`
-  - TypeScript 編集時に自動適用
+- [ ] `copilot-instructions.md` に TypeScript 向けルールを追加
+  - 例: `src/**/*.ts` 編集時に参照する指針を明記
+  - TypeScript 編集時の型安全ルールを記載
 
 **検証**: 実際に Copilot でファイル編集して自動発火確認
 
@@ -195,7 +195,7 @@ Copilot で Serena MCP を使用したい場合:
 
 - [ ] Copilot で `.claude/skills/sdd/SKILL.md` がドロップダウンに表示されるか
 - [ ] `/sdd` で称号が発動するか（または UI で選択可能か）
-- [ ] `src/**/*.ts` を編集したとき `.github/instructions/typescript.instructions.md` が自動提案されるか
+- [ ] `src/**/*.ts` を編集したとき `copilot-instructions.md` の TypeScript ルールが適用されるか
 - [ ] AGENTS.md 更新後、同期スクリプト実行で `copilot-instructions.md` が更新されるか
 - [ ] GitHub Actions Workflow が PR 時に自動実行されるか
 
@@ -218,7 +218,7 @@ Phase 1: 基盤整備
   [ ] ルール定義
 
 Phase 2: 検証と最適化
-  [ ] .github/instructions/ 構築（Optional）
+  [ ] copilot-instructions.md 条件付きルール整備（Optional）
   [ ] CI/CD Workflow 実装
   [ ] 同期スクリプト実装
 

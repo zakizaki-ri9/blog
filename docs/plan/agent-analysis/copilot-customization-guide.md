@@ -17,7 +17,7 @@
 | **制御の主体** | エージェント自律的 | 開発者が常に主導権を持つ |
 | **確認スタイル** | 連続処理（一気に進む） | 断続的（確認を挟む） |
 | **指示の粒度** | ディレクトリ単位 | ファイル単位（glob） |
-| **設定ファイル** | `claude.md`, `.claude/` | `copilot-instructions.md`, `.github/` |
+| **設定ファイル** | `claude.md`, `.claude/` | `copilot-instructions.md`, `.claude/skills/` |
 
 ### 導き出される対応方針
 
@@ -27,8 +27,8 @@
    - `.claude/skills/` に SDD スキルを配置
 
 2. **ファイル単位の条件付き自動提案**が得意
-   - `*.instructions.md` で TypeScript, Astro など拡張子別のルール適用
-   - `.github/instructions/` ディレクトリで管理
+   - `copilot-instructions.md` 内で TypeScript, Astro など用途別セクションを管理
+   - ルールは必要時に追記して段階的に拡張
 
 3. **UI 統合による発見性**が高い
    - Agent Skills がドロップダウンで可視化
@@ -244,7 +244,7 @@ Copilot へカスタマイズする際の確認表：
 |---|---|---|---|
 | **全体指示** | `claude.md` | `copilot-instructions.md` | 内容を共通化、差分を別ファイルで管理 |
 | **スキル/Agent** | `.claude/skills/*/SKILL.md` | `.claude/skills/*/SKILL.md` | 共通の Skill 定義を利用 |
-| **ファイル別ルール** | ディレクトリ単位 | glob pattern (`*.instructions.md`) | 必要に応じて `.github/instructions/` を追加 |
+| **ファイル別ルール** | ディレクトリ単位 | `copilot-instructions.md` のセクション分割 | 必要に応じてルールを追記 |
 | **自動実行** | `claude.md` で常時 | `applyTo` glob で条件付き | 発火条件を明示的に定義 |
 | **コマンド発動** | `/skill-name` | ドロップダウン選択 or `/` コマンド | UI 統合を活用 |
 | **MCP 設定** | `.gemini/settings.json` | GitHub Copilot の設定画面 | ツール側で管理 |
@@ -276,7 +276,7 @@ Copilot へカスタマイズする際の確認表：
 
 **A**: コア部分（言語、基本ルール、TDD）は共通化し、ツール固有の機能差分（MCP、発火条件）だけ異なるようにしてください。
 
-### Q3: `.github/instructions/` は必須か？
+### Q3: 条件付き自動提案ルールは必須か？
 
 **A**: オプショナルです。案 A では不要。案 B で、ファイル拡張子別（TypeScript, Astro）に指示を分岐したい場合に有用です。
 

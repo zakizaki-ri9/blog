@@ -40,7 +40,7 @@
 
 [条件付き自動適用]
   Claude Code    : ディレクトリ別CLAUDE.md
-  GitHub Copilot : *.instructions.md (glob match でファイル編集時発火)
+  GitHub Copilot : copilot-instructions.md の条件付きルール（必要に応じて拡張）
   Gemini CLI     : 仕様駆動（明示的実行）
 ```
 
@@ -109,7 +109,7 @@
 
 **参考URL からの抽出**:
 - GitHub Copilot は `copilot-instructions.md`, `.claude/skills/`, `.github/skills/` をサポート
-- glob pattern（`*.instructions.md`）でファイル単位の条件付き指示が可能
+- `copilot-instructions.md` にルールを段階的に追記して運用可能
 - Agent Skills（2025年12月パブリックプレビュー）で `.claude/skills/` とほぼ同等の機能
 
 **実装ロードマップ**:
@@ -232,8 +232,8 @@ pnpm generate:rules
   - `.agent/skills/branch/SKILL.md` → `branch/SKILL.md` に移行
   - 他のスキルも順次追加
 
-- [ ] `.github/instructions/` 条件付き自動適用ルール設定（Option）
-  - 例: `src/**/*.ts.instructions.md` (TypeScript ファイル編集時自動適用)
+- [ ] `copilot-instructions.md` の条件付きルール拡張（Option）
+  - 例: TypeScript / Astro 向けにセクションを分割して追記
 
 ### Phase 3: 同期自動化（1週間～）
 
