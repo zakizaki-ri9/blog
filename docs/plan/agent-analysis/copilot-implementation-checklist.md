@@ -6,7 +6,7 @@
 
 ### 1. `copilot-instructions.md` の作成
 
-- [x] ファイル作成: `/Users/yazakiyuuki/work/blog/copilot-instructions.md`
+- [x] ファイル作成: `copilot-instructions.md`
 - [x] 内容構成:
   - [x] 言語設定（日本語）
   - [x] プロジェクト概要（Astro ブログ）
