@@ -6,14 +6,14 @@
 
 ### 1. `copilot-instructions.md` の作成
 
-- [ ] ファイル作成: `/Users/yazakiyuuki/work/blog/copilot-instructions.md`
-- [ ] 内容構成:
-  - [ ] 言語設定（日本語）
-  - [ ] プロジェクト概要（Astro ブログ）
-  - [ ] パッケージマネージャー（pnpm）
-  - [ ] 開発ガイドライン参照（`docs/coding-guidelines/`）
-  - [ ] Serena MCP 使用ガイドライン
-  - [ ] Git 操作制限
+- [x] ファイル作成: `/Users/yazakiyuuki/work/blog/copilot-instructions.md`
+- [x] 内容構成:
+  - [x] 言語設定（日本語）
+  - [x] プロジェクト概要（Astro ブログ）
+  - [x] パッケージマネージャー（pnpm）
+  - [x] 開発ガイドライン参照（`docs/coding-guidelines/`）
+  - [x] Serena MCP 使用ガイドライン
+  - [x] Git 操作制限
 - [ ] 動的生成との検討: AGENTS.md と同期可能な構成か確認
 
 **参考**: `AGENTS.md` を和訳しつつ、GitHub Copilot ネイティブの表現に調整

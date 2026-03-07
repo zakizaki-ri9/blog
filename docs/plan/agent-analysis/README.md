@@ -222,13 +222,13 @@ copilot-instructions.md        ← 全体指示
 ### 短期（今週）
 
 - [ ] `multi-agent-strategy.md` をチームで共有
-- [ ] 案 A / B / C のいずれかを決定
+- [x] 案 A / B / C のいずれかを決定
 - [ ] 実装リードを決定
 
 ### 中期（1-2週間）
 
-- [ ] テンプレートをコピー・カスタマイズ
-- [ ] `copilot-instructions.md` 作成
+- [x] テンプレートをコピー・カスタマイズ
+- [x] `copilot-instructions.md` 作成
 - [ ] `.github/agents/` を構築
 - [ ] Copilot で試用開始
 

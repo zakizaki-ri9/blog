@@ -305,10 +305,10 @@ Copilot へカスタマイズする際の確認表：
 
 ### 即座に（今週中）
 - [ ] `.agent-analysis/multi-agent-strategy.md` をチームで共有・レビュー
-- [ ] 案 A / B / C のいずれかを決定
+- [x] 案 A / B / C のいずれかを決定
 
 ### Week 1（案 A 実装）
-- [ ] `copilot-instructions.md` 作成着手
+- [x] `copilot-instructions.md` 作成着手
 - [ ] `.github/agents/` ディレクトリ構築
 
 ### Week 2 以降

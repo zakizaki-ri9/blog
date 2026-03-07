@@ -217,13 +217,13 @@ pnpm generate:rules
 ### Phase 1: 基盤整備（1-2日）
 
 - [ ] `.agent-config/` ディレクトリ作成
-- [ ] `multi-agent-strategy.md` (本文書) を作成・配置
+- [x] `multi-agent-strategy.md` (本文書) を作成・配置
 - [ ] `tool-specific/claude-code.md`, `gemini-cli.md`, `copilot.md` テンプレ作成
 - [ ] `migration-checklist.md` 作成
 
 ### Phase 2: Copilot 最小サポート（2-3日）
 
-- [ ] `copilot-instructions.md` を実装
+- [x] `copilot-instructions.md` を実装
   - AGENTS.md の内容を要約
   - Copilot 固有のセクション追加（発火条件、glob pattern）
   
