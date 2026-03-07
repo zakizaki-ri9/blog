@@ -223,7 +223,7 @@ notify_user で以下を設定:
 > **implementation_plan.md の重要性**
 > - 実装の全体像を示す最も重要なドキュメント
 > - User Review Required セクションで判断事項を明確に提示
-- Breaking Changes や設計上の重要な決定は必ず記載
+> - Breaking Changes や設計上の重要な決定は必ず記載
 
 ## 既存の Skill/Workflow との連携
 

@@ -247,7 +247,7 @@ EARS フォーマット（Event-Action-Response-System）で要件を定義：
 - **e2e-planner**: Webアプリ探索からE2Eテスト計画生成
 - **e2e-healer**: 壊れたPlaywright E2Eテストの自動修復
 
-各スキルの詳細は [.claude/skills/](./･claude/skills/) 配下の `SKILL.md` を参照。
+各スキルの詳細は [.claude/skills/](./.claude/skills/) 配下の `SKILL.md` を参照。
 
 ## 開発フロー
 
