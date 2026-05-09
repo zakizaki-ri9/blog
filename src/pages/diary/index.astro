@@ -1,0 +1,117 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import { SITE_TITLE } from '@/consts';
+import { getDiaryEntries, toDiarySlug } from '@/utils/diary';
+
+const diaries = await getDiaryEntries();
+
+const pageTitle = `Diary | ${SITE_TITLE}`;
+const pageDescription = 'ノートをめくるように読める日記一覧';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={pageTitle} description={pageDescription} />
+		<style>
+			main {
+				width: min(920px, calc(100% - 2rem));
+				margin: 0 auto;
+				padding: 2rem 0 3rem;
+			}
+			.diary-intro {
+				margin-bottom: 2rem;
+			}
+			.diary-intro h1 {
+				margin-bottom: 0.5rem;
+			}
+			.diary-intro p {
+				margin: 0;
+				color: rgb(var(--gray));
+			}
+			.stack {
+				display: grid;
+				gap: 1rem;
+			}
+			.card {
+				display: block;
+				padding: 1.25rem;
+				border-radius: 16px;
+				border: 1px solid rgba(var(--gray), 0.28);
+				text-decoration: none;
+				color: inherit;
+				background:
+					repeating-linear-gradient(
+						to bottom,
+						rgba(255, 255, 255, 0.96),
+						rgba(255, 255, 255, 0.96) 29px,
+						rgba(var(--gray-light), 0.6) 30px
+					),
+					linear-gradient(135deg, #fffaf2, #ffffff);
+				box-shadow: 0 6px 18px rgba(var(--gray), 0.18);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			.card:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 12px 24px rgba(var(--gray), 0.24);
+			}
+			.card-head {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 0.5rem;
+				margin-bottom: 0.75rem;
+				font-size: 0.95rem;
+				color: rgb(var(--gray));
+			}
+			.card h2 {
+				margin: 0;
+				font-size: 1.35rem;
+			}
+			.card p {
+				margin: 0.65rem 0 0;
+				color: rgb(var(--gray-dark));
+			}
+			.empty {
+				padding: 1.25rem;
+				border-radius: 16px;
+				border: 1px dashed rgba(var(--gray), 0.55);
+				background: rgba(var(--gray-light), 0.35);
+			}
+			@media (max-width: 720px) {
+				.card h2 {
+					font-size: 1.2rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="diary-intro">
+				<h1>Diary</h1>
+				<p>日記を1ページずつ、左右キーやフリックでめくれます。</p>
+			</section>
+			<section class="stack" aria-label="日記一覧">
+				{
+					diaries.length === 0 ? (
+						<div class="empty">まだ日記がありません。src/content/diary/YYYY/MM に投稿を追加してください。</div>
+					) : (
+						diaries.map((entry) => (
+							<a class="card" href={`/diary/${toDiarySlug(entry)}`}>
+								<div class="card-head">
+									<FormattedDate date={entry.data.pubDate} />
+									<span>読む</span>
+								</div>
+								<h2>{entry.data.title}</h2>
+								<p>{entry.data.description}</p>
+							</a>
+						))
+					)
+				}
+			</section>
+		</main>
+	</body>
+</html>

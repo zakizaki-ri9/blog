@@ -1,0 +1,355 @@
+---
+import { type CollectionEntry, render } from 'astro:content';
+import BaseHead from '@/components/BaseHead.astro';
+import Header from '@/components/Header.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import { SITE_TITLE } from '@/consts';
+import { getDiaryEntries, toDiarySlug } from '@/utils/diary';
+
+type DiaryPathProps = {
+	entry: CollectionEntry<'diary'>;
+	slug: string;
+	olderHref: string | null;
+	newerHref: string | null;
+	index: number;
+	total: number;
+};
+
+export async function getStaticPaths() {
+	const diaries = await getDiaryEntries();
+
+	return diaries.map((entry, index) => {
+		const slug = toDiarySlug(entry);
+		const newer = diaries[index - 1];
+		const older = diaries[index + 1];
+
+		return {
+			params: { slug },
+			props: {
+				entry,
+				slug,
+				newerHref: newer ? `/diary/${toDiarySlug(newer)}` : null,
+				olderHref: older ? `/diary/${toDiarySlug(older)}` : null,
+				index,
+				total: diaries.length,
+			} satisfies DiaryPathProps,
+		};
+	});
+}
+
+const { entry, slug, olderHref, newerHref, index, total } = Astro.props as DiaryPathProps;
+const { Content } = await render(entry);
+
+const pageTitle = `${entry.data.title} | Diary | ${SITE_TITLE}`;
+const paperMeta = [entry.data.mood, entry.data.weather, entry.data.location].filter(Boolean);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={pageTitle} description={entry.data.description} slug={slug} />
+		<style>
+			main {
+				width: min(980px, calc(100% - 2rem));
+				margin: 0 auto;
+				padding: 1.5rem 0 3rem;
+			}
+			.diary-shell {
+				display: grid;
+				grid-template-columns: 1fr min(760px, 100%) 1fr;
+				align-items: stretch;
+				gap: 1rem;
+			}
+			.gutter {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.nav-btn {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				max-width: 110px;
+				min-height: 220px;
+				border: 1px solid rgba(var(--gray), 0.38);
+				border-radius: 14px;
+				padding: 0.7rem;
+				text-decoration: none;
+				font-size: 0.9rem;
+				letter-spacing: 0.03em;
+				color: rgb(var(--gray-dark));
+				background: linear-gradient(145deg, #f8fbff, #ffffff);
+				transition: transform 0.18s ease, box-shadow 0.18s ease;
+			}
+			.nav-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 20px rgba(var(--gray), 0.18);
+			}
+			.nav-btn.disabled {
+				opacity: 0.35;
+				pointer-events: none;
+			}
+			.paper {
+				position: relative;
+				border-radius: 22px;
+				padding: 1.5rem 1.5rem 1.75rem;
+				background:
+					linear-gradient(90deg, rgba(255, 223, 168, 0.25) 0 4px, transparent 4px),
+					repeating-linear-gradient(
+						to bottom,
+						rgba(255, 255, 255, 0.96),
+						rgba(255, 255, 255, 0.96) 31px,
+						rgba(var(--gray-light), 0.62) 32px
+					),
+					linear-gradient(165deg, #fff8ec, #ffffff);
+				border: 1px solid rgba(var(--gray), 0.35);
+				box-shadow: 0 16px 30px rgba(var(--gray), 0.2);
+				touch-action: pan-y;
+				transition: transform 0.16s ease, opacity 0.16s ease;
+			}
+			.paper.exiting-left {
+				transform: translateX(-14px) rotate(-0.7deg);
+				opacity: 0.6;
+			}
+			.paper.exiting-right {
+				transform: translateX(14px) rotate(0.7deg);
+				opacity: 0.6;
+			}
+			.paper-head {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 0.75rem;
+				color: rgb(var(--gray));
+				font-size: 0.94rem;
+				margin-bottom: 1rem;
+			}
+			.paper h1 {
+				margin-bottom: 0.5rem;
+				font-size: clamp(1.6rem, 2.1vw, 2.1rem);
+			}
+			.description {
+				margin: 0 0 1.2rem;
+				color: rgb(var(--gray-dark));
+			}
+			.meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin: 0 0 1.3rem;
+			}
+			.meta span {
+				font-size: 0.8rem;
+				padding: 0.2rem 0.6rem;
+				border-radius: 999px;
+				border: 1px solid rgba(var(--gray), 0.45);
+				background: rgba(255, 255, 255, 0.7);
+			}
+			.prose {
+				font-size: 1rem;
+				line-height: 1.95;
+			}
+			.controls {
+				display: flex;
+				justify-content: space-between;
+				gap: 0.75rem;
+				margin-top: 1.5rem;
+			}
+			.inline-link {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.55rem 0.9rem;
+				border: 1px solid rgba(var(--gray), 0.45);
+				border-radius: 10px;
+				text-decoration: none;
+				color: rgb(var(--gray-dark));
+				background: rgba(255, 255, 255, 0.74);
+			}
+			.inline-link.disabled {
+				opacity: 0.4;
+				pointer-events: none;
+			}
+			.hint {
+				margin-top: 1rem;
+				font-size: 0.86rem;
+				color: rgb(var(--gray));
+			}
+			@media (max-width: 900px) {
+				.diary-shell {
+					grid-template-columns: 1fr;
+				}
+				.gutter {
+					display: none;
+				}
+				.paper {
+					padding: 1.2rem 1rem 1.4rem;
+				}
+			}
+			@media (prefers-reduced-motion: reduce) {
+				.paper {
+					transition: none;
+				}
+				.nav-btn {
+					transition: none;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="diary-shell">
+				<div class="gutter">
+					<a
+						class:list={["nav-btn", { disabled: !newerHref }]}
+						href={newerHref ?? '#'}
+						aria-label="新しい日記へ"
+					>
+						← 新しい
+					</a>
+				</div>
+				<article
+					class="paper"
+					data-older-href={olderHref ?? ''}
+					data-newer-href={newerHref ?? ''}
+					aria-label="日記ページ"
+				>
+					<div class="paper-head">
+						<FormattedDate date={entry.data.pubDate} />
+						<span>{index + 1} / {total}</span>
+					</div>
+					<h1>{entry.data.title}</h1>
+					<p class="description">{entry.data.description}</p>
+					{
+						paperMeta.length > 0 && (
+							<div class="meta" aria-label="日記メタ情報">
+								{paperMeta.map((item) => <span>{item}</span>)}
+							</div>
+						)
+					}
+					<div class="prose">
+						<Content />
+					</div>
+					<div class="controls">
+						<a
+							class:list={["inline-link", { disabled: !newerHref }]}
+							href={newerHref ?? '#'}
+							aria-label="新しい日記へ移動"
+						>
+							← 新しい日記
+						</a>
+						<a class="inline-link" href="/diary" aria-label="日記一覧へ移動">一覧へ戻る</a>
+						<a
+							class:list={["inline-link", { disabled: !olderHref }]}
+							href={olderHref ?? '#'}
+							aria-label="古い日記へ移動"
+						>
+							古い日記 →
+						</a>
+					</div>
+					<p class="hint">左右キーまたはフリックで前後の日記へ移動できます。</p>
+				</article>
+				<div class="gutter">
+					<a
+						class:list={["nav-btn", { disabled: !olderHref }]}
+						href={olderHref ?? '#'}
+						aria-label="古い日記へ"
+					>
+						古い →
+					</a>
+				</div>
+			</div>
+		</main>
+		<script>
+			/* global document, window, HTMLElement */
+			const paper = document.querySelector('.paper');
+
+			if (paper instanceof HTMLElement) {
+				const newerHref = paper.dataset.newerHref || '';
+				const olderHref = paper.dataset.olderHref || '';
+				const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				let startX = 0;
+				let startY = 0;
+				let tracking = false;
+
+				const navigateWithMotion = (href, directionClass) => {
+					if (!href) {
+						return;
+					}
+					if (prefersReduced) {
+						window.location.assign(href);
+						return;
+					}
+					paper.classList.add(directionClass);
+					window.setTimeout(() => window.location.assign(href), 130);
+				};
+
+				const isTypingTarget = (target) => {
+					if (!(target instanceof HTMLElement)) {
+						return false;
+					}
+					const tag = target.tagName;
+					return (
+						tag === 'INPUT' ||
+						tag === 'TEXTAREA' ||
+						tag === 'SELECT' ||
+						target.isContentEditable
+					);
+				};
+
+				document.addEventListener('keydown', (event) => {
+					if (isTypingTarget(event.target)) {
+						return;
+					}
+					if (event.key === 'ArrowLeft') {
+						navigateWithMotion(newerHref, 'exiting-right');
+					}
+					if (event.key === 'ArrowRight') {
+						navigateWithMotion(olderHref, 'exiting-left');
+					}
+				});
+
+				const finishSwipe = (endX, endY) => {
+					if (!tracking) {
+						return;
+					}
+					const deltaX = endX - startX;
+					const deltaY = Math.abs(endY - startY);
+					const threshold = Math.max(36, window.innerWidth * 0.08);
+					if (Math.abs(deltaX) < threshold || deltaY > 70) {
+						tracking = false;
+						return;
+					}
+					if (deltaX > 0) {
+						navigateWithMotion(newerHref, 'exiting-right');
+					} else {
+						navigateWithMotion(olderHref, 'exiting-left');
+					}
+					tracking = false;
+				};
+
+				paper.addEventListener('touchstart', (event) => {
+					const touch = event.changedTouches[0];
+					startX = touch.clientX;
+					startY = touch.clientY;
+					tracking = true;
+				});
+				paper.addEventListener('touchend', (event) => {
+					const touch = event.changedTouches[0];
+					finishSwipe(touch.clientX, touch.clientY);
+				});
+
+				paper.addEventListener('pointerdown', (event) => {
+					startX = event.clientX;
+					startY = event.clientY;
+					tracking = true;
+				});
+				paper.addEventListener('pointerup', (event) => {
+					finishSwipe(event.clientX, event.clientY);
+				});
+			}
+		</script>
+	</body>
+</html>

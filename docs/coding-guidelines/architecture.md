@@ -61,6 +61,12 @@ src/
 │   ├── clock/       # 時刻取得
 │   └── id/          # ID生成
 ├── web/             # Astro ページ/コンポーネント（表示専用、ビジネスロジックは app 内）
+├── content/
+│   └── diary/
+│       └── YYYY/
+│           └── MM/  # 日記コンテンツ（例: 2026/05/2026-05-09-title.mdx）
+├── utils/
+│   └── diary.ts     # 日記取得・検証・公開判定の共通ロジック
 └── config/
     └── compose.ts   # コンポジションルート（本番配線）
 
@@ -78,6 +84,70 @@ tests/
 - **`src/adapters/`**: 外部世界との接続。ポートの実装。フレームワークやライブラリへの依存をここに集約。
 - **`src/web/`**: Astro のページとコンポーネント。表示のみを担当。ビジネスロジックは `app` に委譲。
 - **`src/config/compose.ts`**: 依存関係の解決。本番環境での実装を配線。
+
+## Diary 設計ポリシー（運用ルール）
+
+日記機能は投稿数が増えても運用しやすく、公開事故を防ぐことを優先します。
+
+### 1. 公開制御（devOnly）
+
+- 日記frontmatterに `devOnly: true/false` を持たせる
+- `devOnly: true` の投稿は **開発/テスト環境のみ表示** し、本番ビルドでは除外する
+- 一覧・詳細で同じ判定を使うため、公開判定は共通関数へ集約する
+
+実装例（`src/utils/diary.ts`）:
+
+```ts
+const isDevOrTest = import.meta.env.DEV || import.meta.env.MODE === "test";
+
+export function shouldIncludeDiaryEntry(entry: DiaryEntry): boolean {
+  return !entry.data.devOnly || isDevOrTest;
+}
+```
+
+### 2. pubDate 一意制約
+
+- 日記の並び順・前後移動を安定化するため、`pubDate` は日単位（`YYYY-MM-DD`）で一意とする
+- 単一ファイル検証だけでは不十分なため、**全件取得時に重複検証** する
+- 重複検知時はエラーを投げて、ビルド/生成を失敗させる（Fail Fast）
+
+実装例（`src/utils/diary.ts`）:
+
+```ts
+function validateUniquePubDate(entries: DiaryEntry[]): void {
+  // 日付ごとに収集し、同日が2件以上なら例外を投げる
+}
+```
+
+### 3. 長期運用のファイル構造
+
+- `src/content/diary/YYYY/MM/*.mdx` の年/月階層で管理する
+- 1〜2年分（数百件）でも、一覧性と保守性を維持しやすい構成を優先する
+- 投稿作成コマンド（`pnpm daily`）もこの階層に出力する
+
+### 4. URL/slug の安定化
+
+- ルーティングは `src/pages/diary/[...slug].astro` を使う
+- URL slug は `entry.id` 全体ではなく、**末尾ファイル名（拡張子除去）** を使う
+- ディレクトリ階層変更（年/月整理）をしても、URLが不要に変わらない設計にする
+
+実装例（`src/utils/diary.ts`）:
+
+```ts
+export function toDiarySlug(entry: DiaryEntry): string {
+  const idWithoutExtension = entry.id.replace(/\.mdx?$/, "");
+  const parts = idWithoutExtension.split("/");
+  return parts.at(-1) ?? idWithoutExtension;
+}
+```
+
+### 5. 共通取得関数の利用
+
+- 日記一覧・静的パス生成・将来のRSS等で、日記取得ロジックを重複させない
+- `getDiaryEntries()` に以下を集約し、呼び出し側は結果のみ利用する
+  - 公開判定（devOnly）
+  - pubDate重複検証
+  - 日付降順ソート
 
 ## 代表ポート例（TypeScript）
 

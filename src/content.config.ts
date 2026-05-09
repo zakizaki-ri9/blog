@@ -26,4 +26,21 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { blog, pages };
+const diary = defineCollection({
+  // Load Markdown and MDX files in the `src/content/diary/` directory.
+  loader: glob({ base: "./src/content/diary", pattern: "**/*.{md,mdx}" }),
+  // Type-check frontmatter using a schema
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    mood: z.string().optional(),
+    weather: z.string().optional(),
+    location: z.string().optional(),
+    heroImage: z.string().optional(),
+    devOnly: z.boolean().optional(),
+  }),
+});
+
+export const collections = { blog, pages, diary };
