@@ -97,7 +97,7 @@ const pageDescription = 'ノートをめくるように読める日記一覧';
 			<section class="stack" aria-label="日記一覧">
 				{
 					diaries.length === 0 ? (
-						<div class="empty">まだ日記がありません。src/content/diary/YYYY/MM に投稿を追加してください。</div>
+						<div class="empty">まだ日記はありません。</div>
 					) : (
 						diaries.map((entry) => (
 							<a class="card" href={`/diary/${toDiarySlug(entry)}`}>
