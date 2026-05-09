@@ -35,9 +35,9 @@ function parseArgs(argv) {
       index += 1;
       continue;
     }
-    if (token === "--dev-only" && next) {
-      args.devOnly = next === "true";
-      index += 1;
+    if (token === "--dev-only") {
+      args.devOnly = next !== "false";
+      if (next === "true" || next === "false") index += 1;
       continue;
     }
     if (token === "--dry-run") {
@@ -80,15 +80,16 @@ function normalizeDate(input) {
 }
 
 function toSlug(rawTitle) {
-  const ascii = rawTitle
+  const slug = rawTitle
     .trim()
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 
-  return ascii || "daily-note";
+  // 日本語などの非ASCII文字を含むタイトルでもslugが空にならないようにする
+  // もし生成されたslugが空の場合は'daily-note'を使用
+  return slug.replace(/[^a-z0-9-]/g, "") || "daily-note"
 }
 
 async function exists(filePath) {

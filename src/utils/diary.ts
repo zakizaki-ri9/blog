@@ -11,7 +11,7 @@ export function toDiarySlug(entry: DiaryEntry): string {
 }
 
 function toDateKey(date: Date): string {
-  return date.toISOString().slice(0, 10);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
 function validateUniquePubDate(entries: DiaryEntry[]): void {
@@ -37,7 +37,7 @@ function validateUniquePubDate(entries: DiaryEntry[]): void {
 }
 
 export function sortDiaryEntries(entries: DiaryEntry[]): DiaryEntry[] {
-  return entries.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return [...entries].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
 export function shouldIncludeDiaryEntry(entry: DiaryEntry): boolean {
