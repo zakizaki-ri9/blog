@@ -40,6 +40,19 @@
 
 ワークフロー `/all-commit` を利用してブランチ作成 -> コミット -> PR作成を行うかをユーザーに確認する。
 
+### 調査・技術選定時
+
+技術調査・ライブラリ比較・公式 API 確認・OSS 内部実装確認時は、必ず該当スキルの `SKILL.md` を Read してから進める。
+
+| 問いの種類 | スキル / 手段 |
+| --- | --- |
+| 動向・比較・選定 | `.claude/skills/research/SKILL.md` |
+| 公式 API・設定・バージョン固有 | Context7 MCP（research 経由） |
+| 内部実装・型・シグネチャ | `.claude/skills/oss-source-reader/SKILL.md` |
+| SPA / WebFetch 失敗 | `.claude/skills/browser-reader/SKILL.md` |
+
+調査成果物は `docs/research/YYYYMMDD_{title}/README.md` に保存し、`docs/research/index.md` に索引を追記する（ユーザーが保存を依頼しない場合はチャット報告のみでもよい）。
+
 ## 目的と前提
 - このプロジェクトは Astro（TypeScript）によるブログサイトであり、エージェントはタスクごとにテスト駆動で安全に改善します。
 - パッケージマネージャーは `pnpm`、フォーマット・静的検査は既存の ESLint 設定を尊重してください。

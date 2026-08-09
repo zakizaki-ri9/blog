@@ -45,7 +45,8 @@ docs/
 │   ├── code-quality.md
 │   ├── e2e-testing.md
 │   └── security.md
-└── plan/              # 計画・設計ドキュメント
+├── plan/              # 計画・設計ドキュメント
+└── research/          # 技術調査レポート（YYYYMMDD_{title}/README.md）
 
 .claude/
 └── skills/            # エージェント Skills（Claude Code & Copilot 共用）
@@ -53,6 +54,9 @@ docs/
     ├── commit/        # Conventional Commits
     ├── pr/            # Pull Request
     ├── review/        # コード品質レビュー
+    ├── research/      # 技術調査・ライブラリ比較・選定
+    ├── oss-source-reader/  # OSS 内部実装調査
+    ├── browser-reader/     # SPA・動的ページ取得
     ├── e2e-generator/ # E2E テスト生成
     ├── e2e-planner/   # E2E テスト計画
     └── e2e-healer/    # E2E テスト修復
@@ -136,6 +140,9 @@ docs/
 - **commit**: Conventional Commits に準拠した日本語コミット作成
 - **pr**: GitHub MCP経由での PR 作成・更新
 - **review**: コード品質とガイドラインのレビュー実行
+- **research**: 技術調査・ライブラリ比較・選定・調査レポート作成
+- **oss-source-reader**: OSS 内部実装・型定義・シグネチャのソース調査
+- **browser-reader**: SPA・動的ページの Playwright CLI 取得
 - **e2e-generator**: テスト計画からPlaywright E2Eテストコード生成
 - **e2e-planner**: Webアプリ探索からE2Eテスト計画生成
 - **e2e-healer**: 壊れたPlaywright E2Eテストの自動修復
