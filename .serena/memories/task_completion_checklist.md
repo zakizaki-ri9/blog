@@ -1,1 +1,0 @@
-docs/plan/testable の追加。README, phases, checklists, templates を作成。フェーズは細分化（0〜8）。
