@@ -1,6 +1,6 @@
 # 調査結果テンプレート
 
-`docs/research/YYYYMMDD_{title}/README.md` に保存する際の形式。
+`../private-memo/docs/research/YYYY-MM-DD-{slug}.md` に保存する際の形式（SF6 配置は `docs/research/sf6-site/visualiza/`）。
 
 ```markdown
 # {調査トピック} (Research)
@@ -45,7 +45,7 @@
 
 ### 関連する既存知識
 
-- `docs/research/...`・`docs/plan/...`・`docs/coding-guidelines/...` への相対パス参照
+- `../private-memo/docs/research/...`・`docs/plan/...`・`docs/coding-guidelines/...` への相対パス参照
 
 ### 次アクション（承認依頼）
 
