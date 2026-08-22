@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import pagefind from "astro-pagefind";
+import tailwindcss from "@tailwindcss/vite";
 import createOgImages from "./src/integrations/og-image";
 
 // https://astro.build/config
@@ -18,6 +19,7 @@ export default defineConfig({
     pagefind(),
   ],
   vite: {
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         "@": "/src",

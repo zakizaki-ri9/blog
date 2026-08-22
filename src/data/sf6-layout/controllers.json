@@ -1,0 +1,77 @@
+{
+  "presets": [
+    {
+      "manufacturerId": "generic",
+      "modelId": "generic-pad",
+      "displayName": "汎用パッド",
+      "formFactor": "pad",
+      "buttonSlots": [
+        { "id": "slot_l2", "x": 0.25, "y": 0.145, "r": 0.080, "face": "top" },
+        { "id": "slot_r2", "x": 0.75, "y": 0.145, "r": 0.080, "face": "top" },
+        { "id": "slot_l1", "x": 0.25, "y": 0.272, "r": 0.065, "face": "top" },
+        { "id": "slot_r1", "x": 0.75, "y": 0.272, "r": 0.065, "face": "top" },
+        { "id": "slot_dpad", "x": 0.24, "y": 0.48, "r": 0.117, "face": "front" },
+        { "id": "slot_ls", "x": 0.40, "y": 0.50, "r": 0.107, "face": "front" },
+        { "id": "slot_face_1", "x": 0.785, "y": 0.41, "r": 0.085, "face": "front" },
+        { "id": "slot_face_2", "x": 0.875, "y": 0.52, "r": 0.085, "face": "front" },
+        { "id": "slot_face_3", "x": 0.785, "y": 0.63, "r": 0.085, "face": "front" },
+        { "id": "slot_face_4", "x": 0.695, "y": 0.52, "r": 0.085, "face": "front" }
+      ],
+      "meta": {
+        "sourceUrl": "https://www.playstation.com/ja-jp/accessories/dualsense-wireless-controller/",
+        "verifiedAt": "2026-08-18",
+        "note": "汎用パッドの一体外形。スロットは外郭内包診断が通る位置。L2/R2 は浅い trigger"
+      }
+    },
+    {
+      "manufacturerId": "generic",
+      "modelId": "generic-stick",
+      "displayName": "汎用スティック",
+      "formFactor": "stick",
+      "buttonSlots": [
+        { "id": "slot_stick", "x": 0.18, "y": 0.50, "r": 0.110 },
+        { "id": "slot_face_1", "x": 0.50, "y": 0.41, "r": 0.080 },
+        { "id": "slot_face_2", "x": 0.62, "y": 0.35, "r": 0.080 },
+        { "id": "slot_face_3", "x": 0.74, "y": 0.33, "r": 0.080 },
+        { "id": "slot_l1", "x": 0.86, "y": 0.37, "r": 0.080 },
+        { "id": "slot_face_4", "x": 0.50, "y": 0.65, "r": 0.080 },
+        { "id": "slot_face_5", "x": 0.62, "y": 0.59, "r": 0.080 },
+        { "id": "slot_face_6", "x": 0.74, "y": 0.57, "r": 0.080 },
+        { "id": "slot_l2", "x": 0.86, "y": 0.61, "r": 0.080 }
+      ],
+      "meta": {
+        "sourceUrl": "https://hori.jp/products/p5/fs_alpha/",
+        "verifiedAt": "2026-08-18",
+        "note": "8 ボタン弧 + 左レバー。面 r=0.080、レバー r=0.110。現行横長筐体内"
+      }
+    },
+    {
+      "manufacturerId": "generic",
+      "modelId": "generic-leverless",
+      "displayName": "汎用レバーレス",
+      "formFactor": "leverless",
+      "buttonSlots": [
+        { "id": "slot_extra_1", "x": 0.13, "y": 0.48, "r": 0.078 },
+        { "id": "slot_left", "x": 0.26, "y": 0.48, "r": 0.078 },
+        { "id": "slot_down", "x": 0.34, "y": 0.32, "r": 0.078 },
+        { "id": "slot_right", "x": 0.42, "y": 0.48, "r": 0.078 },
+        { "id": "slot_extra_2", "x": 0.36, "y": 0.74, "r": 0.078 },
+        { "id": "slot_up", "x": 0.50, "y": 0.74, "r": 0.092 },
+        { "id": "slot_extra_3", "x": 0.64, "y": 0.74, "r": 0.078 },
+        { "id": "slot_face_1", "x": 0.546, "y": 0.38, "r": 0.078 },
+        { "id": "slot_face_2", "x": 0.660, "y": 0.38, "r": 0.078 },
+        { "id": "slot_face_3", "x": 0.774, "y": 0.38, "r": 0.078 },
+        { "id": "slot_l1", "x": 0.886, "y": 0.38, "r": 0.078 },
+        { "id": "slot_face_4", "x": 0.546, "y": 0.56, "r": 0.078 },
+        { "id": "slot_face_5", "x": 0.660, "y": 0.56, "r": 0.078 },
+        { "id": "slot_face_6", "x": 0.774, "y": 0.56, "r": 0.078 },
+        { "id": "slot_l2", "x": 0.886, "y": 0.56, "r": 0.078 }
+      ],
+      "meta": {
+        "sourceUrl": "https://hori.jp/products/p5/spf-049/",
+        "verifiedAt": "2026-08-18",
+        "note": "左は ↓ 頂点、中央は Up+拡張の横3、右は攻撃 2×4 格子。通常 r=0.078、Up r=0.092。現行タブレット筐体内"
+      }
+    }
+  ]
+}

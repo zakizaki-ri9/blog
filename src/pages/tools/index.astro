@@ -1,0 +1,43 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Header from "@/components/Header.astro";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title="Tools" description="ポートフォリオ向けツール一覧" />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1em;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li + li {
+        margin-top: 0.75rem;
+      }
+      a {
+        color: rgb(var(--black));
+        text-decoration: none;
+      }
+      a:hover {
+        color: rgb(var(--accent));
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Tools</h1>
+      <p>ポートフォリオ向けのインタラクティブツール一覧です。</p>
+      <ul>
+        <li><a href="/tools/sf6">SF6 ツール</a></li>
+      </ul>
+    </main>
+  </body>
+</html>

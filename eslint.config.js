@@ -14,7 +14,16 @@ export default [
   // Playwrightテストの設定 (推奨設定を適用)
   {
     ...playwright.configs['flat/recommended'],
-    files: ['tests/**'],
+    files: ['tests/e2e/**'],
+  },
+  // Vitest 単体テスト
+  {
+    files: ['tests/unit/**'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
   },
   // グローバル設定
   js.configs.recommended,
