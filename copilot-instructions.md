@@ -46,7 +46,7 @@ docs/
 │   ├── e2e-testing.md
 │   └── security.md
 ├── plan/              # 計画・設計ドキュメント
-└── research/          # 技術調査レポート（YYYYMMDD_{title}/README.md）
+└── research/          # 調査レポート保存先の案内（本体は ../private-memo）
 
 .claude/
 └── skills/            # エージェント Skills（Claude Code & Copilot 共用）
@@ -140,7 +140,7 @@ docs/
 - **commit**: Conventional Commits に準拠した日本語コミット作成
 - **pr**: GitHub MCP経由での PR 作成・更新
 - **review**: コード品質とガイドラインのレビュー実行
-- **research**: 技術調査・ライブラリ比較・選定・調査レポート作成
+- **research**: 技術調査・ライブラリ比較・選定（成果物は sibling `../private-memo` に保存）
 - **oss-source-reader**: OSS 内部実装・型定義・シグネチャのソース調査
 - **browser-reader**: SPA・動的ページの Playwright CLI 取得
 - **e2e-generator**: テスト計画からPlaywright E2Eテストコード生成

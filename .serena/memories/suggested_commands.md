@@ -7,6 +7,7 @@
 - Lint: `pnpm lint` / fix: `pnpm lint:fix`
 - Type check: `pnpm type-check`
 - Full review gate: `pnpm review` (lint + type-check + security-check)
+- Unit tests: `pnpm test`
 - E2E: `pnpm test:e2e`
 - Daily script: `pnpm daily`
 - Serena memory lint: `uvx --from serena-agent==1.6.1 serena memories check` (from repo root)

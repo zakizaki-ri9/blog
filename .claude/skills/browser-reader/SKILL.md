@@ -75,5 +75,5 @@ playwright-cli が使えない場合:
 
 ## 保存ルール
 
-- [research](../research/SKILL.md) と併用時: `docs/research/YYYYMMDD_{title}/README.md` に統合する
+- [research](../research/SKILL.md) と併用時: sibling `../private-memo/docs/research/` に統合する
 - 取得方法として「Playwright CLI（ブラウザレンダ）」と取得日時を記載する

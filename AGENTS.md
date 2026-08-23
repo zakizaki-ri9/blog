@@ -51,7 +51,7 @@
 | 内部実装・型・シグネチャ | `.claude/skills/oss-source-reader/SKILL.md` |
 | SPA / WebFetch 失敗 | `.claude/skills/browser-reader/SKILL.md` |
 
-調査成果物は `docs/research/YYYYMMDD_{title}/README.md` に保存し、`docs/research/index.md` に索引を追記する（ユーザーが保存を依頼しない場合はチャット報告のみでもよい）。
+調査成果物は非公開リポジトリ [zakizaki-ri9/private-memo](https://github.com/zakizaki-ri9/private-memo) に保存する。ローカルでは sibling `../private-memo` を参照する。索引は [`docs/research/index.md`](docs/research/index.md)（公開側は保存先の案内のみ）。
 
 ## 目的と前提
 - このプロジェクトは Astro（TypeScript）によるブログサイトであり、エージェントはタスクごとにテスト駆動で安全に改善します。

@@ -93,5 +93,5 @@ ghq / rg が使えない場合（承認なし・インストール不可）:
 
 ## 保存ルール
 
-- [research](../research/SKILL.md) スキルと組み合わせて使用する場合: 調査結果は `docs/research/YYYYMMDD_{title}/README.md` に統合する
+- [research](../research/SKILL.md) スキルと組み合わせて使用する場合: 調査結果は sibling `../private-memo/docs/research/` に統合する
 - 単独で使用する場合: 結果を直接報告する

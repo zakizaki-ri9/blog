@@ -26,8 +26,12 @@ pnpm-debug.log*
 .old-blog/
 .vercel/
 
+# Serena（配置レシピは private-memo へ）
+.serena/memories/sf6-layout.md
+
 # Playwright
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.playwright-cli

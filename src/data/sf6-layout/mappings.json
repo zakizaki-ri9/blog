@@ -1,0 +1,98 @@
+{
+  "classic": {
+    "slot_up": "↑",
+    "slot_down": "↓",
+    "slot_left": "←",
+    "slot_right": "→",
+    "slot_stick": "Stick",
+    "slot_ls": "Stick",
+    "slot_rs": "Stick"
+  },
+  "modern": {
+    "slot_up": "↑",
+    "slot_down": "↓",
+    "slot_left": "←",
+    "slot_right": "→",
+    "slot_stick": "Stick",
+    "slot_ls": "Stick",
+    "slot_rs": "Stick"
+  },
+  "pad": {
+    "classic": {
+      "slot_face_1": "MP",
+      "slot_face_2": "MK",
+      "slot_face_3": "LK",
+      "slot_face_4": "LP",
+      "slot_l1": "HP+HK",
+      "slot_l2": "MP+MK",
+      "slot_r1": "HP",
+      "slot_r2": "HK",
+      "slot_ls": "Stick"
+    },
+    "modern": {
+      "slot_face_1": "SP",
+      "slot_face_2": "H",
+      "slot_face_3": "M",
+      "slot_face_4": "L",
+      "slot_l1": "DI",
+      "slot_l2": "Throw",
+      "slot_r1": "Parry",
+      "slot_r2": "Assist",
+      "slot_ls": "Stick"
+    }
+  },
+  "stick": {
+    "classic": {
+      "slot_face_1": "LP",
+      "slot_face_2": "MP",
+      "slot_face_3": "HP",
+      "slot_l1": "HK",
+      "slot_face_4": "LK",
+      "slot_face_5": "MK",
+      "slot_face_6": "MP+MK",
+      "slot_l2": "HP+HK",
+      "slot_stick": "Stick"
+    },
+    "modern": {
+      "slot_face_1": "L",
+      "slot_face_2": "M",
+      "slot_face_3": "H",
+      "slot_l1": "SP",
+      "slot_face_4": "Throw",
+      "slot_face_5": "Assist",
+      "slot_face_6": "Parry",
+      "slot_l2": "DI",
+      "slot_stick": "Stick"
+    }
+  },
+  "leverless": {
+    "classic": {
+      "slot_up": "↑",
+      "slot_down": "↓",
+      "slot_left": "←",
+      "slot_right": "→",
+      "slot_face_1": "LP",
+      "slot_face_2": "MP",
+      "slot_face_3": "HP",
+      "slot_l1": "HP+HK",
+      "slot_face_4": "LK",
+      "slot_face_5": "MK",
+      "slot_face_6": "HK",
+      "slot_l2": "MP+MK"
+    },
+    "modern": {
+      "slot_up": "↑",
+      "slot_down": "↓",
+      "slot_left": "←",
+      "slot_right": "→",
+      "slot_face_1": "L",
+      "slot_face_2": "SP",
+      "slot_face_3": "Parry",
+      "slot_l1": "DI",
+      "slot_face_4": "M",
+      "slot_face_5": "H",
+      "slot_face_6": "Assist",
+      "slot_l2": "Throw"
+    }
+  }
+}

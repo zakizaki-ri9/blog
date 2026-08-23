@@ -14,6 +14,7 @@
     "type-check": "tsc --noEmit",
     "security-check": "pnpm audit --audit-level=moderate",
     "review": "pnpm lint && pnpm type-check && pnpm security-check",
+    "test": "vitest run",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -27,11 +28,17 @@
     "sharp": "^0.34.5"
   },
   "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
+  "pnpm": {
+    "overrides": {
+      "vite": "^7.3.2"
+    }
+  },
   "devDependencies": {
     "@astrojs/vercel": "^10.0.6",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@typescript-eslint/parser": "^8.59.2",
     "astro-eslint-parser": "^1.4.0",
     "astro-pagefind": "^1.8.6",
@@ -40,7 +47,9 @@
     "eslint-plugin-playwright": "^2.10.2",
     "globals": "^17.6.0",
     "pagefind": "^1.5.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "vite": "^8.0.11"
+    "vite": "^7.3.2",
+    "vitest": "^4.1.10"
   }
 }

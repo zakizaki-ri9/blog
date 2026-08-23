@@ -18,10 +18,11 @@ allowed-tools: Read, Write, Grep, Glob, Bash(gh:*), WebSearch, WebFetch
    - 調査深度（下記「深度ゲート」）
    - **現在日時の確認**: 実行時点の現在日時（例: 2026年8月現在）を認識し、調査テーマの最新動向を追うための基準とする
 2. **Prior Art（必須）**
-   - `docs/research/`・`docs/plan/`・`docs/coding-guidelines/` を Grep/Glob で検索する
+   - `docs/plan/`・`docs/coding-guidelines/` を Grep/Glob で検索する
+   - 調査レポート本体は sibling `../private-memo` の `docs/research/`（SF6 配置は `docs/research/sf6-site/visualiza/`）を参照する
    - Serena MCP が利用可能なら `list_memories` / `read_memory` で関連知見を確認する
    - 既存レポートがあれば再調査せず相対パスで参照し、差分のみ更新する
-   - 索引は [`docs/research/index.md`](../../../docs/research/index.md) を確認する
+   - 公開側索引は [`docs/research/index.md`](../../../docs/research/index.md)（保存先の案内のみ）
 3. **検索クエリの設計（最新情報の確保）**
    - 最新の動向や事例を取得するため、検索クエリに現在年（例: `2026`）や `latest`、`recent` などのキーワードを戦略的に付与する
 4. **取得チャネルの選択**（下記ルーティング表）
@@ -82,10 +83,10 @@ allowed-tools: Read, Write, Grep, Glob, Bash(gh:*), WebSearch, WebFetch
 
 ## 保存ルール
 
-- 保存先: `docs/research/YYYYMMDD_{title}/README.md`
-  - `{title}` は英数字・ハイフンの短い slug（例: `20260809_astro-view-transitions`）
+- 保存先: sibling `../private-memo` の `docs/research/YYYY-MM-DD-{slug}.md`（SF6 配置は `docs/research/sf6-site/visualiza/`）
 - テンプレート: [references/output-template.md](references/output-template.md)
-- 完了後: [`docs/research/index.md`](../../../docs/research/index.md) に 1 行追記（日付・トピック・結論1行・パス）
+- 完了後: private-memo の `docs/research/index.md`（または visualiza の README）に 1 行追記
+- 公開リポ `blog` の [`docs/research/index.md`](../../../docs/research/index.md) には結論を書かない
 - ユーザーが保存を依頼しない場合はチャット報告のみでもよい
 - WebFetch が禁止されている場合は WebSearch のみで整理し、必要ならユーザーに承認を求める
 
