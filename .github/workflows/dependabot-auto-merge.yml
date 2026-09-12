@@ -1,0 +1,42 @@
+# Dependabot の patch / minor（または既知のグループ PR）に GitHub の auto-merge を付ける。
+# PR のコードは checkout しない。マージ自体は必須 CI が緑になってから GitHub が行う。
+name: Dependabot auto-merge
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'zakizaki-ri9/blog'
+    steps:
+      - name: Dependabot のメタデータを取得
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: patch / minor または既知グループの auto-merge を有効化
+        if: >
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor' ||
+          contains(fromJSON('["production-minor-patch","development-minor-patch","github-actions-minor-patch"]'), steps.metadata.outputs.dependency-group)
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # opened 直後は mergeability 未計算で --auto が失敗することがある
+          for attempt in 1 2 3 4 5; do
+            if gh pr merge --auto --squash "$PR_URL"; then
+              echo "auto-merge を有効化しました（試行 ${attempt} 回目）"
+              exit 0
+            fi
+            echo "::warning::auto-merge の有効化に失敗しました（試行 ${attempt} 回目）。15秒後に再試行します。"
+            sleep 15
+          done
+          echo "::error::auto-merge を有効化できませんでした: $PR_URL"
+          exit 1

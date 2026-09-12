@@ -1,6 +1,7 @@
 version: 2
 updates:
   # npm用の設定
+  # 自動マージは dependabot.yml では行わず、.github/workflows/dependabot-auto-merge.yml が担当する
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -10,15 +11,16 @@ updates:
     labels:
       - "dependencies"
       - "npm"
-    # 自動マージの設定
-    auto-merge: true
     groups:
-      # 開発依存関係の更新をグループ化
-      dev-dependencies:
-        patterns:
-          - "*eslint*"
-          - "@typescript-eslint/*"
-          - "typescript"
+      # 本番依存の minor / patch を1 PR にまとめる（major は個別のまま人手レビュー）
+      production-minor-patch:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      # 開発依存の minor / patch を1 PR にまとめる
+      development-minor-patch:
+        dependency-type: "development"
         update-types:
           - "minor"
           - "patch"
@@ -32,5 +34,10 @@ updates:
     labels:
       - "dependencies"
       - "github-actions"
-    # 自動マージの設定
-    auto-merge: true 
+    groups:
+      github-actions-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
