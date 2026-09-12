@@ -34,7 +34,7 @@
     }
   },
   "devDependencies": {
-    "@astrojs/vercel": "^10.0.6",
+    "@astrojs/vercel": "^10.0.8",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
     "@stylistic/eslint-plugin": "^5.10.0",
