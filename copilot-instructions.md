@@ -46,7 +46,7 @@ docs/
 │   ├── e2e-testing.md
 │   └── security.md
 ├── plan/              # 計画・設計ドキュメント
-└── research/          # 調査レポート保存先の案内（本体は ../private-memo）
+└── research/          # 調査レポート保存先の案内（本体は .agent/.config 参照）
 
 .claude/
 └── skills/            # エージェント Skills（Claude Code & Copilot 共用）
@@ -79,9 +79,11 @@ docs/
 
 ### パス記載ルール
 
-- ドキュメントやコメントに絶対パス（例: `/Users/...`）を記載しない
-- パスは必ずプロジェクトルート（`blog/`）基準の相対パスで記載する
-- 例: `copilot-instructions.md`、`docs/plan/agent-analysis/README.md`
+- ドキュメント、コメント、手順書、Serena メモリに OS 絶対パス（例: `/Users/...`）や `../` を含むパスを記載しない
+- パス文字列はプロジェクトルート基準の相対パス（先頭 `/` なし）で記載する。例: `copilot-instructions.md`、`docs/plan/agent-analysis/README.md`
+- Markdown の href は `../` を使わず、リポジトリルート相対（例: `/docs/coding-guidelines/architecture.md`）とする
+- コミット対象には非公開リポの実名やローカルディレクトリ名を直書きしない
+- 唯一の例外: TypeScript / Astro などの import / export（言語仕様のファイル相対）
 
 
 ### 使用ガイドライン
@@ -140,7 +142,7 @@ docs/
 - **commit**: Conventional Commits に準拠した日本語コミット作成
 - **pr**: GitHub MCP経由での PR 作成・更新
 - **review**: コード品質とガイドラインのレビュー実行
-- **research**: 技術調査・ライブラリ比較・選定（成果物は sibling `../private-memo` に保存）
+- **research**: 技術調査・ライブラリ比較・選定（成果物は `.agent/.config` の `PRIVATE_REPO` / `PRIVATE_DIR` 参照）
 - **oss-source-reader**: OSS 内部実装・型定義・シグネチャのソース調査
 - **browser-reader**: SPA・動的ページの Playwright CLI 取得
 - **e2e-generator**: テスト計画からPlaywright E2Eテストコード生成

@@ -22,8 +22,8 @@ allowed-tools: Read, Grep, Glob, Bash(which:*), Bash(ghq:*), Bash(rg:*), Bash(br
 
 ## 適用しない場面
 
-- ライブラリの概要・用途を知りたい → [research](../research/SKILL.md) の WebSearch
-- 公式 API・設定 → Context7 MCP（[research](../research/SKILL.md) 経由）
+- ライブラリの概要・用途を知りたい → [research](/.claude/skills/research/SKILL.md) の WebSearch
+- 公式 API・設定 → Context7 MCP（[research](/.claude/skills/research/SKILL.md) 経由）
 - 既知の問題・バグ情報を探す（`gh` CLI での Issue 検索も活用）
 - バージョン間の差分・マイグレーション情報
 
@@ -93,5 +93,5 @@ ghq / rg が使えない場合（承認なし・インストール不可）:
 
 ## 保存ルール
 
-- [research](../research/SKILL.md) スキルと組み合わせて使用する場合: 調査結果は sibling `../private-memo/docs/research/` に統合する
+- [research](/.claude/skills/research/SKILL.md) スキルと組み合わせて使用する場合: 調査結果は `.agent/.config` の `PRIVATE_DIR` 配下 `docs/research/` に統合する
 - 単独で使用する場合: 結果を直接報告する

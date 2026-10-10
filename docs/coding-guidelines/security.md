@@ -259,4 +259,4 @@ export default defineConfig({
 
 - [Astro/TypeScript](./astro-typescript.md) - Astro/TypeScript コーディングガイドライン
 - [コード品質](./code-quality.md) - コード品質チェック項目
-- [`AGENTS.md`](../../AGENTS.md) - エージェント開発ガイド
+- [`AGENTS.md`](/AGENTS.md) - エージェント開発ガイド

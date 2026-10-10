@@ -22,12 +22,12 @@ description: Antigravity エージェントの行動指針と基本ルール
 技術的な判断や実装の基準は、すべて `docs/coding-guidelines/` 配下のドキュメントを正とします。
 このファイルには技術的な詳細は記述しません。必ず以下のリンク先を参照してください。
 
-- **[全体ガイドライン](../docs/coding-guidelines/README.md)**
-- **[アーキテクチャ](../docs/coding-guidelines/architecture.md)**: DIP, レイヤー構造, 副作用の分離
-- **[Astro/TypeScript](../docs/coding-guidelines/astro-typescript.md)**: 型安全性, コンポーネント設計
-- **[セキュリティ](../docs/coding-guidelines/security.md)**: XSS対策, 機密情報管理
-- **[E2Eテスト](../docs/coding-guidelines/e2e-testing.md)**: スモークテスト, セレクター戦略
-- **[コード品質](../docs/coding-guidelines/code-quality.md)**: レビュー基準
+- **[全体ガイドライン](/docs/coding-guidelines/README.md)**
+- **[アーキテクチャ](/docs/coding-guidelines/architecture.md)**: DIP, レイヤー構造, 副作用の分離
+- **[Astro/TypeScript](/docs/coding-guidelines/astro-typescript.md)**: 型安全性, コンポーネント設計
+- **[セキュリティ](/docs/coding-guidelines/security.md)**: XSS対策, 機密情報管理
+- **[E2Eテスト](/docs/coding-guidelines/e2e-testing.md)**: スモークテスト, セレクター戦略
+- **[コード品質](/docs/coding-guidelines/code-quality.md)**: レビュー基準
 
 ## 3. コンテキスト取得 (Context & Serena)
 
@@ -56,9 +56,12 @@ GitHub に関連する操作（PR作成、PR更新、PRリスト取得など）�
 
 ## 5. パス記述のルール
 
-- **相対パスの徹底**: ドキュメント、アーティファクト、設定ファイル内でプロジェクト内のファイルを参照する際は、**必ず相対パス** (`./`, `../docs/...` 等) または **リポジトリルート相対パス** (`/docs/...`) を使用してください。
-- **禁止事項**: ユーザーのホームディレクトリを含む絶対パス (`/Users/...`, `/home/...`, `file://...`) は、環境依存性が高く、セキュリティリスクも高いため **絶対に使用禁止** です。
-- **設定ファイルへの適用**: この規則は `.gemini/settings.json` や `.agent/` 配下のファイルにも適用されます。環境変数 (`$VAR_NAME`) やカレントディレクトリ参照 (`"cwd": "."`) を活用してください。
+- **プロジェクトルート相対**: ドキュメント、コメント、手順書、Serena メモリのパス文字列は先頭 `/` なしのプロジェクトルート相対（例: `docs/coding-guidelines/architecture.md`）で記載する
+- **Markdown の href**: `../` を使わず、リポジトリルート相対（例: `/docs/coding-guidelines/architecture.md`）とする
+- **禁止事項**: 文書・コメント・メモリに `../` を含むパス、OS 絶対パス (`/Users/...`, `/home/...`, `file://...`)、非公開リポの実名やローカルディレクトリ名を直書きしない
+- **調査の保存先**: gitignore 済みの `.agent/.config` の `PRIVATE_REPO` / `PRIVATE_DIR` を読む。設定値を文書・コメント・メモリへコピーしない
+- **唯一の例外**: TypeScript / Astro などの import / export（言語仕様のファイル相対）
+- **設定ファイルへの適用**: この規則は `.gemini/settings.json` や `.agent/` 配下のコミット対象ファイルにも適用される。環境変数 (`$VAR_NAME`) やカレントディレクトリ参照 (`"cwd": "."`) を活用する
 
 ## 6. TDDと基本姿勢
 

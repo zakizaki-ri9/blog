@@ -252,4 +252,4 @@ function processData(): Result<ProcessedData, Error> {
 - [Astro/TypeScript](./astro-typescript.md) - Astro/TypeScript コーディングガイドライン
 - [セキュリティ](./security.md) - セキュリティチェック項目
 - [アーキテクチャ設計](./architecture.md) - テスト容易性を確保するアーキテクチャ
-- [`AGENTS.md`](../../AGENTS.md) - エージェント開発ガイド
+- [`AGENTS.md`](/AGENTS.md) - エージェント開発ガイド

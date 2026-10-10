@@ -1,6 +1,6 @@
 # 調査結果テンプレート
 
-`../private-memo/docs/research/YYYY-MM-DD-{slug}.md` に保存する際の形式（SF6 配置は `docs/research/sf6-site/visualiza/`）。
+`.agent/.config` の `PRIVATE_DIR` 配下 `docs/research/YYYY-MM-DD-{slug}.md` に保存する際の形式（SF6 配置は同リポの `docs/research/sf6-site/visualiza/`）。
 
 ```markdown
 # {調査トピック} (Research)
@@ -45,7 +45,7 @@
 
 ### 関連する既存知識
 
-- `../private-memo/docs/research/...`・`docs/plan/...`・`docs/coding-guidelines/...` への相対パス参照
+- `docs/research/...`（PRIVATE_DIR 側）・`docs/plan/...`・`docs/coding-guidelines/...` へのパス参照
 
 ### 次アクション（承認依頼）
 

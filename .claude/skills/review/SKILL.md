@@ -37,12 +37,12 @@ pnpm security-check
 > **必ず日本語で**思考・回答・記述してください。
 
 ### ガイドライン参照
-- [コーディングガイドライン](../../../docs/coding-guidelines/README.md)
-- [アーキテクチャ設計](../../../docs/coding-guidelines/architecture.md)
-- [Astro/TypeScript](../../../docs/coding-guidelines/astro-typescript.md)
-- [セキュリティ](../../../docs/coding-guidelines/security.md)
-- [コード品質](../../../docs/coding-guidelines/code-quality.md)
-- [E2Eテスト](../../../docs/coding-guidelines/e2e-testing.md)
+- [コーディングガイドライン](/docs/coding-guidelines/README.md)
+- [アーキテクチャ設計](/docs/coding-guidelines/architecture.md)
+- [Astro/TypeScript](/docs/coding-guidelines/astro-typescript.md)
+- [セキュリティ](/docs/coding-guidelines/security.md)
+- [コード品質](/docs/coding-guidelines/code-quality.md)
+- [E2Eテスト](/docs/coding-guidelines/e2e-testing.md)
 
 ### チェックリスト
 
@@ -75,6 +75,10 @@ pnpm security-check
 - [ ] 実装変更に合わせて、関連ドキュメント（例: `docs/coding-guidelines/*.md`, `README.md`）が更新されているか？
 - [ ] 新しい運用ルール・制約（例: `devOnly`, 命名規則, ディレクトリ構成, バリデーション方針）がドキュメントに反映されているか？
 - [ ] ドキュメント変更が不要な場合、その理由がPR説明やレビューコメントに明記されているか？
+
+**パス記載・機密情報**
+- [ ] 文書・コメント・メモリに `../` や OS 絶対パス（`/Users/...` 等）が含まれていないか？
+- [ ] 非公開リポの実名や `PRIVATE_DIR` の展開値がコミット対象に混入していないか？
 
 ## 完了
 
