@@ -37,3 +37,6 @@ pnpm-debug.log*
 .playwright-cli
 
 .agent/.config
+
+# ローカルの調査ログ
+.audit/
