@@ -219,4 +219,4 @@ import { Post } from '@/types/post'; // 値として使わない場合は type �
 - [アーキテクチャ設計](./architecture.md) - テスト容易性を確保するアーキテクチャ
 - [セキュリティ](./security.md) - セキュリティチェック項目
 - [コード品質](./code-quality.md) - コード品質チェック項目
-- [`AGENTS.md`](../../AGENTS.md) - エージェント開発ガイド
+- [`AGENTS.md`](/AGENTS.md) - エージェント開発ガイド

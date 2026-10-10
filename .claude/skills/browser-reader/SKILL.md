@@ -10,7 +10,7 @@ allowed-tools: Read, Write, Grep, Glob, Bash(which:*), Bash(playwright-cli:*), B
 
 ## 優先順位（重要）
 
-- [research](../research/SKILL.md) が **先に WebFetch を試した後** のエスカレーションとして使う
+- [research](/.claude/skills/research/SKILL.md) が **先に WebFetch を試した後** のエスカレーションとして使う
 - Context7 / 静的 WebFetch で足りる公式 docs には使わない
 - **Playwright MCP は使わない**（CLI の方がトークン効率が良い）
 - 本リポジトリの E2E は `@playwright/test` を使用するが、**調査用ブラウザ取得は Playwright CLI** を使う
@@ -75,5 +75,5 @@ playwright-cli が使えない場合:
 
 ## 保存ルール
 
-- [research](../research/SKILL.md) と併用時: sibling `../private-memo/docs/research/` に統合する
+- [research](/.claude/skills/research/SKILL.md) と併用時: `.agent/.config` の `PRIVATE_DIR` 配下 `docs/research/` に統合する
 - 取得方法として「Playwright CLI（ブラウザレンダ）」と取得日時を記載する

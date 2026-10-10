@@ -19,10 +19,10 @@ allowed-tools: Read, Write, Grep, Glob, Bash(gh:*), WebSearch, WebFetch
    - **現在日時の確認**: 実行時点の現在日時（例: 2026年8月現在）を認識し、調査テーマの最新動向を追うための基準とする
 2. **Prior Art（必須）**
    - `docs/plan/`・`docs/coding-guidelines/` を Grep/Glob で検索する
-   - 調査レポート本体は sibling `../private-memo` の `docs/research/`（SF6 配置は `docs/research/sf6-site/visualiza/`）を参照する
+   - 調査レポート本体は `.agent/.config` の `PRIVATE_DIR` 配下の `docs/research/`（SF6 配置は同リポの `docs/research/sf6-site/visualiza/`）を参照する
    - Serena MCP が利用可能なら `list_memories` / `read_memory` で関連知見を確認する
-   - 既存レポートがあれば再調査せず相対パスで参照し、差分のみ更新する
-   - 公開側索引は [`docs/research/index.md`](../../../docs/research/index.md)（保存先の案内のみ）
+   - 既存レポートがあれば再調査せずパスで参照し、差分のみ更新する
+   - 公開側索引は [`docs/research/index.md`](/docs/research/index.md)（保存先の案内のみ）
 3. **検索クエリの設計（最新情報の確保）**
    - 最新の動向や事例を取得するため、検索クエリに現在年（例: `2026`）や `latest`、`recent` などのキーワードを戦略的に付与する
 4. **取得チャネルの選択**（下記ルーティング表）
@@ -43,10 +43,10 @@ allowed-tools: Read, Write, Grep, Glob, Bash(gh:*), WebSearch, WebFetch
 | --- | --- | --- |
 | 公式 API・設定・バージョン固有 | Context7 MCP（下記） | 広範 WebSearch → 全文 WebFetch |
 | 動向・比較・選定 | 本スキル（WebSearch + CRAAP） | ブログ量産を一次扱い |
-| 内部実装・型・シグネチャ | [oss-source-reader](../oss-source-reader/SKILL.md) | 学習データの推測 |
+| 内部実装・型・シグネチャ | [oss-source-reader](/.claude/skills/oss-source-reader/SKILL.md) | 学習データの推測 |
 | 既知バグ・マイグレーション | `gh` Issue/Discussion + 公式 changelog | 二次記事のみ |
 | 静的 HTML・SSR ページ | WebFetch（短い本文のみ context に） | 最初から Playwright |
-| SPA / JS 必須 / 認証後 UI | [browser-reader](../browser-reader/SKILL.md)（WebFetch 失敗後） | Playwright MCP / 常時ブラウザ |
+| SPA / JS 必須 / 認証後 UI | [browser-reader](/.claude/skills/browser-reader/SKILL.md)（WebFetch 失敗後） | Playwright MCP / 常時ブラウザ |
 
 ### Context7（公式 docs 調査）
 
@@ -83,10 +83,11 @@ allowed-tools: Read, Write, Grep, Glob, Bash(gh:*), WebSearch, WebFetch
 
 ## 保存ルール
 
-- 保存先: sibling `../private-memo` の `docs/research/YYYY-MM-DD-{slug}.md`（SF6 配置は `docs/research/sf6-site/visualiza/`）
+- 保存先: `.agent/.config` の `PRIVATE_DIR` 配下 `docs/research/YYYY-MM-DD-{slug}.md`（SF6 配置は同リポの `docs/research/sf6-site/visualiza/`）
 - テンプレート: [references/output-template.md](references/output-template.md)
-- 完了後: private-memo の `docs/research/index.md`（または visualiza の README）に 1 行追記
-- 公開リポ `blog` の [`docs/research/index.md`](../../../docs/research/index.md) には結論を書かない
+- 完了後: `PRIVATE_DIR` 側の `docs/research/index.md`（または visualiza の README）に 1 行追記
+- 公開リポ `blog` の [`docs/research/index.md`](/docs/research/index.md) には結論を書かない
+- 設定値（`PRIVATE_REPO` / `PRIVATE_DIR`）を文書・コメント・メモリへコピーしない
 - ユーザーが保存を依頼しない場合はチャット報告のみでもよい
 - WebFetch が禁止されている場合は WebSearch のみで整理し、必要ならユーザーに承認を求める
 

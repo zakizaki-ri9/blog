@@ -15,9 +15,12 @@
 
 ### パス記載ルール
 
-- ドキュメント、コメント、手順書に **絶対パス**（例: `/Users/...`）を記載しない
-- パスは必ずプロジェクトルート（`blog/`）基準の **相対パス** で記載する
-- 例: `copilot-instructions.md`、`docs/plan/agent-analysis/README.md`
+- ドキュメント、コメント、手順書、Serena メモリに **OS 絶対パス**（例: `/Users/...`, `/home/...`, `file://`）を記載しない
+- ドキュメント、コメント、手順書、Serena メモリに **`../` を含むパス** を記載しない
+- パス文字列はプロジェクトルート基準の **相対パス**（先頭 `/` なし）で記載する。例: `AGENTS.md`、`docs/plan/agent-analysis/README.md`
+- Markdown の href は `../` を使わず、リポジトリルート相対（例: `/docs/coding-guidelines/architecture.md`）とする
+- **コミット対象には非公開リポの実名（owner/name）やローカルディレクトリ名を直書きしない**
+- **唯一の例外**: TypeScript / Astro などの **import / export**（言語仕様のファイル相対）。ドキュメント内の import コード例もこの例外
 
 ### Serena MCP使用ガイドライン
 
@@ -51,7 +54,7 @@
 | 内部実装・型・シグネチャ | `.claude/skills/oss-source-reader/SKILL.md` |
 | SPA / WebFetch 失敗 | `.claude/skills/browser-reader/SKILL.md` |
 
-調査成果物は非公開リポジトリ [zakizaki-ri9/private-memo](https://github.com/zakizaki-ri9/private-memo) に保存する。ローカルでは sibling `../private-memo` を参照する。索引は [`docs/research/index.md`](docs/research/index.md)（公開側は保存先の案内のみ）。
+調査成果物は本リポジトリには保存しない。保存先は gitignore 済みの `.agent/.config` の `PRIVATE_REPO`（`username/repo`）と `PRIVATE_DIR`（プロジェクトルートからの相対パス）を読んで決める。**設定値そのものを文書・コメント・メモリへコピーしない。** 公開側の案内は [`docs/research/index.md`](docs/research/index.md) のみ。
 
 ## 目的と前提
 - このプロジェクトは Astro（TypeScript）によるブログサイトであり、エージェントはタスクごとにテスト駆動で安全に改善します。
@@ -88,7 +91,7 @@
 
 ## コーディングと設計の指針
 
-コーディングと設計に関する詳細なガイドラインは、[`docs/coding-guidelines/`](../docs/coding-guidelines/) ディレクトリにまとめられています。
+コーディングと設計に関する詳細なガイドラインは、[`docs/coding-guidelines/`](/docs/coding-guidelines/) ディレクトリにまとめられています。
 
 ### 主要なドキュメント
 

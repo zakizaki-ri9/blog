@@ -1,0 +1,5 @@
+# 非公開リポジトリ設定（gitignore 済みの .agent/.config にコピーして使用）
+# PRIVATE_REPO: username/repo 形式
+# PRIVATE_DIR: プロジェクトルートからの相対パス
+PRIVATE_REPO=
+PRIVATE_DIR=

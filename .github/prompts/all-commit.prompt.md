@@ -17,20 +17,20 @@ description: "ReviewからPR作成までの一連フローをCopilotで実行す
 ## 実行ステップ
 
 1. Review
-- [../../.claude/skills/review/SKILL.md](../../.claude/skills/review/SKILL.md) を参照して実行する
+- [/.claude/skills/review/SKILL.md](/.claude/skills/review/SKILL.md) を参照して実行する
 - 必要な自動チェック（lint, type-check, security-check）を実施する
 - 手動レビュー項目を確認する
 
 2. Branch
-- [../../.claude/skills/branch/SKILL.md](../../.claude/skills/branch/SKILL.md) を参照して実行する
+- [/.claude/skills/branch/SKILL.md](/.claude/skills/branch/SKILL.md) を参照して実行する
 - ブランチ命名規則に従って作成または確認する
 
 3. Commit
-- [../../.claude/skills/commit/SKILL.md](../../.claude/skills/commit/SKILL.md) を参照して実行する
+- [/.claude/skills/commit/SKILL.md](/.claude/skills/commit/SKILL.md) を参照して実行する
 - Conventional Commitsに準拠した日本語コミットを作成する
 
 4. PR
-- [../../.claude/skills/pr/SKILL.md](../../.claude/skills/pr/SKILL.md) を参照して実行する
+- [/.claude/skills/pr/SKILL.md](/.claude/skills/pr/SKILL.md) を参照して実行する
 - PR本文に、変更概要・検証結果・影響範囲・未対応事項を明記する
 
 ## 完了条件
