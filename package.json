@@ -36,10 +36,10 @@
   "devDependencies": {
     "@astrojs/vercel": "^10.0.8",
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.64.0",
+    "@playwright/test": "^1.64.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tailwindcss/vite": "^4.3.3",
-    "@typescript-eslint/parser": "^8.71.1",
+    "@typescript-eslint/parser": "^8.71.2",
     "astro-eslint-parser": "^1.4.0",
     "astro-pagefind": "^1.8.6",
     "eslint": "^10.12.0",
