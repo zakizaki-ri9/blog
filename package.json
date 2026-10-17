@@ -43,7 +43,7 @@
     "astro-eslint-parser": "^1.4.0",
     "astro-pagefind": "^1.8.6",
     "eslint": "^10.12.0",
-    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-astro": "^3.2.1",
     "eslint-plugin-playwright": "^2.12.1",
     "globals": "^17.13.0",
     "pagefind": "^1.5.2",
