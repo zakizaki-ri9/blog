@@ -37,7 +37,7 @@
     "@astrojs/vercel": "^10.0.8",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.65.1",
-    "@stylistic/eslint-plugin": "^5.10.0",
+    "@stylistic/eslint-plugin": "^6.0.1",
     "@tailwindcss/vite": "^4.3.5",
     "@typescript-eslint/parser": "^8.74.0",
     "astro-eslint-parser": "^1.4.0",
